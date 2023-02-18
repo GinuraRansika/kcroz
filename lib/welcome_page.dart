@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'auth_controller.dart';
+
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  String email;
+  WelcomePage({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +45,8 @@ class WelcomePage extends StatelessWidget {
             margin: const EdgeInsets.only(left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Welcome",
                   style: TextStyle(
                     fontSize: 36,
@@ -52,8 +55,8 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "name@gmail.com",
-                  style: TextStyle(
+                  email,
+                  style: const TextStyle(
                       fontSize: 18,
                       color: Colors.grey
                   ),
@@ -62,29 +65,34 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 200,),
-          Container (
-            width: width * 0.6,
-            height: height * 0.08,
-            decoration: BoxDecoration (
-                borderRadius: BorderRadius.circular(30),
-                image: const DecorationImage(
-                    image: AssetImage(
-                        "img/loginbtn.png"
-                    ),
-                    fit: BoxFit.cover
-                )
-            ),
-            child: const Center(
-              child: Text (
-                  "Sign out",
-                  style: TextStyle (
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
+          GestureDetector(
+            onTap: () {
+              AuthController.instance.logout();
+            },
+            child: Container (
+              width: width * 0.6,
+              height: height * 0.08,
+              decoration: BoxDecoration (
+                  borderRadius: BorderRadius.circular(30),
+                  image: const DecorationImage(
+                      image: AssetImage(
+                          "img/loginbtn.png"
+                      ),
+                      fit: BoxFit.cover
                   )
               ),
-            ),
+              child: const Center(
+                child: Text (
+                    "Sign out",
+                    style: TextStyle (
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                    )
+                ),
+              ),
 
+            ),
           ),
         ],
       ),

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "814801737668",
+    "project_id": "fir-kcroz",
+    "storage_bucket": "fir-kcroz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814801737668:android:da0c5189a9cbaacf77f691",
+        "android_client_info": {
+          "package_name": "com.kcroz.app.db.kcroz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814801737668-stn1tajkhfkjjiq6sq3r66qm8tbse930.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGY--BCxHPgHD40CyFi3W8zSb00dOEei8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814801737668-stn1tajkhfkjjiq6sq3r66qm8tbse930.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "814801737668-mbs0kiin3bcl0b21v9afknkbj88kirvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kcroz.app.db.kcroz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
