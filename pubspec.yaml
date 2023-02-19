@@ -37,4 +37,6 @@ flutter:
       - assets/images/splash_screen/
       - assets/images/
       - assets/images/on_boarding_images/
-      - assets/images/on-boarding-image-1.jpg
+      - assets/images/on_boarding_images/on-boarding-image-1.jpg
+      - assets/images/welcome_images/
+      - assets/images/splash_screen/splash-screen-bottom.jpg
