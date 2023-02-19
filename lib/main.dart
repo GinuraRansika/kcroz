@@ -2,9 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/auth_controller.dart';
-import 'package:kcroz/login_page.dart';
-import 'package:kcroz/splash_screen.dart';
 import 'package:kcroz/utils/theme/theme.dart';
+import 'features/authentication/controllers/splash_screen_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       title: 'Flutter Demo',
       theme: KcrozAppTheme.lightTheme,
       darkTheme: KcrozAppTheme.darkTheme,
