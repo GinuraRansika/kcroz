@@ -8,7 +8,7 @@ class KcrozTextTheme {
       ),
       subtitle2: GoogleFonts.poppins(
         color: Colors.black54,
-        fontSize: 24,
+        fontSize: 10,
       ));
   static TextTheme darkTextTheme = TextTheme(
       headline2: GoogleFonts.montserrat(
@@ -16,6 +16,6 @@ class KcrozTextTheme {
       ),
       subtitle2: GoogleFonts.poppins(
         color: Colors.white60,
-        fontSize: 24,
+        fontSize: 10,
       ));
 }
