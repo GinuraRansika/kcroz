@@ -1,5 +1,8 @@
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:kcroz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/image_string.dart';
@@ -44,10 +47,16 @@ class OnBoardingController extends GetxController{
 
 
 
-  skip() => controller.jumpToPage(page: 2);
+  skip() => Get.to(WelcomeScreen());
   animateToNextSlide() {
     int nextPage = controller.currentPage + 1;
-    controller.animateToPage(page: nextPage);
+    if(controller.currentPage != 2) {
+      controller.animateToPage(page: nextPage);
+    } else {
+      Get.to(WelcomeScreen());
+    }
   }
-  onPageChangedCallback(int activePageIndex) =>  currentPage.value = activePageIndex;
+  onPageChangedCallback(int activePageIndex) {
+    currentPage.value = activePageIndex;
+  }
 }
