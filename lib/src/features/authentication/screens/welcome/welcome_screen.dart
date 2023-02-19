@@ -7,6 +7,7 @@ import 'package:kcroz/src/common_widgets/fade_in_animation/fade_in_animation_mod
 import 'package:kcroz/src/constants/colors.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/login/login_screen.dart';
 import '../../../../constants/image_string.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -69,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {Get.to(() => const LoginScreen());},
                               child: Text(kcrozLogin.toUpperCase())
                           )
                       ),

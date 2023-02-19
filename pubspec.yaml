@@ -38,5 +38,6 @@ flutter:
       - assets/images/
       - assets/images/on_boarding_images/
       - assets/images/on_boarding_images/on-boarding-image-1.jpg
-      - assets/images/welcome_images/
+      - assets/images/welcome_images/welcome-screen-image.png
       - assets/images/splash_screen/splash-screen-bottom.jpg
+      - assets/logo/
