@@ -1,6 +1,5 @@
-import "package:flutter/material.dart";
 import 'package:get/get.dart';
-import 'package:kcroz/login_page.dart';
+import 'package:kcroz/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 
 class SplashScreenController extends GetxController {
   static SplashScreenController get find => Get.find(); // avoid using with instances
@@ -10,6 +9,6 @@ class SplashScreenController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 500));
     animate.value = true;
     await Future.delayed(const Duration(milliseconds: 5000));
-    Get.to(const LoginPage());
+    Get.to( () => OnBoardingScreen());
   }
 }

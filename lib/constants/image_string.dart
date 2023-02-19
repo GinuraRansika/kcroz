@@ -1,3 +1,10 @@
 // App Image Strings
-const String kcrozSplashTopIcon = "assets/images/splash-screen-top.jpg";
-const String kcrozSplashBottomIcon = "assets/images/splash-screen-top.jpg";
+
+// Splash Screen Images
+const String kcrozSplashTopIcon = "assets/images/on-boarding-image-1.jpg";
+const String kcrozSplashBottomIcon = "assets/images/splash-screen-bottom.jpg";
+
+// OnBoarding Screen Images
+const String kcrozOnBoardingImage1 = "assets/images/on_boarding_images/on-boarding-image-1.jpg";
+const String kcrozOnBoardingImage2 = "assets/images/splash-screen-bottom.jpg";
+const String kcrozOnBoardingImage3 = "assets/images/on_boarding_images/on-boarding-image-1.jpg";

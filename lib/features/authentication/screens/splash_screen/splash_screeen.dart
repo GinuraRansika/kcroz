@@ -7,7 +7,7 @@ import 'package:kcroz/constants/text_string.dart';
 import 'package:kcroz/features/authentication/controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  SplashScreen({Key? key}) : super(key: key);
 
   final splashController = Get.put(SplashScreenController());
   @override
