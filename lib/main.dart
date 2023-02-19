@@ -2,10 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/auth_controller.dart';
-import 'package:kcroz/features/authentication/screens/splash_screen/splash_screeen.dart';
-import 'package:kcroz/utils/theme/theme.dart';
-
-import 'features/authentication/screens/on_boarding/on_boarding_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/splash_screen/splash_screeen.dart';
+import 'package:kcroz/src/utils/theme/theme.dart';
 
 main() {
   // WidgetsFlutterBinding.ensureInitialized();

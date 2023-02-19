@@ -34,6 +34,7 @@ flutter:
 
    assets:
       - img/
+      - assets/images/splash_screen/
       - assets/images/
       - assets/images/on_boarding_images/
       - assets/images/on-boarding-image-1.jpg
