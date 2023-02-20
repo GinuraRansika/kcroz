@@ -4,6 +4,7 @@
 const String kcrozLogin = "Login";
 const String kcrozSignup = "Signup";
 const String kcrozFullName = "Full Name";
+const String kcrozNext = "Next";
 const String kcrozEmail = "E-Mail";
 const String kcrozPhoneNo = "Phone No";
 const String kcrozPassword = "Password";
@@ -42,3 +43,15 @@ const String dontHaveAnAccount = "Don't have and Account?";
 const String kcrozSignUpTitle = "Get On Board!";
 const String kcrozSignUpSubTitle = "Create your profile to start your Journey with us...";
 const String kcrozAlreadyHavenAccount = "Already have an Account?";
+
+
+// Forget Password Text
+const String kcrozForgetPasswordTitle = "Make Selection!";
+const String kcrozForgetPasswordSubTitle = "Select one of the options given below to reset your password.";
+const String kcrozResetViaEmail = "Reset via E-Mail Verification.";
+const String kcrozResetViaPhone = "Reset vla Phone Verification.";
+
+// Forget Password Vla Phone • Text
+const String kcrozForgetPhoneSubTitle = "Enter your registered Phone No to receive OTP";
+// Forget Password Via E-Mail - Text
+const String kcrozForgetMailSubTitle = "Enter your registered E-Mail to receive OTP";

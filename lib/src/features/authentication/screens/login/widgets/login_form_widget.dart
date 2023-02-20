@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/sizes.dart';
-import '../../../../constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/forget_password/forget_password_options/forget_password_model_bottom_sheet.dart';
+import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_string.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -39,7 +40,9 @@ class LoginForm extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  ForgetPasswordScreen.buildShowModalBottomSheet(context);
+                },
                 child: const Text(kcrozForgetPassword)),
           ),
           SizedBox(
@@ -51,6 +54,8 @@ class LoginForm extends StatelessWidget {
           )
         ],
       ),
-    ));
+    )
+    );
   }
 }
+

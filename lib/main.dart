@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/auth_controller.dart';
-import 'package:kcroz/src/features/authentication/screens/splash_screen/splash_screeen.dart';
+import 'package:kcroz/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
 
 main() {
@@ -20,9 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
       theme: KcrozAppTheme.lightTheme,
       darkTheme: KcrozAppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      defaultTransition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500),
       home: SplashScreen()
     );
   }

@@ -8,7 +8,9 @@ class FormHeaderWidget extends StatelessWidget {
     required this.subTitle,
     this.imageHeight = 0.2,
     this.textAlign,
-    this.crossAxisAlignment = CrossAxisAlignment.start, this.imageColor, this.heightBetween,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.imageColor,
+    this.heightBetween,
   }) : super(key: key);
 
   //Variables -- Declared in Constructor
@@ -23,7 +25,7 @@ class FormHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         Image(image: AssetImage(image), color: imageColor, height: size.height * imageHeight,),
         SizedBox(height: heightBetween,),

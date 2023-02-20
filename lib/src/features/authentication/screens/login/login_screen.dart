@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kcroz/src/constants/image_string.dart';
 import 'package:kcroz/src/constants/sizes.dart';
-
-import ' login_footer_widget.dart';
-import 'login_form_widget.dart';
-import 'login_header_widget.dart';
+import 'package:kcroz/src/constants/text_string.dart';
+import '../../../../common_widgets/form/form_header_widget.dart';
+import '../../../../constants/image_string.dart';
+import 'widgets/ login_footer_widget.dart';
+import 'widgets/login_form_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,7 +21,12 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   // Section - 1
-                  LoginHeaderWidget(),
+                  FormHeaderWidget(
+                    image: kcrozWelcomeScreenImage,
+                    title: kcrozLoginTitle,
+                    subTitle: kcrozLoginTitle,
+                    imageHeight: 0.2,
+                  ),
                   // Section - 2 [ Form ]
                   LoginForm(),
                   // Section - 3
