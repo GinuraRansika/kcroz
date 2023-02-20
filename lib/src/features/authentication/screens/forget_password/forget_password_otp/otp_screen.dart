@@ -3,12 +3,14 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/controllers/otp_controller.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var otp;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(kcrozDefaultSize),
@@ -39,14 +41,18 @@ class OTPScreen extends StatelessWidget {
               fillColor: Colors.black.withOpacity(0.1),
               filled: true,
               onSubmit: (code) {
-                print("OTP is => $code");
+                otp = code;
+                OTPController.instance.verifyOTP(otp);
               },
             ),
             const SizedBox(height: kcrozDefaultSize,),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // if the field didn't call automatically onSubmit
+                    OTPController.instance.verifyOTP(otp);
+                  },
                   child: const Text(kcrozNext)
               ),
             ),

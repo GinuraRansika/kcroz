@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/src/repository/authentication_repository/authentication_repository.dart';
 
-class SignUpController extends GetxController{
+class SignUpController extends GetxController {
   // to make SignUpController callable
   static SignUpController get instance => Get.find();
 
@@ -12,8 +12,16 @@ class SignUpController extends GetxController{
   final fullName = TextEditingController();
   final phoneNo = TextEditingController();
 
-  // Call this function from Design : This will do the registrationPart
-  void registerUser(String email, String password){
-    AuthenticationRepository.instance.createUserWithEmailAndPassword(email, password);
+  // register user with [EMAIL] & [Password]
+  void registerUser(String email, String password) {
+    String? error = AuthenticationRepository.instance.createUserWithEmailAndPassword(email, password) as String?;
+    if (error != null) {
+      Get.showSnackbar(GetSnackBar(message: error.toString()));
+    }
+  }
+
+  // Get phoneNo from user (Screen) and pass it to Auth Repository for Firebase Authentication
+  void phoneAuthentication(String phoneNo) {
+    AuthenticationRepository.instance.phoneAuthentication(phoneNo);
   }
 }

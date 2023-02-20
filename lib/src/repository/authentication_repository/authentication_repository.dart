@@ -10,6 +10,7 @@ class AuthenticationRepository extends GetxController{
   // Variables
   final _auth = FirebaseAuth.instance; // for the firebase authentication
   late final Rx<User?> firebaseUser;
+  var verificationId = ''.obs;  // this will observe and automatically update it's children if a change happens
 
   @override
   void onReady() {
@@ -21,11 +22,37 @@ class AuthenticationRepository extends GetxController{
     ever(firebaseUser, _setInitialScreen);
   } // ? - it can be nullable
 
-
-
   _setInitialScreen(User? user) {
     // Get.offAll - remove all the previous screen if the user logged out
     user == null ? Get.offAll(() => const WelcomeScreen()) : Get.offAll(() => () => const HomePage());
+  }
+
+
+  Future<void> phoneAuthentication(String phoneNo) async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phoneNo,
+      verificationCompleted: (credential) async {
+        await _auth.signInWithCredential(credential);
+      },
+      codeSent: (verificationId, resendToken) {
+        this.verificationId.value = verificationId;
+      },
+      codeAutoRetrievalTimeout: (verificationId) {
+        this.verificationId.value = verificationId;
+      },
+      verificationFailed: (e) {
+        if(e.code == 'invalid-phone-number'){
+          Get.snackbar("Error", "The provided phone number is not valid.");
+        } else{
+          Get.snackbar("Error", "Something went wrong. Try again.");
+        }
+      },
+    );
+  }
+  
+  Future<bool> verifyOTP(String otp) async {
+    var credentials = await _auth.signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationId.value, smsCode: otp));
+    return credentials.user != null ? true : false;
   }
 
   Future<void> createUserWithEmailAndPassword(String email, String password) async {

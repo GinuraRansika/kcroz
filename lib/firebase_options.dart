@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCaHwdyIMcLikmTWCC0rms9I9tthNOVzio',
-    appId: '1:814801737668:web:d12c7de262af1bd177f691',
-    messagingSenderId: '814801737668',
-    projectId: 'fir-kcroz',
-    authDomain: 'fir-kcroz.firebaseapp.com',
-    storageBucket: 'fir-kcroz.appspot.com',
-    measurementId: 'G-6M0GH3DNCN',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAGY--BCxHPgHD40CyFi3W8zSb00dOEei8',
     appId: '1:814801737668:android:da0c5189a9cbaacf77f691',
@@ -67,17 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '814801737668',
     projectId: 'fir-kcroz',
     storageBucket: 'fir-kcroz.appspot.com',
+    androidClientId: '814801737668-jv91975e37tg2rbl76723hbhrbfld3cq.apps.googleusercontent.com',
     iosClientId: '814801737668-mbs0kiin3bcl0b21v9afknkbj88kirvf.apps.googleusercontent.com',
     iosBundleId: 'com.kcroz.app.db.kcroz',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCvoduS32CZR1xouGujwB4VQ2_v2ZYAqr4',
-    appId: '1:814801737668:ios:70b2997522b75ec677f691',
-    messagingSenderId: '814801737668',
-    projectId: 'fir-kcroz',
-    storageBucket: 'fir-kcroz.appspot.com',
-    iosClientId: '814801737668-icp54l0adtg66vd8641b8pvprt4opp65.apps.googleusercontent.com',
-    iosBundleId: 'com.kcroz.kcroz',
   );
 }
