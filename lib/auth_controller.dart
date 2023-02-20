@@ -5,7 +5,7 @@ import 'package:kcroz/welcome_page.dart';
 import 'login_page.dart';
 import 'package:flutter/material.dart';
 
-class AuthController extends GetxController {
+class AuthController extends GetxController{
   // will make accessible authController and it's props from other pages
   static AuthController instance = Get.find();
   // email, password, name ...
@@ -14,7 +14,8 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
-  void onReady() {
+  void onReady()
+  {
     super.onReady();
     _user = Rx<User?>(auth.currentUser);
     // track the user (our user would be notified)
@@ -23,41 +24,51 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  _initialScreen(User? user) {
-    if (user == null) {
-      print("login page");
-      Get.offAll(() => LoginPage());
-    } else {
-      Get.offAll(() => WelcomePage(email: user.email!));
-    }
+
+  _initialScreen(User? user)
+  {
+    if(user == null)
+      {
+        print("login page");
+        Get.offAll(() => LoginPage());
+      }
+    else
+      {
+        Get.offAll(() => WelcomePage(email:user.email!));
+      }
   }
 
   void register(String email, password) async {
     try {
-      await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-    } catch (e) {
+      await auth.createUserWithEmailAndPassword(email: email, password: password);
+    }
+    catch(e) {
       Get.snackbar("About User", "User message",
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: const Text(
-            "Account creation Failed",
-            style: TextStyle(color: Colors.white),
+      backgroundColor: Colors.redAccent,
+      snackPosition: SnackPosition.BOTTOM,
+      titleText: const Text(
+        "Account creation Failed",
+        style: TextStyle (
+            color: Colors.white
           ),
-          messageText: Text(
-            e.toString(),
-            style: const TextStyle(color: Colors.white),
-          ));
+      ),
+        messageText: Text(
+          e.toString(),
+          style: const TextStyle(
+              color: Colors.white
+          ),
+        )
+      );
     }
   }
 
-  signInWithGoogle() async {
+  signInWithGoogle() async
+  {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(scopes: <String>["email"]).signIn();
+    final GoogleSignInAccount? googleUser = await GoogleSignIn(
+      scopes: <String>["email"]).signIn();
     // obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -72,18 +83,24 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
+    }
+    catch(e) {
       Get.snackbar("About Login", "Login message",
           backgroundColor: Colors.redAccent,
           snackPosition: SnackPosition.BOTTOM,
           titleText: const Text(
             "Login Failed",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle (
+                color: Colors.white
+            ),
           ),
           messageText: Text(
             e.toString(),
-            style: const TextStyle(color: Colors.white),
-          ));
+            style: const TextStyle(
+                color: Colors.white
+            ),
+          )
+      );
     }
   }
 
