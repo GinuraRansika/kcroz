@@ -17,8 +17,8 @@ class LoginForm extends StatelessWidget {
           TextFormField(
             decoration: const InputDecoration (
                 prefixIcon: Icon(Icons.person_outline_outlined),
-                labelText: "Email",
-                hintText: "Email",
+                labelText: kcrozEmail,
+                hintText: kcrozEmail,
                 border: OutlineInputBorder()
             ),
           ),
@@ -27,8 +27,8 @@ class LoginForm extends StatelessWidget {
           TextFormField(
             decoration: const InputDecoration (
               prefixIcon: Icon(Icons.fingerprint),
-              labelText: "Password",
-              hintText: "Password",
+              labelText: kcrozPassword,
+              hintText: kcrozPassword,
               border: OutlineInputBorder(),
               suffixIcon: IconButton(
                   onPressed: null,
@@ -40,7 +40,7 @@ class LoginForm extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
                 onPressed: () {},
-                child: const Text("Forget Password? ")),
+                child: const Text(kcrozForgetPassword)),
           ),
           SizedBox(
               width: double.infinity,

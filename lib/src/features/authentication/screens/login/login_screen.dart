@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/constants/image_string.dart';
 import 'package:kcroz/src/constants/sizes.dart';
-import 'package:kcroz/src/constants/text_string.dart';
 
 import ' login_footer_widget.dart';
 import 'login_form_widget.dart';

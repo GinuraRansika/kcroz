@@ -10,6 +10,7 @@ const String kcrozOnBoardingImage2 = "assets/images/splash_screen/splash-screen-
 const String kcrozOnBoardingImage3 = "assets/images/on_boarding_images/on-boarding-image-1.jpg";
 
 // Welcome Screen Images
+// also used in Login and Signup
 const String kcrozWelcomeScreenImage = "assets/images/welcome_images/welcome-screen-image.png";
 
 // Login Image And Signup Image

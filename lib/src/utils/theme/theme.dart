@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/utils/theme/widget_themes/elevated_button_theme.dart';
 import 'package:kcroz/src/utils/theme/widget_themes/outlined_button_theme.dart';
+import 'package:kcroz/src/utils/theme/widget_themes/text_field_theme.dart';
 import 'package:kcroz/src/utils/theme/widget_themes/text_theme.dart';
 
 class KcrozAppTheme {
@@ -11,6 +12,7 @@ class KcrozAppTheme {
     textTheme: KcrozTextTheme.lightTextTheme,
     outlinedButtonTheme: KcrozOutlinedButtonTheme.lightOutlinedButtonTheme,
     elevatedButtonTheme: KcrozElevatedButtonTheme.lightElevatedButtonTheme,
+    inputDecorationTheme: KcrozTextFormFieldTheme.lightInputDecorationTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -18,5 +20,6 @@ class KcrozAppTheme {
     textTheme: KcrozTextTheme.darkTextTheme,
     outlinedButtonTheme: KcrozOutlinedButtonTheme.darkOutlinedButtonTheme,
     elevatedButtonTheme: KcrozElevatedButtonTheme.darkElevatedButtonTheme,
+    inputDecorationTheme: KcrozTextFormFieldTheme.darkInputDecorationTheme,
   );
 }
