@@ -14,4 +14,7 @@ const String kcrozOnBoardingImage3 = "assets/images/on_boarding_images/on-boardi
 const String kcrozWelcomeScreenImage = "assets/images/welcome_images/welcome-screen-image.png";
 
 // Login Image And Signup Image
-const String GoogleLogoImage = "assets/logo/google-logo.png";
+const String kcrozGoogleLogoImage = "assets/logo/google-logo.png";
+
+// Forget Password Images
+const String kcrozForgetPasswordImage = "assets/images/forget_password/forget-password.png";
