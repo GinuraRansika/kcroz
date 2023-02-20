@@ -52,8 +52,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     version: "1.16.0"
 =======
+=======
+>>>>>>> Stashed changes
     version: "1.17.0"
   crypto:
     dependency: transitive
@@ -260,6 +263,9 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   lints:
     dependency: transitive
@@ -269,6 +275,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+<<<<<<< Updated upstream
+=======
+  liquid_swipe:
+    dependency: "direct main"
+    description:
+      name: liquid_swipe
+      sha256: "0d890834cfd5cc1a526a6aa8965cd25b84d77420b2ec8755c9490271fdfc42d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+>>>>>>> Stashed changes
   matcher:
     dependency: transitive
     description:
@@ -293,6 +310,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+<<<<<<< Updated upstream
+=======
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+>>>>>>> Stashed changes
   path:
     dependency: transitive
     description:
@@ -375,6 +403,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+<<<<<<< Updated upstream
+=======
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.5"
+>>>>>>> Stashed changes
   quiver:
     dependency: transitive
     description:
@@ -389,6 +428,17 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+<<<<<<< Updated upstream
+=======
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "8c301bc686892306cd41672c1880167f140c16be305d5ede8201fefd9fcda829"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+>>>>>>> Stashed changes
   source_span:
     dependency: transitive
     description:
@@ -437,8 +487,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     version: "0.4.12"
 =======
+=======
+>>>>>>> Stashed changes
     version: "0.4.16"
   typed_data:
     dependency: transitive
@@ -457,8 +510,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     version: "2.1.2"
 =======
+=======
+>>>>>>> Stashed changes
     version: "2.1.4"
   win32:
     dependency: transitive
