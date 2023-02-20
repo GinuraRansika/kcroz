@@ -16,7 +16,7 @@ class SignUpFooterWidget extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton.icon(
             onPressed: () {},
-            icon: const Image(image: AssetImage(GoogleLogoImage), width: 20.0,),
+            icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
             label: Text(kcrozSignInWithGoogle.toUpperCase()),
 
           ),

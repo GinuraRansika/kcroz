@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/image_string.dart';
-import '../../../../constants/sizes.dart';
-import '../../../../constants/text_string.dart';
+import '../../../../../constants/image_string.dart';
+import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_string.dart';
 
 class LoginFooterWidget extends StatelessWidget {
   const LoginFooterWidget({
@@ -18,7 +18,7 @@ class LoginFooterWidget extends StatelessWidget {
         SizedBox( // make it cover the complete screen
           width: double.infinity,
           child: OutlinedButton.icon(
-            icon: const Image(image: AssetImage(GoogleLogoImage), width: 20.0,),
+            icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
             onPressed: () {},
             label: const Text(kcrozSignInWithGoogle),
           ),
