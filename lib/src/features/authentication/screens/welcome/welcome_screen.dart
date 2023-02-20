@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:kcroz/signup_page.dart';
 import 'package:kcroz/src/common_widgets/fade_in_animation/animation_design.dart';
 import 'package:kcroz/src/common_widgets/fade_in_animation/fade_in_animation_controller.dart';
 import 'package:kcroz/src/common_widgets/fade_in_animation/fade_in_animation_model.dart';
 import 'package:kcroz/src/constants/colors.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/login/login_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/signup/signup_screen.dart';
 import '../../../../constants/image_string.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -69,14 +72,14 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                           child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {Get.to(() => const LoginScreen());},
                               child: Text(kcrozLogin.toUpperCase())
                           )
                       ),
                       const SizedBox(width: 10.0,),
                       Expanded(
                           child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {Get.to(() => const SignUpScreen());},
                               child: Text(kcrozSignup.toUpperCase())
                           )
                       ),
