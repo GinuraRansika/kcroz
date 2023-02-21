@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:kcroz/src/home_page.dart';
+import 'package:kcroz/src/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:kcroz/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 
 class AuthenticationRepository extends GetxController{
@@ -14,10 +15,8 @@ class AuthenticationRepository extends GetxController{
 
   @override
   void onReady() {
-    Future.delayed(const Duration(seconds: 6));
     firebaseUser = Rx<User?>(_auth.currentUser); // casting
     firebaseUser.bindStream(_auth.userChanges()); // always listening to the user
-
     // whenever anything came new below function should be called
     ever(firebaseUser, _setInitialScreen);
   } // ? - it can be nullable
@@ -31,21 +30,22 @@ class AuthenticationRepository extends GetxController{
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        await _auth.signInWithCredential(credential);
-      },
-      codeSent: (String verificationId,int? resendToken) async {
-        this.verificationId.value = verificationId;
-      },
-      codeAutoRetrievalTimeout: (verificationId) {
-        this.verificationId.value = verificationId;
-      },
-      verificationFailed: (e) {
-        if(e.code == 'invalid-phone-number'){
-          Get.snackbar("Error", "The provided phone number is not valid.");
-        } else{
-          Get.snackbar("Error", "Something went wrong. Try again.");
-        }
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential);
+        },
+        codeSent: (String verificationId,int? resendToken) {
+          this.verificationId.value = verificationId;
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          this.verificationId.value = verificationId;
+        },
+        verificationFailed: (e) {
+          if(e.code == 'invalid-phone-number'){
+            Get.snackbar("Error", "The provided phone number is not valid.");
+          } else{
+            print(e);
+            Get.snackbar("Error", "Something went wrong. Try again.");
+          }
       },
     );
   }
@@ -55,7 +55,7 @@ class AuthenticationRepository extends GetxController{
     return credentials.user != null ? true : false;
   }
 
-  Future<void> createUserWithEmailAndPassword(String email, String password) async {
+  Future<String?> createUserWithEmailAndPassword(String email, String password) async {
     // cloud statements could throw an exception
     try
     {
@@ -65,23 +65,28 @@ class AuthenticationRepository extends GetxController{
     on FirebaseAuthException catch(e)
     {
       final exception = SignUpWithEmailAndPasswordFailure.code(e.code);
-      print('FIREBASE AUTH EXCEPTION - ${exception.message}');
-      throw exception;
+      return exception.message;
     }
     catch (_)
     {
       const exception = SignUpWithEmailAndPasswordFailure();
-      print('FIREBASE AUTH EXCEPTION - ${exception.message}');
-      throw exception;
+      return exception.message;
     }
+    return null;
   }
 
-  Future<void> loginWithEmailAndPassword(String email, String password) async {
+  Future<String?> loginWithEmailAndPassword(String email, String password) async {
     // cloud statements could throw an exception
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch(e){
-    } catch (_) {}
+      final exception = LoginWithEmailAndPasswordFailure.code(e.code);
+      return exception.message;
+    } catch (_) {
+      const exception = LoginWithEmailAndPasswordFailure();
+      return exception.message;
+    }
+    return null;
   }
 
   Future<void> logout() async { await _auth.signOut();}

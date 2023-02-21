@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/src/features/authentication/controllers/signup_controller.dart';
-import 'package:kcroz/src/home_page.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_string.dart';
 import '../../forget_password/forget_password_otp/otp_screen.dart';
@@ -61,9 +60,9 @@ class SignUpFormWidget extends StatelessWidget {
                   onPressed: (){
                     // formKey means the form is validated
                     if(_formKey.currentState!.validate()){
-                      SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
-                      // SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
-
+                      // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                      SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
+                      Get.to(() => const OTPScreen());
                     }
                   },
                   child: Text(kcrozSignup.toUpperCase())),

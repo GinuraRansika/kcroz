@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1019076583860',
     projectId: 'kcroz-app',
     storageBucket: 'kcroz-app.appspot.com',
+    androidClientId: '1019076583860-h7oulbfokar3bfrutpjk6p962tc9eunu.apps.googleusercontent.com',
     iosClientId: '1019076583860-knptgam5ciskr0qepecnq6k4csd4d2i4.apps.googleusercontent.com',
     iosBundleId: 'com.app.kcroz',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1019076583860',
     projectId: 'kcroz-app',
     storageBucket: 'kcroz-app.appspot.com',
+    androidClientId: '1019076583860-h7oulbfokar3bfrutpjk6p962tc9eunu.apps.googleusercontent.com',
     iosClientId: '1019076583860-9tq0fm689bg8qevf3nr0up2uiahp7ucq.apps.googleusercontent.com',
     iosBundleId: 'com.kcroz.kcroz',
   );

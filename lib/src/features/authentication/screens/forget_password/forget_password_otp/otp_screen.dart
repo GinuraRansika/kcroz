@@ -10,7 +10,7 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var otp;
+    late String otp;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(kcrozDefaultSize),
