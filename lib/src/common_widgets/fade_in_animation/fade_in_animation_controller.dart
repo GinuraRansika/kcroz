@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:kcroz/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 import 'package:kcroz/src/features/authentication/screens/welcome/welcome_screen.dart';
 
 class FadeInAnimationController extends GetxController {
@@ -11,7 +12,7 @@ class FadeInAnimationController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 2000));
-    Get.to( () => const WelcomeScreen());
+    Get.to( () => const OnBoardingScreen());
   }
 
   Future startAnimation() async {
