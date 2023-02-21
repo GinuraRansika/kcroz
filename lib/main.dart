@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/firebase_options.dart';
 import 'package:kcroz/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
@@ -10,7 +11,6 @@ import 'package:kcroz/src/utils/theme/theme.dart';
 main() {
   // everytime run the app firebase will get initialized and authenticationRepository get initialized
   WidgetsFlutterBinding.ensureInitialized();
-
   Firebase.initializeApp(
     name: "kcroz-app",
     options: DefaultFirebaseOptions.currentPlatform)
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       darkTheme: KcrozAppTheme.darkTheme,
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
-      home: const OnBoardingScreen()
+      home: const SplashScreen()
     );
   }
 }

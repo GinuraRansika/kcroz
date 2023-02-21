@@ -42,7 +42,7 @@ class OTPScreen extends StatelessWidget {
               filled: true,
               onSubmit: (code) {
                 otp = code;
-                OTPController.instance.verifyOTP(otp);
+                // OTPController.instance.verifyOTP(otp);
               },
             ),
             const SizedBox(height: kcrozDefaultSize,),
@@ -51,7 +51,7 @@ class OTPScreen extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {
                     // if the field didn't call automatically onSubmit
-                    OTPController.instance.verifyOTP(otp);
+                    // OTPController.instance.verifyOTP(otp);
                   },
                   child: const Text(kcrozNext)
               ),

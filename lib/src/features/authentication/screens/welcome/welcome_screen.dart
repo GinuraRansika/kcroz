@@ -79,7 +79,8 @@ class WelcomeScreen extends StatelessWidget {
                       const SizedBox(width: 10.0,),
                       Expanded(
                           child: ElevatedButton(
-                              onPressed: () {Get.to(() => const SignUpScreen());},
+                              onPressed: () {
+                                Get.to(() => const SignUpScreen());},
                               child: Text(kcrozSignup.toUpperCase())
                           )
                       ),
