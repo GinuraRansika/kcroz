@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,22 +43,41 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBq8J1I7jbqkrohBoRcDKfc5WmJwzjLCR4',
+    appId: '1:1019076583860:web:124d82684b45adf626d2e1',
+    messagingSenderId: '1019076583860',
+    projectId: 'kcroz-app',
+    authDomain: 'kcroz-app.firebaseapp.com',
+    storageBucket: 'kcroz-app.appspot.com',
+    measurementId: 'G-P1MN8JTW62',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAGY--BCxHPgHD40CyFi3W8zSb00dOEei8',
-    appId: '1:814801737668:android:da0c5189a9cbaacf77f691',
-    messagingSenderId: '814801737668',
-    projectId: 'fir-kcroz',
-    storageBucket: 'fir-kcroz.appspot.com',
+    apiKey: 'AIzaSyCUlnksK8AGux-IBF8MU50gb72s5uKzfas',
+    appId: '1:1019076583860:android:5d425def51d232b226d2e1',
+    messagingSenderId: '1019076583860',
+    projectId: 'kcroz-app',
+    storageBucket: 'kcroz-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCvoduS32CZR1xouGujwB4VQ2_v2ZYAqr4',
-    appId: '1:814801737668:ios:497bf4f9f86d203a77f691',
-    messagingSenderId: '814801737668',
-    projectId: 'fir-kcroz',
-    storageBucket: 'fir-kcroz.appspot.com',
-    androidClientId: '814801737668-jv91975e37tg2rbl76723hbhrbfld3cq.apps.googleusercontent.com',
-    iosClientId: '814801737668-mbs0kiin3bcl0b21v9afknkbj88kirvf.apps.googleusercontent.com',
-    iosBundleId: 'com.kcroz.app.db.kcroz',
+    apiKey: 'AIzaSyCSTLLmwZmI3wEWWdqwnjbDYDpDTvxvD_w',
+    appId: '1:1019076583860:ios:480f041a9717880c26d2e1',
+    messagingSenderId: '1019076583860',
+    projectId: 'kcroz-app',
+    storageBucket: 'kcroz-app.appspot.com',
+    iosClientId: '1019076583860-knptgam5ciskr0qepecnq6k4csd4d2i4.apps.googleusercontent.com',
+    iosBundleId: 'com.app.kcroz',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCSTLLmwZmI3wEWWdqwnjbDYDpDTvxvD_w',
+    appId: '1:1019076583860:ios:ee0abf01d764e83826d2e1',
+    messagingSenderId: '1019076583860',
+    projectId: 'kcroz-app',
+    storageBucket: 'kcroz-app.appspot.com',
+    iosClientId: '1019076583860-9tq0fm689bg8qevf3nr0up2uiahp7ucq.apps.googleusercontent.com',
+    iosBundleId: 'com.kcroz.kcroz',
   );
 }

@@ -31,10 +31,10 @@ class AuthenticationRepository extends GetxController{
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
-      verificationCompleted: (credential) async {
+      verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
       },
-      codeSent: (verificationId, resendToken) {
+      codeSent: (String verificationId,int? resendToken) async {
         this.verificationId.value = verificationId;
       },
       codeAutoRetrievalTimeout: (verificationId) {

@@ -1,45 +1,45 @@
 {
   "project_info": {
-    "project_number": "814801737668",
-    "project_id": "fir-kcroz",
-    "storage_bucket": "fir-kcroz.appspot.com"
+    "project_number": "1019076583860",
+    "project_id": "kcroz-app",
+    "storage_bucket": "kcroz-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:814801737668:android:da0c5189a9cbaacf77f691",
+        "mobilesdk_app_id": "1:1019076583860:android:5d425def51d232b226d2e1",
         "android_client_info": {
-          "package_name": "com.kcroz.app.db.kcroz"
+          "package_name": "com.app.kcroz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "814801737668-jv91975e37tg2rbl76723hbhrbfld3cq.apps.googleusercontent.com",
+          "client_id": "1019076583860-h7oulbfokar3bfrutpjk6p962tc9eunu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kcroz.app.db.kcroz",
+            "package_name": "com.app.kcroz",
             "certificate_hash": "e34fa13667d89946c774bcfdcc38c1fb82f347b9"
           }
         },
         {
-          "client_id": "814801737668-stn1tajkhfkjjiq6sq3r66qm8tbse930.apps.googleusercontent.com",
+          "client_id": "1019076583860-0h51lnu8ljc1f807blgndg5kicuqbu2o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAGY--BCxHPgHD40CyFi3W8zSb00dOEei8"
+          "current_key": "AIzaSyCUlnksK8AGux-IBF8MU50gb72s5uKzfas"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "814801737668-stn1tajkhfkjjiq6sq3r66qm8tbse930.apps.googleusercontent.com",
+              "client_id": "1019076583860-0h51lnu8ljc1f807blgndg5kicuqbu2o.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "814801737668-icp54l0adtg66vd8641b8pvprt4opp65.apps.googleusercontent.com",
+              "client_id": "1019076583860-9tq0fm689bg8qevf3nr0up2uiahp7ucq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.kcroz.kcroz"

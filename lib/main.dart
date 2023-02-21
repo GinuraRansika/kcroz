@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kcroz/auth_controller.dart';
 import 'package:kcroz/firebase_options.dart';
 import 'package:kcroz/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/repository/authentication_repository/authentication_repository.dart';
@@ -12,7 +11,6 @@ main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
-
   runApp(const MyApp());
 }
 
