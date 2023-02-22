@@ -18,3 +18,7 @@ const String kcrozGoogleLogoImage = "assets/logo/google-logo.png";
 
 // Forget Password Images
 const String kcrozForgetPasswordImage = "assets/images/forget_password/forget-password.png";
+
+
+// Profile Image
+const String kcrozProfileImage = "assets/images/profile/profile-pic.png";

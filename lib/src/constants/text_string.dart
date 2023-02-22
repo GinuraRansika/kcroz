@@ -10,6 +10,7 @@ const String kcrozPhoneNo = "Phone No";
 const String kcrozPassword = "Password";
 const String kcrozForgetPassword = "Forget Password?";
 const String kcrozSignInWithGoogle = "Sign-In with Google";
+const String kcrozProfile = "Profile";
 
 
 // Splash Screen Text
@@ -55,3 +56,8 @@ const String kcrozResetViaPhone = "Reset vla Phone Verification.";
 const String kcrozForgetPhoneSubTitle = "Enter your registered Phone No to receive OTP";
 // Forget Password Via E-Mail - Text
 const String kcrozForgetMailSubTitle = "Enter your registered E-Mail to receive OTP";
+
+// OTP Screen - Text
+const String kcrozOTPTitle = "CO\nDE";
+const String kcrozOTPSubTitle = "Verification";
+const String kcrozOTPMessage = "Enter the verification code sent at ";

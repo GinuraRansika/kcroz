@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:kcroz/src/constants/image_string.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
 import '../../../../../common_widgets/form/form_header_widget.dart';
 
 class ForgetPasswordMailScreen extends StatelessWidget {
@@ -41,7 +44,9 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => const OTPScreen());
+                            },
                             child: const Text(kcrozNext)
                         )
                       ),
