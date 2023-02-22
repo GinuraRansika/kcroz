@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1027941086185",
+    "project_id": "kcroz-dating-app",
+    "storage_bucket": "kcroz-dating-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027941086185:android:38a3212f79a97313f1d178",
+        "android_client_info": {
+          "package_name": "com.creed.kcroz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027941086185-vcq9r03truss8e6kfifla0batho6040l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrhBvgEZOSsNiqkMrJ-n6UoaZ61ZfKXRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027941086185-vcq9r03truss8e6kfifla0batho6040l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

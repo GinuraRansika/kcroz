@@ -1,6 +1,6 @@
 # kcroz
 
-A new Flutter project.
+Dating Application Project
 
 ## Getting Started
 
