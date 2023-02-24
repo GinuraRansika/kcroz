@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-
-import '../../features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/services/auth_wrapper.dart';
 
 class FadeInAnimationController extends GetxController {
   static FadeInAnimationController get find => Get.find(); // avoid using with instances
@@ -12,7 +11,7 @@ class FadeInAnimationController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 2000));
-    await Get.to( () => const SignUpScreen());
+    await Get.to( () => const AuthWrapper());
   }
 
   Future startAnimation() async {

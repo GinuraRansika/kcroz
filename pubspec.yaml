@@ -25,6 +25,7 @@ dependencies:
   #OTP Text Field Package
   flutter_otp_text_field: ^1.1.1
   provider: ^6.0.5
+  cloud_firestore: ^4.4.3
 
 dev_dependencies:
   flutter_test:

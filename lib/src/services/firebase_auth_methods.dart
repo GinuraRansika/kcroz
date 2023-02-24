@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../features/core/screens/map/home_page_map.dart';
+
 import '../utils/show_snack_bar.dart';
 
 class FirebaseAuthMethods {
