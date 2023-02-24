@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1027941086185-vcq9r03truss8e6kfifla0batho6040l.apps.googleusercontent.com",
+          "client_id": "1027941086185-i5ndmc9259hnklq7red3r33odlbcl867.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.creed.kcroz",
+            "certificate_hash": "e34fa13667d89946c774bcfdcc38c1fb82f347b9"
+          }
+        },
+        {
+          "client_id": "1027941086185-bv4obaurmrup52urctablmaks3fbmk6l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1027941086185-vcq9r03truss8e6kfifla0batho6040l.apps.googleusercontent.com",
+              "client_id": "1027941086185-bv4obaurmrup52urctablmaks3fbmk6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1027941086185-s6bmh5knodevji7akvbi441439q51mo2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.creed.kcroz"
+              }
             }
           ]
         }
