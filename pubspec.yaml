@@ -21,6 +21,7 @@ dependencies:
   # OnBoarding Packages
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.1
+  line_awesome_flutter: ^2.0.0
   #OTP Text Field Package
   flutter_otp_text_field: ^1.1.1
   provider: ^6.0.5

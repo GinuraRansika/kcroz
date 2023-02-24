@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:kcroz/firebase_options.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/login/login_screen.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const SignUpScreen(),
+        home: const AuthWrapper(),
         routes: {
 
         },
@@ -50,3 +52,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+
+    if (firebaseUser != null) {
+      return const HomePageMap();
+    }
+    return const LoginScreen();
+  }
+}

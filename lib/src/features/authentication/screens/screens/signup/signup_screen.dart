@@ -31,7 +31,6 @@ class SignUpScreen extends StatelessWidget {
 
                 // Section - 3 [ Footer ]
                 SignUpFooterWidget()
-
               ],
             ),
           ),

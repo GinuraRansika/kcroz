@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../features/core/screens/map/home_page_map.dart';
 import '../utils/show_snack_bar.dart';
 
 class FirebaseAuthMethods {
@@ -15,6 +18,7 @@ class FirebaseAuthMethods {
   User get user => _auth.currentUser!;
 
   // STATE PERSISTENCE STREAM
+  // stream of users which will tel if the user is present or not
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
   // EMAIL SIGN UP
