@@ -1,7 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:kcroz/firebase_options.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/services/firebase_auth_methods.dart';
+import 'package:kcroz/src/utils/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,63 +17,36 @@ void main() async{
   runApp(const MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+    return MultiProvider(
+      providers: [
+        Provider<FirebaseAuthMethods>(
+          create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        StreamProvider(
+          create: (context) => context.read<FirebaseAuthMethods>().authState,
+          initialData: null,
+        ),
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        theme: KcrozAppTheme.lightTheme,
+        darkTheme: KcrozAppTheme.darkTheme,
+        defaultTransition: Transition.leftToRightWithFade,
+        transitionDuration: const Duration(milliseconds: 500),
+        home: const SignUpScreen(),
+        routes: {
+
+        },
       ),
     );
   }
 }
+

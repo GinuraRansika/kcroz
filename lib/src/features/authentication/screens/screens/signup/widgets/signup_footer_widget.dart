@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/login/login_screen.dart';
 
 import '../../../../../../constants/image_string.dart';
 import '../../../../../../constants/text_string.dart';
@@ -24,7 +28,7 @@ class SignUpFooterWidget extends StatelessWidget {
           ),
         ),
         TextButton(
-            onPressed: () {},
+            onPressed: () {Get.to(() => const LoginScreen());},
             child: Text.rich(
                 TextSpan(
                     children: [

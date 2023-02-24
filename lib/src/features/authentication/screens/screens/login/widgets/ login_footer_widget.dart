@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/services/firebase_auth_methods.dart';
 
 import '../../../../../../constants/image_string.dart';
 import '../../../../../../constants/sizes.dart';
@@ -21,13 +25,15 @@ class LoginFooterWidget extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton.icon(
             icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
-            onPressed: () {},
+            onPressed: () {
+              FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
+            },
             label: const Text(kcrozSignInWithGoogle),
           ),
         ),
         const SizedBox(height: kcrozFormHeight - 20,),
         TextButton(
-            onPressed: () {},
+            onPressed: () {Get.to(() => const SignUpScreen());},
             child: Text.rich(TextSpan(
                 text: dontHaveAnAccount,
                 style: Theme.of(context).textTheme.bodyText1,

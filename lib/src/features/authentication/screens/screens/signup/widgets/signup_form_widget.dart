@@ -1,19 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kcroz/src/services/firebase_auth_methods.dart';
 
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_string.dart';
 import '../../../controllers/signup_controller.dart';
 
 
-class SignUpFormWidget extends StatelessWidget {
+class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
+}
+
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  SignUpController controller = Get.put(SignUpController());
+
+  void signUpUser() async{
+    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+        email: controller.email.text,
+        password: controller.password.text,
+        context: context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
     final _formKey = GlobalKey<FormState>();
 
     return Container(
@@ -58,14 +76,7 @@ class SignUpFormWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: (){
-                    // formKey means the form is validated
-                    if(_formKey.currentState!.validate()){
-
-                      // SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
-                      // Get.to(() => const OTPScreen());
-                    }
-                  },
+                  onPressed:  signUpUser,
                   child: Text(kcrozSignup.toUpperCase())),
             )
           ],

@@ -1,12 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../utils/show_snack_bar.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
+  FirebaseAuthMethods(this._auth);
 
-  FirebaseAuthMethods(this._auth); // constructor
+  // GET USER DATA
+  // using null check operator since this method should be called only
+  // when the user is logged in
+  User get user => _auth.currentUser!;
+
+  // STATE PERSISTENCE STREAM
+  Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
   // EMAIL SIGN UP
   Future<void> signUpWithEmail({
@@ -32,6 +41,24 @@ class FirebaseAuthMethods {
     }
   }
 
+  // EMAIL LOGIN
+  Future<void> loginWithEmail({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (!user.emailVerified) {
+        await sendEmailVerification(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!);
+    }
+  }
 
   // EMAIL VERIFICATION
   Future<void> sendEmailVerification(BuildContext context) async {
@@ -39,7 +66,72 @@ class FirebaseAuthMethods {
       _auth.currentUser!.sendEmailVerification();
       showSnackBar(context, 'Email verification sent!');
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Display error message
+      showSnackBar(context, e.message!);
+    }
+  }
+
+
+  // GOOGLE SIGN IN
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      if (kIsWeb) {
+        GoogleAuthProvider googleProvider = GoogleAuthProvider();
+
+        googleProvider
+            .addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+        await _auth.signInWithPopup(googleProvider);
+      } else {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+        final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+        if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+          // Create a new credential
+          final credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken,
+            idToken: googleAuth?.idToken,
+          );
+          UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+          // if you want to do specific task like storing information in firestore
+          // only for new users using google sign in (since there are no two options
+          // for google sign in and google sign up, only one as of now),
+          // do the following:
+
+          if (userCredential.user != null) {
+            if (userCredential.additionalUserInfo!.isNewUser) {}
+          }
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+    }
+  }
+
+
+
+
+
+  // SIGN OUT
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+    }
+  }
+
+  // DELETE ACCOUNT
+  Future<void> deleteAccount(BuildContext context) async {
+    try {
+      await _auth.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+      // if an error of requires-recent-login is thrown, make sure to log
+      // in user again and then delete account.
     }
   }
 }
