@@ -12,20 +12,31 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^6.0.5
   get: ^4.6.5
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.7.0
-  firebase_auth: ^4.2.9
+
+  # Google
   google_fonts: ^4.0.3
   google_sign_in: ^6.0.0
+
   # OnBoarding Packages
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.1
   line_awesome_flutter: ^2.0.0
-  #OTP Text Field Package
+
+  # OTP Text Field Package
   flutter_otp_text_field: ^1.1.1
-  provider: ^6.0.5
+
+  # Image
+  image_picker: ^0.8.6+3
+
+  # Backend
+  firebase_core: ^2.7.0
+  firebase_auth: ^4.2.9
   cloud_firestore: ^4.4.3
+  firebase_storage: ^11.0.14
+
 
 dev_dependencies:
   flutter_test:

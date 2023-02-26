@@ -32,8 +32,10 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
         password: controller.password.text.trim(),
         phoneNo: controller.phoneNo.text.trim());
     await UserRepository.instance.createUser(user);
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+    FirebaseAuthMethods().signUpWithEmail(
         email: controller.email.text,
+        fullName: controller.fullName.text,
+        phoneNo: controller.phoneNo.text,
         password: controller.password.text,
         context: context);
   }

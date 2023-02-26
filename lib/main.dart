@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -8,15 +9,31 @@ import 'package:kcroz/src/features/authentication/screens/screens/login/login_sc
 import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
+import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
+import 'package:kcroz/src/responsive/responsive_layout_screen.dart';
+import 'package:kcroz/src/responsive/web_screen_layout.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  if(kIsWeb){
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyCT6gukdku4kHO18alUDoUce6Skur9oO8U",
+          appId: "1:1027941086185:web:23c79fa588e1ae1ff1d178",
+          messagingSenderId: "1027941086185",
+          projectId: "kcroz-dating-app",
+          storageBucket: "kcroz-dating-app.appspot.com",
+        )
+    );
+  } else {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform
+    );
+  }
+
   runApp(const MyApp());
 }
 
@@ -28,7 +45,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<FirebaseAuthMethods>(
-          create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
+          create: (_) => FirebaseAuthMethods(),
         ),
         StreamProvider(
           create: (context) => context.read<FirebaseAuthMethods>().authState,
@@ -42,8 +59,10 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const SplashScreen(),
-        routes: const {},
+        home: const LoginScreen()
+            // webScreenLayout: WebScreenLayout(),
+            // mobileScreenLayout: MobileScreenLayout()),
+        // routes: const {},
       ),
     );
   }

@@ -26,7 +26,7 @@ class LoginFooterWidget extends StatelessWidget {
           child: OutlinedButton.icon(
             icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
             onPressed: () {
-              FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
+              FirebaseAuthMethods().signInWithGoogle(context);
             },
             label: const Text(kcrozSignInWithGoogle),
           ),
@@ -40,7 +40,10 @@ class LoginFooterWidget extends StatelessWidget {
                 children: const [
                   TextSpan(
                     text: " $kcrozSignup",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold
+                    ),
                   )
                 ]
             ))

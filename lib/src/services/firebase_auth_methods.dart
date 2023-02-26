@@ -1,14 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 
 import '../utils/show_snack_bar.dart';
 
 class FirebaseAuthMethods {
-  final FirebaseAuth _auth;
-  FirebaseAuthMethods(this._auth);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // GET USER DATA
   // using null check operator since this method should be called only
@@ -22,15 +26,34 @@ class FirebaseAuthMethods {
   // EMAIL SIGN UP
   Future<void> signUpWithEmail({
     required String email,
+    required String fullName,
+    required String phoneNo,
     required String password,
     required BuildContext context,
   }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      await sendEmailVerification(context);
+      if(email.isNotEmpty || fullName.isNotEmpty || phoneNo.isNotEmpty || password.isNotEmpty) {
+        // Register the user
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // add user to the firestore
+        await _firestore.collection("users").doc(userCredential.user!.uid).set({
+          "username" : fullName,
+          "uid" : userCredential.user!.uid,
+          "email" : userCredential.user!.email,
+          "phoneNumber" : userCredential.user!.phoneNumber,
+          "followers" : []
+        });
+        Get.snackbar("Success", "Your Account has been created.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green.withOpacity(0.1),
+            colorText: Colors.green);
+      }
+
+      // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       // if you want to display your own custom error message
       if (e.code == 'weak-password') {

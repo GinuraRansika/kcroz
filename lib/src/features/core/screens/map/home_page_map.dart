@@ -27,7 +27,7 @@ class HomePageMap extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: () {
-                FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
+                FirebaseAuthMethods().signOut(context);
                 },
               icon: const Icon(Icons.logout_outlined),
             ),
