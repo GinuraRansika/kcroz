@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_string.dart';
 import '../../../../../../services/firebase_auth_methods.dart';
@@ -20,8 +21,8 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   LoginController controller = Get.put(LoginController());
 
-  void loginUser() async{
-    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+  void loginUser() {
+    context.read<FirebaseAuthMethods>().loginWithEmail(
         email: controller.email.text,
         password: controller.password.text,
         context: context);

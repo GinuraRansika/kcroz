@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_string.dart';
@@ -24,7 +25,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   SignUpController controller = Get.put(SignUpController());
 
   void signUpUser() async{
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+    context.read<FirebaseAuthMethods>().signUpWithEmail(
         email: controller.email.text,
         password: controller.password.text,
         context: context);
