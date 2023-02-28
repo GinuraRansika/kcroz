@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -8,12 +10,12 @@ class SignUpController extends GetxController{
   // TextField Controllers to get data  from TextFields
   final phoneNo = TextEditingController();
   final email = TextEditingController();
-  final firstName = TextEditingController();
-  final lastName = TextEditingController();
+  final password = TextEditingController();
+
   final fullName = TextEditingController();
-  final birthday = TextEditingController();
+  final religion = TextEditingController();
   final gender = TextEditingController();
   final sexualOrientation = TextEditingController();
-  final password = TextEditingController();
+  final birthday = TextEditingController();
   final interests = TextEditingController();
 }

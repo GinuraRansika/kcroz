@@ -26,18 +26,18 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   SignUpController controller = Get.put(SignUpController());
 
   void signUpUser() async{
-    final user = UserModel(
-        fullName: controller.fullName.text.trim(),
-        email: controller.email.text.trim(),
-        password: controller.password.text.trim(),
-        phoneNo: controller.phoneNo.text.trim());
-    await UserRepository.instance.createUser(user);
-    FirebaseAuthMethods().signUpWithEmail(
-        email: controller.email.text,
-        fullName: controller.fullName.text,
-        phoneNo: controller.phoneNo.text,
-        password: controller.password.text,
-        context: context);
+    // final user = UserModel(
+    //     fullName: controller.fullName.text.trim(),
+    //     email: controller.email.text.trim(),
+    //     password: controller.password.text.trim(),
+    //     phoneNo: controller.phoneNo.text.trim());
+    // await UserRepository.instance.createUser(user);
+    // FirebaseAuthMethods().signUpWithEmail(
+    //     email: controller.email.text,
+    //     fullName: controller.fullName.text,
+    //     phoneNo: controller.phoneNo.text,
+    //     password: controller.password.text,
+    //     context: context);
   }
 
   @override

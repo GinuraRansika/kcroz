@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/services/storage_methods.dart';
 
 
@@ -30,17 +31,17 @@ class FirebaseAuthMethods {
     required String fullName,
     required String phoneNo,
     required String password,
+    required String religion,
     required BuildContext context,
 
   }) async {
     try {
-      if(email.isNotEmpty || fullName.isNotEmpty || phoneNo.isNotEmpty || password.isNotEmpty) {
+      if(email.isNotEmpty && fullName.isNotEmpty && phoneNo.isNotEmpty && password.isNotEmpty && religion.isNotEmpty ) {
         // Register the user
         UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-        
         // String photoURL = await StorageMethods().uploadImageToStorage("profilePics", file, false)
 
         // add user to the firestore
@@ -48,6 +49,7 @@ class FirebaseAuthMethods {
           "username" : fullName,
           "uid" : userCredential.user!.uid,
           "email" : userCredential.user!.email,
+          "religion" : userCredential.user!.religion,
           "phoneNumber" : userCredential.user!.phoneNumber,
           "followers" : [],
           // "photoURL" : photoURL,
@@ -58,6 +60,14 @@ class FirebaseAuthMethods {
             backgroundColor: Colors.green.withOpacity(0.1),
             colorText: Colors.green);
       }
+      else {
+        Get.snackbar("Error", "Something Went Wrong.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+        Get.to(() => const SignUpScreen());
+      }
+
 
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {

@@ -6,8 +6,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:kcroz/firebase_options.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/login/login_screen.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen11.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
@@ -61,7 +59,7 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const AuthWrapper()
+        home: const SplashScreen()
             // webScreenLayout: WebScreenLayout(),
             // mobileScreenLayout: MobileScreenLayout()),
         // routes: const {},
