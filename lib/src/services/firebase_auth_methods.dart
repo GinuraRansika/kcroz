@@ -11,6 +11,7 @@ import 'package:kcroz/src/services/storage_methods.dart';
 
 
 import '../utils/show_snack_bar.dart';
+import 'exceptions/signup_email_password_failure.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -26,7 +27,7 @@ class FirebaseAuthMethods {
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
   // EMAIL SIGN UP
-  Future<void> signUpWithEmail({
+  Future<String> signUpWithEmail({
     required String email,
     required String fullName,
     required String phoneNo,
@@ -39,6 +40,7 @@ class FirebaseAuthMethods {
     required Uint8List file,
     required BuildContext context,
   }) async {
+    String result = "Error - An Unknown error occurred.";
     try {
       if(email.isNotEmpty
           && fullName.isNotEmpty
@@ -56,12 +58,12 @@ class FirebaseAuthMethods {
           password: password,
         );
 
-        String photoURL = await StorageMethods().uploadImageToStorage("profilePics", file, false);
+        String dpURL = await StorageMethods().uploadImageToStorage("profilePictures", file, false);
 
         // add user to the firestore
         await _firestore.collection("users").doc(userCredential.user!.uid).set({
           "username" : fullName,
-          "dpURL" : photoURL,
+          "dpURL" : dpURL,
           "uid" : userCredential.user!.uid,
           "email" : userCredential.user!.email,
           "phoneNumber" : userCredential.user!.phoneNumber,
@@ -72,31 +74,18 @@ class FirebaseAuthMethods {
           "interests" : interests,
           "followers" : [],
         });
-
-        Get.snackbar("Success", "Your Account has been created.",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green.withOpacity(0.1),
-            colorText: Colors.green);
+        result = "Success - Your Account has been created.";
       }
       else {
-        Get.snackbar("Error", "Something Went Wrong.",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.redAccent.withOpacity(0.1),
-            colorText: Colors.red);
-        Get.to(() => const SignUpScreen());
+        result = "Error - Something went wrong.";
       }
-
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
-      // if you want to display your own custom error message
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-      showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
+      result = "Error - ${SignUpWithEmailAndPasswordFailure.code(e.code).message}";
+    } catch(_) {
+      result = "Error - ${const SignUpWithEmailAndPasswordFailure().message}";
     }
+    return result;
   }
 
   // EMAIL LOGIN

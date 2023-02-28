@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 
 pickImage(ImageSource source) async {
@@ -15,5 +14,5 @@ pickImage(ImageSource source) async {
   Get.snackbar("No Image Selected", "You haven't selected an Image",
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.redAccent.withOpacity(0.1),
-      colorText: Colors.green);
+      colorText: Colors.red);
 }

@@ -28,7 +28,7 @@ class _CreateProfileState extends State<CreateProfile> {
   void selectImage() async {
     Uint8List image = await pickImage(ImageSource.gallery);
     setState(() {
-      _image = _image;
+      _image = image;
     });
   }
 
@@ -39,7 +39,7 @@ class _CreateProfileState extends State<CreateProfile> {
   }
 
   void signUpUser() async {
-    await FirebaseAuthMethods().signUpWithEmail(
+    String result = await FirebaseAuthMethods().signUpWithEmail(
         email: controller.email.text,
         fullName: controller.fullName.text,
         phoneNo: controller.phoneNo.text,
@@ -51,6 +51,15 @@ class _CreateProfileState extends State<CreateProfile> {
         interests: controller.interests.text,
         file: _image!,
         context: context);
+
+    if(result.substring(0,5) != "Error"){
+
+    } else {
+      Get.snackbar("Error", result.substring(8),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
   }
 
 
@@ -96,23 +105,23 @@ class _CreateProfileState extends State<CreateProfile> {
                 controlsBuilder: (context, ControlsDetails controls) {
                   final isLastStep = currentStep == getSteps().length -1;
                   return Container(
-                    margin: EdgeInsets.only(top: 50),
+                    margin:EdgeInsets.only(top: 50),
                     child: Row(
                       children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: controls.onStepContinue,
-                            child: Text(isLastStep ? "Confirm" : "Next"),
-                          )
-                        ),
-                        const SizedBox(width: 12,),
                         if(currentStep != 0)
                           Expanded(
+                              child: ElevatedButton(
+                                onPressed: controls.onStepCancel,
+                                child: Text("Back"),
+                              )
+                          ),
+                        const SizedBox(width: 12,),
+                        Expanded(
                             child: ElevatedButton(
-                              onPressed: controls.onStepCancel,
-                              child: Text("Back"),
+                              onPressed: controls.onStepContinue,
+                              child: Text(isLastStep ? "Confirm" : "Next"),
                             )
-                          )
+                        ),
                       ],
                     ),
                   );
@@ -207,20 +216,37 @@ class _CreateProfileState extends State<CreateProfile> {
               image: kcrozWelcomeScreenImage,
               title: "Add Your Profile Photo",
               subTitle: "We protect our community by making sure everyone on Kcroz is real.",
-              imageHeight: 0.3,
+              imageHeight: 0.2,
             ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    // controller: controller.phoneNo,
-                    decoration: const InputDecoration(
-                      label: Text(kcrozEmail),
-                      prefixIcon: Icon(Icons.email_outlined),
-                    ),
-                  ),
+                  // circular widget to add dp
+                  Stack(
+                    children: [
+                      _image != null ? CircleAvatar(
+                        radius: 64,
+                        backgroundImage: MemoryImage(_image!),
+                      ):
+                      const CircleAvatar(
+                        radius: 64,
+                        backgroundImage: AssetImage(kcrozDefaultProfileImage),
+                      ),
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                          onPressed: () {
+                            selectImage();
+                          },
+                          icon: const Icon(Icons.add_circle_outlined),
+                        )
+                      )
+                    ],
+
+                  )
                 ],
               ),
             )
