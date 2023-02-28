@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kcroz/src/services/storage_methods.dart';
 
 
 import '../utils/show_snack_bar.dart';
@@ -30,6 +31,7 @@ class FirebaseAuthMethods {
     required String phoneNo,
     required String password,
     required BuildContext context,
+
   }) async {
     try {
       if(email.isNotEmpty || fullName.isNotEmpty || phoneNo.isNotEmpty || password.isNotEmpty) {
@@ -38,6 +40,8 @@ class FirebaseAuthMethods {
           email: email,
           password: password,
         );
+        
+        // String photoURL = await StorageMethods().uploadImageToStorage("profilePics", file, false)
 
         // add user to the firestore
         await _firestore.collection("users").doc(userCredential.user!.uid).set({
@@ -45,8 +49,10 @@ class FirebaseAuthMethods {
           "uid" : userCredential.user!.uid,
           "email" : userCredential.user!.email,
           "phoneNumber" : userCredential.user!.phoneNumber,
-          "followers" : []
+          "followers" : [],
+          // "photoURL" : photoURL,
         });
+
         Get.snackbar("Success", "Your Account has been created.",
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green.withOpacity(0.1),

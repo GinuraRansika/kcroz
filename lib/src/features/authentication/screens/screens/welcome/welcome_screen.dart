@@ -6,10 +6,11 @@ import 'package:kcroz/src/common_widgets/fade_in_animation/fade_in_animation_mod
 import 'package:kcroz/src/constants/colors.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 
 import '../../../../../constants/image_string.dart';
 import '../login/login_screen.dart';
-import '../signup/signup_screen.dart';
+import '../signup/signup_screen11.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

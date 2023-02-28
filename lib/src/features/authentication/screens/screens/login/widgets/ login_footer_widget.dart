@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen11.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 
 import '../../../../../../constants/image_string.dart';
@@ -33,7 +33,7 @@ class LoginFooterWidget extends StatelessWidget {
         ),
         const SizedBox(height: kcrozFormHeight - 20,),
         TextButton(
-            onPressed: () {Get.to(() => const SignUpScreen());},
+            onPressed: () {Get.to(() => const SignUpPage());},
             child: Text.rich(TextSpan(
                 text: dontHaveAnAccount,
                 style: Theme.of(context).textTheme.bodyText1,
