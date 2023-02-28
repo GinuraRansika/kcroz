@@ -1,7 +1,7 @@
 class LoginWithEmailAndPasswordFailure {
   final String message;
 
-  const LoginWithEmailAndPasswordFailure([this.message = "An Unknown error occurred."]); // constructor
+  const LoginWithEmailAndPasswordFailure([this.message = "We couldn't find Your account \nPlease check your email and password agian."]); // constructor
 
   factory LoginWithEmailAndPasswordFailure.code(String code) {
     switch(code){

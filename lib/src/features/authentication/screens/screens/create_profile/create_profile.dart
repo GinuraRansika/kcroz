@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../common_widgets/text_field_input.dart';
@@ -42,7 +43,7 @@ class _CreateProfileState extends State<CreateProfile> {
     String result = await FirebaseAuthMethods().signUpWithEmail(
         email: controller.email.text,
         fullName: controller.fullName.text,
-        phoneNo: controller.phoneNo.text,
+        phoneNumber: controller.phoneNo.text,
         password: controller.password.text,
         religion: controller.religion.text,
         gender: controller.gender.text,
@@ -53,7 +54,7 @@ class _CreateProfileState extends State<CreateProfile> {
         context: context);
 
     if(result.substring(0,5) != "Error"){
-
+      Get.to(() => HomePageMap());
     } else {
       Get.snackbar("Error", result.substring(8),
           snackPosition: SnackPosition.BOTTOM,
@@ -67,67 +68,66 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: isCompleted
-          ? const Text("Hai")
-          : Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.light(primary: Colors.red)
-              ),
-              child: Stepper(
-                type: StepperType.horizontal,
-                steps: getSteps(),
-                currentStep: currentStep,
-                onStepContinue: () {
-                  final isLastStep = currentStep == getSteps().length -1;
-                  if(isLastStep) {
-                    setState(() {
-                      isCompleted = true;
-                    });
-                    signUpUser();
-                    print("LastStep");
-                  } else{
-                    setState(() {currentStep += 1;});
-                  }
-                },
-                onStepTapped: (step){
-                  setState(() {
-                    currentStep = step;
-                  });
-                },
-                onStepCancel: () {
-                  if(currentStep == 0){
-                    print("GO Back");
-                  }
-                  else{
-                    setState(() {currentStep -= 1;});
-                  }
-                },
-                controlsBuilder: (context, ControlsDetails controls) {
-                  final isLastStep = currentStep == getSteps().length -1;
-                  return Container(
-                    margin:EdgeInsets.only(top: 50),
-                    child: Row(
-                      children: [
-                        if(currentStep != 0)
-                          Expanded(
-                              child: ElevatedButton(
-                                onPressed: controls.onStepCancel,
-                                child: Text("Back"),
-                              )
-                          ),
-                        const SizedBox(width: 12,),
-                        Expanded(
-                            child: ElevatedButton(
-                              onPressed: controls.onStepContinue,
-                              child: Text(isLastStep ? "Confirm" : "Next"),
-                            )
-                        ),
-                      ],
+        body:
+        Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(primary: Colors.red)
+          ),
+          child: Stepper(
+            type: StepperType.horizontal,
+            steps: getSteps(),
+            currentStep: currentStep,
+            onStepContinue: () {
+              final isLastStep = currentStep == getSteps().length -1;
+              if(isLastStep) {
+                setState(() {
+                  isCompleted = true;
+                });
+                signUpUser();
+                print("LastStep");
+              } else{
+                setState(() {currentStep += 1;});
+              }
+            },
+            onStepTapped: (step){
+              setState(() {
+                currentStep = step;
+              });
+            },
+            onStepCancel: () {
+              if(currentStep == 0){
+                print("GO Back");
+              }
+              else{
+                setState(() {currentStep -= 1;});
+              }
+            },
+            controlsBuilder: (context, ControlsDetails controls) {
+              final isLastStep = currentStep == getSteps().length -1;
+              return Container(
+                margin:EdgeInsets.only(top: 50),
+                child: Row(
+                  children: [
+                    if(currentStep != 0)
+                      Expanded(
+                          child: ElevatedButton(
+                            onPressed: controls.onStepCancel,
+                            child: Text("Back"),
+                          )
+                      ),
+                    const SizedBox(width: 12,),
+                    Expanded(
+                        child: ElevatedButton(
+                          onPressed: controls.onStepContinue,
+                          child: Text(isLastStep ? "Confirm" : "Next"),
+                        )
                     ),
-                  );
-                },
-              ),
-            ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

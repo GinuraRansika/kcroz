@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kcroz/src/common_widgets/text_field_input.dart';
 import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
+import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../constants/image_string.dart';
 import '../../../../../services/firebase_auth_methods.dart';
@@ -21,12 +20,29 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginController controller = Get.put(LoginController());
+  bool _isLoading = false;
 
   void loginUser() async{
-    FirebaseAuthMethods().loginWithEmail(
+    setState(() {
+      _isLoading = true;
+    });
+    String result = await FirebaseAuthMethods().loginWithEmail(
         email: controller.email.text,
         password: controller.password.text,
         context: context);
+
+    if(result.substring(0,5) != "Error"){
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePageMap()));
+
+    } else {
+      Get.snackbar("Error", result.substring(8),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.2),
+          colorText: Colors.red);
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -37,7 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         // To make the layout scrollable
@@ -89,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               ForgetPasswordScreen.buildShowModalBottomSheet(context);
                             },
-                            child:  Text(kcrozForgetPassword)),
+                            child:  const Text(kcrozForgetPassword)),
                         ),
                         SizedBox(
                             width: double.infinity,
