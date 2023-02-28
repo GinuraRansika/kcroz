@@ -11,7 +11,6 @@ import '../../../../../constants/text_string.dart';
 import '../../../../../services/firebase_auth_methods.dart';
 import '../../../../../utils/utils.dart';
 import '../../controllers/signup_controller.dart';
-import '../../models/user_model.dart';
 
 class CreateProfile extends StatefulWidget {
   const CreateProfile({Key? key,}) : super(key: key);
@@ -40,20 +39,17 @@ class _CreateProfileState extends State<CreateProfile> {
   }
 
   void signUpUser() async {
-    final user = UserModel(
-        fullName: controller.fullName.text.trim(),
-        email: controller.email.text.trim(),
-        password: controller.password.text.trim(),
-        phoneNo: controller.phoneNo.text.trim());
-
-    // await UserRepository.instance.createUser(user);
-
     await FirebaseAuthMethods().signUpWithEmail(
         email: controller.email.text,
         fullName: controller.fullName.text,
         phoneNo: controller.phoneNo.text,
         password: controller.password.text,
         religion: controller.religion.text,
+        gender: controller.gender.text,
+        sexualOrientation: controller.sexualOrientation.text,
+        birthday: controller.birthday.text,
+        interests: controller.interests.text,
+        file: _image!,
         context: context);
   }
 

@@ -32,27 +32,45 @@ class FirebaseAuthMethods {
     required String phoneNo,
     required String password,
     required String religion,
+    required String gender,
+    required String sexualOrientation,
+    required String birthday,
+    required String interests,
+    required Uint8List file,
     required BuildContext context,
-
   }) async {
     try {
-      if(email.isNotEmpty && fullName.isNotEmpty && phoneNo.isNotEmpty && password.isNotEmpty && religion.isNotEmpty ) {
+      if(email.isNotEmpty
+          && fullName.isNotEmpty
+          && phoneNo.isNotEmpty
+          && password.isNotEmpty
+          && religion.isNotEmpty
+          && gender.isNotEmpty
+          && birthday.isNotEmpty
+          && interests.isNotEmpty
+          && file != null
+          && sexualOrientation.isNotEmpty ) {
         // Register the user
         UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-        // String photoURL = await StorageMethods().uploadImageToStorage("profilePics", file, false)
+
+        String photoURL = await StorageMethods().uploadImageToStorage("profilePics", file, false);
 
         // add user to the firestore
         await _firestore.collection("users").doc(userCredential.user!.uid).set({
           "username" : fullName,
+          "dpURL" : photoURL,
           "uid" : userCredential.user!.uid,
           "email" : userCredential.user!.email,
-          "religion" : userCredential.user!.religion,
           "phoneNumber" : userCredential.user!.phoneNumber,
+          "religion" : religion,
+          "gender" : gender,
+          "sexualOrientation" : sexualOrientation,
+          "birthday" : birthday,
+          "interests" : interests,
           "followers" : [],
-          // "photoURL" : photoURL,
         });
 
         Get.snackbar("Success", "Your Account has been created.",
@@ -67,7 +85,6 @@ class FirebaseAuthMethods {
             colorText: Colors.red);
         Get.to(() => const SignUpScreen());
       }
-
 
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
