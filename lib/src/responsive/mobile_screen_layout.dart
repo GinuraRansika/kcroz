@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kcroz/src/constants/colors.dart';
@@ -13,13 +15,42 @@ class MobileScreenLayout extends StatefulWidget {
 }
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
-  var currentIndex = 0;
+  int _currentIndex = 0;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    pageController.dispose();
+  }
+
+  void navigationTapped(int page){
+    print("Name" + page.toString());
+    pageController.jumpToPage(page);
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(_currentIndex);
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: const Center(
-          child: Text("Mobile")
+      body: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
+          Center(child: Text("Map")),
+          Center(child: Text("Game")),
+          Text("Message"),
+          Text("Me"),
+        ],
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.fromLTRB(displayWidth*.05,displayWidth*.05,displayWidth*.05,displayWidth*.08),
@@ -42,9 +73,10 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           itemBuilder: (context, index) => InkWell(
             onTap: () {
               setState(() {
-                currentIndex = index;
+                _currentIndex = index;
                 HapticFeedback.lightImpact();
               });
+              navigationTapped(_currentIndex);
             },
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -53,19 +85,16 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                 AnimatedContainer(
                   duration: const Duration(seconds: 1),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  width: index == currentIndex
-                      ? displayWidth * .33
-                      : displayWidth * .18,
+                  width: index == _currentIndex ? displayWidth * .33 : displayWidth * .18,
                   alignment: Alignment.center,
                   child: AnimatedContainer(
                     duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
-                    height: index == currentIndex ? displayWidth * .15 : 0,
-                    width: index == currentIndex ? displayWidth * .25 : 0,
+                    height: index == _currentIndex ? displayWidth * .15 : 0,
+                    width: index == _currentIndex ? displayWidth * .25 : 0,
                     decoration: BoxDecoration(
-                      color: index == currentIndex
-                          ? Colors.white // selected icon color
-                          : Colors.transparent,
+                      // selected icon color
+                      color: index == _currentIndex ? Colors.white: Colors.transparent,
                       borderRadius: BorderRadius.circular(25),
                     ),
                   ),
@@ -73,9 +102,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                 AnimatedContainer(
                   duration: const Duration(seconds: 1),
                   curve: Curves.fastLinearToSlowEaseIn,
-                  width: index == currentIndex
-                      ? displayWidth * .31
-                      : displayWidth * .18,
+                  width: index == _currentIndex ? displayWidth * .31 : displayWidth * .18,
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
@@ -85,16 +112,14 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
                             width:
-                            index == currentIndex ? displayWidth * .16 : 0,
+                            index == _currentIndex ? displayWidth * .16 : 0,
                           ),
                           AnimatedOpacity(
-                            opacity: index == currentIndex ? 1 : 0,
+                            opacity: index == _currentIndex ? 1 : 0,
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
                             child: Text(
-                              index == currentIndex
-                                  ? listOfStrings[index]
-                                  : '',
+                              index == _currentIndex ? listOfStrings[index] : '',
                               style: const TextStyle(
                                 color: Colors.black87,
                                 fontWeight: FontWeight.w600,
@@ -111,14 +136,12 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                             curve: Curves.fastLinearToSlowEaseIn,
                             // icons width
                             width:
-                            index == currentIndex ? displayWidth * .07 : 20,
+                            index == _currentIndex ? displayWidth * .07 : 20,
                           ),
                           Icon(
                             listOfIcons[index],
                             size: displayWidth * .07,
-                            color: index == currentIndex
-                                ? Colors.black87
-                                : Colors.black26,
+                            color: index == _currentIndex ? Colors.black87 : Colors.black26,
                           ),
                         ],
                       ),
