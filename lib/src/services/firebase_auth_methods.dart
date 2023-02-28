@@ -20,6 +20,14 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<UserModel> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+
+    DocumentSnapshot snapshot = await _firestore.collection("users").doc(currentUser.uid).get();
+
+    return UserModel.fromSnap(snapshot);
+  }
+
   // GET USER DATA
   // using null check operator since this method should be called only
   // when the user is logged in

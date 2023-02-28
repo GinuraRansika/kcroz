@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/constants/text_string.dart';
@@ -6,12 +7,37 @@ import 'package:provider/provider.dart';
 
 import '../../../../common_widgets/button/custom_button.dart';
 
-class HomePageMap extends StatelessWidget {
+class HomePageMap extends StatefulWidget {
   const HomePageMap({Key? key}) : super(key: key);
 
   @override
+  State<HomePageMap> createState() => _HomePageMapState();
+}
+
+class _HomePageMapState extends State<HomePageMap> {
+  String  username = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUsername();
+  }
+
+  void getUsername() async {
+    // snapshot of the current user's data from the firebase firestore database
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    print(snapshot.data());
+    setState(() {
+      username = (snapshot.data() as Map<String, dynamic>)['username'];
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final user = context.read<FirebaseAuthMethods>().user;
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.menu, color: Colors.black,),
@@ -40,25 +66,7 @@ class HomePageMap extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // when user signs anonymously or with phone, there is no email
-              if (user.phoneNumber == null) Text(user.email!),
-              if (user.phoneNumber == null)
-                Text(user.providerData[0].providerId),
-              // display phone number only when user's phone number is not null
-              if (user.phoneNumber != null) Text(user.phoneNumber!),
-              // uid is always available for every sign in method
-              Text(user.uid),
-              // display the button only when the user email is not verified
-              // or isnt an anonymous user
-              if (!user.emailVerified)
-                CustomButton(
-                  onTap: () {
-                    context
-                        .read<FirebaseAuthMethods>()
-                        .sendEmailVerification(context);
-                  },
-                  text: 'Verify Email',
-                ),
+              Text(username),
               CustomButton(
                 onTap: () {
                   context.read<FirebaseAuthMethods>().signOut(context);
@@ -75,7 +83,7 @@ class HomePageMap extends StatelessWidget {
 
           ),
 
-          
+
         ),
       ),
     );

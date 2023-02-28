@@ -54,7 +54,7 @@ class _CreateProfileState extends State<CreateProfile> {
         context: context);
 
     if(result.substring(0,5) != "Error"){
-      Get.to(() => HomePageMap());
+      Get.to(() => const HomePageMap());
     } else {
       Get.snackbar("Error", result.substring(8),
           snackPosition: SnackPosition.BOTTOM,
