@@ -19,7 +19,6 @@ class _HomePageMapState extends State<HomePageMap> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUsername();
   }
@@ -80,10 +79,7 @@ class _HomePageMapState extends State<HomePageMap> {
                 text: 'Delete Account',
               ),
             ],
-
           ),
-
-
         ),
       ),
     );

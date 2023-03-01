@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kcroz/src/features/core/screens/home_screen_items.dart';
 
 
 class MobileScreenLayout extends StatefulWidget {
@@ -37,12 +38,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          Center(child: Text("Map")),
-          Center(child: Text("Game")),
-          Text("Message"),
-          Text("Me"),
-        ],
+        children: homeScreenItems
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.fromLTRB(displayWidth*.05,displayWidth*.05,displayWidth*.05,displayWidth*.08),
