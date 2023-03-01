@@ -1,8 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:kcroz/src/common_widgets/form/form_header_widget.dart';
 import 'package:kcroz/src/common_widgets/text_field_input.dart';
 import 'package:kcroz/src/constants/image_string.dart';
@@ -10,10 +8,7 @@ import 'package:kcroz/src/constants/sizes.dart';
 import 'package:kcroz/src/constants/text_string.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/create_profile/create_profile.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/signup/widgets/signup_footer_widget.dart';
-import 'package:kcroz/src/utils/utils.dart';
-import '../../../../../services/firebase_auth_methods.dart';
 import '../../controllers/signup_controller.dart';
-import '../../models/user_model.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -48,20 +43,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // TextFieldInput(
-                      //   textEditingController: controller.firstName,
-                      //   labelText: kcrozFullName,
-                      //   prefixIcon: const Icon(Icons.person_outline_rounded),
-                      //   hintText: kcrozFullName,
-                      //   textInputType: TextInputType.text,
-                      // ),
                       const SizedBox(height: kcrozDefaultSize - 20,),
                       TextFieldInput(
                         textEditingController: controller.email,
                         labelText: kcrozEmail,
                         prefixIcon: const Icon(Icons.email_outlined),
                         hintText: kcrozEmail,
-                        textInputType: TextInputType.text,
+                        textInputType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: kcrozDefaultSize - 20,),
                       TextFieldInput(
@@ -69,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: kcrozPhoneNo,
                         prefixIcon: const Icon(Icons.numbers),
                         hintText: kcrozPhoneNo,
-                        textInputType: TextInputType.text,
+                        textInputType: TextInputType.phone,
                       ),
                       const SizedBox(height: kcrozDefaultSize - 20,),
                       TextFieldInput(
@@ -84,7 +72,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed:  () {
-                              Get.to(() => const CreateProfile());
+                              if(controller.email.text.isNotEmpty
+                                  && controller.phoneNo.text.isNotEmpty
+                                  && controller.password.text.isNotEmpty){
+                                Get.to(() => const CreateProfile());
+                              }else {
+                                Get.snackbar("Error", "Please Fill empty Fields",
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: Colors.redAccent.withOpacity(0.2),
+                                    colorText: Colors.red);
+                              }
                             },
                             child: Text(kcrozSignup.toUpperCase())),
                       )

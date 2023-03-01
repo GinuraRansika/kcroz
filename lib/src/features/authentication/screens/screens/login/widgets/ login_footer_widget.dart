@@ -28,7 +28,7 @@ class LoginFooterWidget extends StatelessWidget {
             onPressed: () {
               FirebaseAuthMethods().signInWithGoogle(context);
             },
-            label: const Text(kcrozSignInWithGoogle),
+            label: Text(kcrozSignInWithGoogle.toUpperCase()),
           ),
         ),
         const SizedBox(height: kcrozFormHeight - 20,),

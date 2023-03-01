@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
+import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
+import 'package:kcroz/src/responsive/responsive_layout_screen.dart';
+import 'package:kcroz/src/responsive/web_screen_layout.dart';
 
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../common_widgets/text_field_input.dart';
@@ -54,7 +57,9 @@ class _CreateProfileState extends State<CreateProfile> {
         context: context);
 
     if(result.substring(0,5) != "Error"){
-      Get.to(() => const HomePageMap());
+      Get.to(() => const ResponsiveLayout(
+          webScreenLayout: WebScreenLayout(),
+          mobileScreenLayout: MobileScreenLayout()));
     } else {
       Get.snackbar("Error", result.substring(8),
           snackPosition: SnackPosition.BOTTOM,
@@ -79,14 +84,21 @@ class _CreateProfileState extends State<CreateProfile> {
             currentStep: currentStep,
             onStepContinue: () {
               final isLastStep = currentStep == getSteps().length -1;
-              if(isLastStep) {
-                setState(() {
-                  isCompleted = true;
-                });
-                signUpUser();
-                print("LastStep");
-              } else{
-                setState(() {currentStep += 1;});
+              if(validate(currentStep))
+              {
+                if(isLastStep) {
+                  setState(() {
+                    isCompleted = true;
+                  });
+                  signUpUser();
+                } else {
+                  setState(() {currentStep += 1;});
+                }
+              }else{
+                Get.snackbar("Error","Please add your Details",
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.redAccent.withOpacity(0.1),
+                    colorText: Colors.red);
               }
             },
             onStepTapped: (step){
@@ -130,6 +142,48 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     );
+  }
+
+  bool validate(int currentStep) {
+    if(currentStep == 0) {
+      if(controller.fullName.text.isNotEmpty){
+        return true;
+      }
+    }
+    else if(currentStep == 1){
+      if(controller.religion.text.isNotEmpty) {
+        return true;
+      }
+    }
+    else if(currentStep == 2){
+      if(_image != null) {
+        return true;
+      }
+    }
+    else if(currentStep == 3){
+      if(controller.gender.text.isNotEmpty && controller.sexualOrientation.text.isNotEmpty) {
+        return true;
+      }
+    }
+    else if(currentStep == 4){
+      if(controller.birthday.text.isNotEmpty) {
+        return true;
+      }
+
+    }
+    else if(currentStep == 5){
+        return true;
+    }
+    else if(currentStep == 6){
+        return true;
+
+    }
+    else if(currentStep == 7){
+      if(controller.interests.text.isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
   }
 
   List<Step> getSteps() => [

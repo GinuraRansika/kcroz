@@ -1,19 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
   final String? uid;
-  final String username;
-  final String email;
-  final String phoneNumber;
-  final String password;
-  final String dpURL;
-  final String religion;
-  final String gender;
-  final String sexualOrientation;
-  final String birthday;
-  final String interests;
-  final List followers;
+  final String? username;
+  final String? email;
+  final String? phoneNumber;
+  final String? password;
+  final String? dpURL;
+  final String? religion;
+  final String? gender;
+  final String? sexualOrientation;
+  final String? birthday;
+  final String? interests;
+  final List? followers;
 
   const UserModel({
     required this.uid,

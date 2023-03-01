@@ -14,8 +14,8 @@ const String kcrozProfile = "Profile";
 
 
 // Splash Screen Text
-const String kcrozAppName = ".kcroz/";
-const String kcrozAppTagLine = "Your Favorite Dating Application";
+const String kcrozAppName = "kcroz";
+const String kcrozAppTagLine = "Your Favorite\nDating Application";
 
 // OnBoarding Text
 const String kcrozOnBoardingTitle1 = "Dating Application1";

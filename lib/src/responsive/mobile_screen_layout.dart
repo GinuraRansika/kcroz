@@ -1,11 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kcroz/src/constants/colors.dart';
-import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
-import 'package:kcroz/src/providers/user_provider.dart';
-import 'package:provider/provider.dart';
+
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -20,20 +15,17 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pageController = PageController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     pageController.dispose();
   }
 
   void navigationTapped(int page){
-    print("Name" + page.toString());
     pageController.jumpToPage(page);
   }
 
