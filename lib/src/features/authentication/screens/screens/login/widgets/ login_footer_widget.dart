@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
-import 'package:kcroz/src/services/firebase_auth_methods.dart';
 
+import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import '../../../../../../constants/image_string.dart';
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_string.dart';
+import '../../signup/signup_screen.dart';
 
 
 class LoginFooterWidget extends StatelessWidget {
@@ -26,9 +26,9 @@ class LoginFooterWidget extends StatelessWidget {
           child: OutlinedButton.icon(
             icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
             onPressed: () {
-              FirebaseAuthMethods(FirebaseAuth.instance).signInWithGoogle(context);
+              FirebaseAuthMethods().signInWithGoogle(context);
             },
-            label: const Text(kcrozSignInWithGoogle),
+            label: Text(kcrozSignInWithGoogle.toUpperCase()),
           ),
         ),
         const SizedBox(height: kcrozFormHeight - 20,),
@@ -40,7 +40,10 @@ class LoginFooterWidget extends StatelessWidget {
                 children: const [
                   TextSpan(
                     text: " $kcrozSignup",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold
+                    ),
                   )
                 ]
             ))

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:kcroz/main.dart';
-
+import 'package:kcroz/src/services/auth_wrapper.dart';
 
 class FadeInAnimationController extends GetxController {
   static FadeInAnimationController get find => Get.find(); // avoid using with instances
