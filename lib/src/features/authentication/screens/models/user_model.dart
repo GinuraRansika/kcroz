@@ -1,24 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  final String? uid;
-  final String? username;
-  final String? email;
-  final String? phoneNumber;
-  final String? password;
-  final String? dpURL;
-  final String? religion;
-  final String? gender;
-  final String? sexualOrientation;
-  final String? birthday;
-  final String? interests;
-  final List? followers;
+  final String uid;
+  final String username;
+  final String email;
+  final String phoneNumber;
+  final String dpURL;
+  final String religion;
+  final String gender;
+  final String sexualOrientation;
+  final String birthday;
+  final String interests;
+  final List followers;
 
   const UserModel({
     required this.uid,
     required this.username,
     required this.email,
-    required this.password,
     required this.phoneNumber,
     required this.dpURL,
     required this.religion,
@@ -40,7 +38,7 @@ class UserModel {
     "sexualOrientation" : sexualOrientation,
     "birthday" : birthday,
     "interests" : interests,
-    "followers" : [],
+    "followers" : followers,
   };
 
   static UserModel fromSnap(DocumentSnapshot snap) {
@@ -50,7 +48,6 @@ class UserModel {
       dpURL: snapshot["dpURL"],
       uid: snapshot["uid"],
       email: snapshot["email"],
-      password: snapshot["password"],
       phoneNumber: snapshot["phoneNumber"],
       religion: snapshot["religion"],
       gender: snapshot["gender"],

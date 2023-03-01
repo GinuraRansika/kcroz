@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:kcroz/src/services/auth_wrapper.dart';
+import 'package:kcroz/src/services/auth_wrapper_in.dart';
+
 
 class FadeInAnimationController extends GetxController {
   static FadeInAnimationController get find => Get.find(); // avoid using with instances
@@ -11,7 +12,8 @@ class FadeInAnimationController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 3000));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 2000));
-    await Get.to( () => const AuthWrapper());
+    await Get.to( () => const AuthWrapper()
+    );
   }
 
   Future startAnimation() async {
@@ -19,3 +21,4 @@ class FadeInAnimationController extends GetxController {
     animate.value = true;
   }
 }
+

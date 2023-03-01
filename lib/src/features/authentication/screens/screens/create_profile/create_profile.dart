@@ -2,7 +2,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
 import 'package:kcroz/src/responsive/responsive_layout_screen.dart';
 import 'package:kcroz/src/responsive/web_screen_layout.dart';

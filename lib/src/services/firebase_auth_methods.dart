@@ -22,20 +22,14 @@ class FirebaseAuthMethods {
 
   Future<UserModel> getUserDetails() async {
     User currentUser = _auth.currentUser!;
-
     DocumentSnapshot snapshot = await _firestore.collection("users").doc(currentUser.uid).get();
-
     return UserModel.fromSnap(snapshot);
   }
 
-  // GET USER DATA
-  // using null check operator since this method should be called only
-  // when the user is logged in
-  User get user => _auth.currentUser!;
 
   // STATE PERSISTENCE STREAM
   // stream of users which will tel if the user is present or not
-  Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
+
 
   // EMAIL SIGN UP
   Future<String> signUpWithEmail({
@@ -75,7 +69,6 @@ class FirebaseAuthMethods {
           uid: userCredential.user!.uid,
           username: fullName,
           email: email,
-          password: password,
           phoneNumber: phoneNumber,
           dpURL: dpURL,
           religion: religion,

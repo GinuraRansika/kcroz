@@ -24,3 +24,4 @@ class AuthWrapper extends StatelessWidget {
     return const WelcomeScreen();
   }
 }
+
