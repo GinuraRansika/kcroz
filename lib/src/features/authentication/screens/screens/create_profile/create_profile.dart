@@ -1,7 +1,9 @@
 import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/constants/creat_profile_text_string.dart';
 import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
 import 'package:kcroz/src/responsive/responsive_layout_screen.dart';
 import 'package:kcroz/src/responsive/web_screen_layout.dart';
@@ -27,6 +29,7 @@ class _CreateProfileState extends State<CreateProfile> {
   Uint8List? _image;
   int currentStep = 0;
   bool isCompleted = false;
+  DateTime _dateTime = DateTime.now();
 
   void selectImage() async {
     Uint8List image = await pickImage(ImageSource.gallery);
@@ -50,7 +53,10 @@ class _CreateProfileState extends State<CreateProfile> {
         religion: controller.religion.text,
         gender: controller.gender.text,
         sexualOrientation: controller.sexualOrientation.text,
-        birthday: controller.birthday.text,
+        birthday:
+            "${_dateTime.year}-"
+            "${_dateTime.month.toString().length == 1? _dateTime.month : {'0${_dateTime.month}'}}-"
+            "${_dateTime.day.toString().length == 1? _dateTime.day : {'0${_dateTime.day}'}}",
         interests: controller.interests.text,
         file: _image!,
         context: context);
@@ -227,13 +233,15 @@ class _CreateProfileState extends State<CreateProfile> {
       isActive: currentStep >= 1,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
             const FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
               title: "Religion?",
-              subTitle: "We protect our community by making sure everyone on Kcroz is real.",
+              subTitle:
+              "We protect our community by making sure everyone on Kcroz is real.",
               imageHeight: 0.3,
             ),
             Container(
@@ -243,9 +251,9 @@ class _CreateProfileState extends State<CreateProfile> {
                 children: [
                   TextFieldInput(
                     textEditingController: controller.religion,
-                    labelText: kcrozFullName,
-                    prefixIcon: const Icon(Icons.person_outline_rounded),
-                    hintText: kcrozFullName,
+                    labelText: religionTextFieldText,
+                    prefixIcon: const Icon(Icons.type_specimen),
+                    hintText: religionTextFieldText,
                     textInputType: TextInputType.text,
                   ),
                 ],
@@ -256,50 +264,56 @@ class _CreateProfileState extends State<CreateProfile> {
       ),
     ),
 
+
     // Profile Pic
     Step(
       state: currentStep > 2 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 2,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize-20,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, kcrozDefaultSize - 20, kcrozDefaultSize, 0),
         child: Column(
           children: [
-            const FormHeaderWidget(
-              image: kcrozWelcomeScreenImage,
-              title: "Add Your Profile Photo",
-              subTitle: "We protect our community by making sure everyone on Kcroz is real.",
-              imageHeight: 0.2,
-            ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text(
+                    profilePicPageTitle,
+                    style: Theme.of(context).textTheme.headline1,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 80,),
                   // circular widget to add dp
                   Stack(
                     children: [
-                      _image != null ? CircleAvatar(
-                        radius: 64,
+                      _image != null
+                          ? CircleAvatar(
+                        radius: 150,
                         backgroundImage: MemoryImage(_image!),
-                      ):
-                      const CircleAvatar(
-                        radius: 64,
-                        backgroundImage: AssetImage(kcrozDefaultProfileImage),
+                      )
+                          : const CircleAvatar(
+                        radius: 150,
+                        backgroundImage:
+                        AssetImage(kcrozDefaultProfileImage),
                       ),
                       Positioned(
-                        bottom: -10,
-                        left: 80,
-                        child: IconButton(
-                          onPressed: () {
-                            selectImage();
-                          },
-                          icon: const Icon(Icons.add_circle_outlined),
-                        )
-                      )
+                          bottom: 10,
+                          left: 200,
+                          child: IconButton(
+                            onPressed: () {
+                              selectImage();
+                            },
+                            icon: const Icon(
+                              Icons.add_circle_outlined,
+                              size: 50,
+                            ),
+                          )),
                     ],
-
-                  )
+                  ),
+                  const SizedBox(height: 80,),
                 ],
               ),
             )
@@ -308,13 +322,15 @@ class _CreateProfileState extends State<CreateProfile> {
       ),
     ),
 
+
     // Gender, Sexual Orientation
     Step(
       state: currentStep > 3 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 3,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
             const FormHeaderWidget(
@@ -324,22 +340,28 @@ class _CreateProfileState extends State<CreateProfile> {
               imageHeight: 0.3,
             ),
             Container(
-              padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
+              padding: const EdgeInsets.only(top: kcrozDefaultSize - 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFieldInput(
                     textEditingController: controller.gender,
-                    labelText: kcrozPassword,
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    hintText: kcrozPassword,
+                    labelText: "Gender",
+                    prefixIcon: const Icon(Icons.hourglass_empty_rounded),
+                    hintText: "Gender",
                     textInputType: TextInputType.text,
                   ),
+                  const SizedBox(height: 20,),
+                  Text(
+                    "Interested In",
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  const SizedBox(height: 20,),
                   TextFieldInput(
                     textEditingController: controller.sexualOrientation,
-                    labelText: kcrozPassword,
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    hintText: kcrozPassword,
+                    labelText: "Sexual Orientation",
+                    prefixIcon: const Icon(Icons.heat_pump_rounded),
+                    hintText: "Sexual Orientation",
                     textInputType: TextInputType.text,
                   ),
                 ],
@@ -350,34 +372,42 @@ class _CreateProfileState extends State<CreateProfile> {
       ),
     ),
 
+
     // Birthday
     Step(
       state: currentStep > 4 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 4,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
-            const FormHeaderWidget(
-              image: kcrozWelcomeScreenImage,
-              title: "When's your birthday?",
-              subTitle: "",
-              imageHeight: 0.3,
-            ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFieldInput(
-                    textEditingController: controller.birthday,
-                    labelText: kcrozPassword,
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    hintText: kcrozPassword,
-                    textInputType: TextInputType.datetime,
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "When's your Birthday?",
+                      style: Theme.of(context).textTheme.headline1,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 300,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: _dateTime,
+                        onDateTimeChanged: (dateTime) {
+                          setState(() {
+                            _dateTime = dateTime;
+                          });
+                        }
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -391,7 +421,8 @@ class _CreateProfileState extends State<CreateProfile> {
       isActive: currentStep >= 5,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,0,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, 0, kcrozDefaultSize, 0),
         child: Column(
           children: [
             const FormHeaderWidget(
@@ -406,21 +437,22 @@ class _CreateProfileState extends State<CreateProfile> {
                 children: [
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("Occupation"),
+                      prefixIcon: Icon(Icons.cast_for_education),
                     ),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
-
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("University"),
+                      prefixIcon: Icon(Icons.book),
                     ),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("College"),
+                      prefixIcon: Icon(Icons.book_online_rounded),
                     ),
                   ),
                 ],
@@ -437,7 +469,8 @@ class _CreateProfileState extends State<CreateProfile> {
       isActive: currentStep >= 6,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,0,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, 0, kcrozDefaultSize, 0),
         child: Column(
           children: [
             const FormHeaderWidget(
@@ -447,26 +480,28 @@ class _CreateProfileState extends State<CreateProfile> {
               imageHeight: 0.3,
             ),
             Container(
-              padding: const EdgeInsets.only(top: kcrozDefaultSize ),
+              padding: const EdgeInsets.only(top: kcrozDefaultSize),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("Drink"),
+                      prefixIcon: Icon(Icons.local_drink),
                     ),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("Smoke"),
+                      prefixIcon: Icon(Icons.smoke_free_rounded),
                     ),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     decoration: const InputDecoration(
-                      label: Text(kcrozPhoneNo),
-                      prefixIcon: Icon(Icons.numbers),
+                      label: Text("Diet"),
+                      prefixIcon: Icon(Icons.food_bank_rounded),
                     ),
                   ),
                 ],
@@ -483,13 +518,15 @@ class _CreateProfileState extends State<CreateProfile> {
       isActive: currentStep >= 7,
       title: Text(""),
       content: Container(
-        padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize,kcrozDefaultSize,0),
+        padding: const EdgeInsets.fromLTRB(
+            kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
             const FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
               title: "My Interests are",
-              subTitle: "We protect our community by making sure everyone on Kcroz is real.",
+              subTitle:
+              "We protect our community by making sure everyone on Kcroz is real.",
               imageHeight: 0.3,
             ),
             Container(
@@ -499,9 +536,9 @@ class _CreateProfileState extends State<CreateProfile> {
                 children: [
                   TextFieldInput(
                     textEditingController: controller.interests,
-                    labelText: kcrozPassword,
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    hintText: kcrozPassword,
+                    labelText: "Interests",
+                    prefixIcon: const Icon(Icons.sports_cricket),
+                    hintText: "Interests",
                     textInputType: TextInputType.text,
                   ),
                 ],
@@ -511,5 +548,6 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
+
   ];
 }
