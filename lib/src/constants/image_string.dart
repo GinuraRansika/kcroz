@@ -21,3 +21,11 @@ const String kcrozForgetPasswordImage = "assets/images/forget_password/forget-pa
 
 // Default Profile Image
 const String kcrozDefaultProfileImage = "assets/images/profile_picture/default-profile-picture.png";
+
+
+// Create Profile Image - Name
+
+
+// Create Profile Image
+
+

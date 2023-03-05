@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // List of Colors
-const kcrozPrimaryColor = Color(0xFFFFE400);
+const kcrozPrimaryColor = Color(0xFFB78BEC);
 const kcrozSecondaryColor = Color(0xFF272727);
 const kcrozAccentColor = Color(0xFF001BFF);
 
