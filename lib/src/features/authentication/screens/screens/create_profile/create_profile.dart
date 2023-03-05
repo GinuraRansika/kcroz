@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/constants/creat_profile_text_string.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/create_profile/additional_step.dart';
 import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
 import 'package:kcroz/src/responsive/responsive_layout_screen.dart';
 import 'package:kcroz/src/responsive/web_screen_layout.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
 
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../common_widgets/text_field_input.dart';
@@ -62,9 +64,7 @@ class _CreateProfileState extends State<CreateProfile> {
         context: context);
 
     if(result.substring(0,5) != "Error"){
-      Get.to(() => const ResponsiveLayout(
-          webScreenLayout: WebScreenLayout(),
-          mobileScreenLayout: MobileScreenLayout()));
+      Get.to(() => AdditionalStep());
     } else {
       Get.snackbar("Error", result.substring(8),
           snackPosition: SnackPosition.BOTTOM,
@@ -73,11 +73,13 @@ class _CreateProfileState extends State<CreateProfile> {
     }
   }
 
-
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        key: scaffoldKey,
         body:
         Theme(
           data: Theme.of(context).copyWith(
@@ -318,7 +320,6 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
-
 
     // Gender, Sexual Orientation
     Step(
