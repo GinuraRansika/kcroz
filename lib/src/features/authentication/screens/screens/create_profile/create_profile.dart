@@ -171,10 +171,7 @@ class _CreateProfileState extends State<CreateProfile> {
       }
     }
     else if(currentStep == 4){
-      if(controller.birthday.text.isNotEmpty) {
-        return true;
-      }
-
+      return true;
     }
     else if(currentStep == 5){
         return true;
