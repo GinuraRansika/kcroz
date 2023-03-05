@@ -55,8 +55,8 @@ class _CreateProfileState extends State<CreateProfile> {
         sexualOrientation: controller.sexualOrientation.text,
         birthday:
             "${_dateTime.year}-"
-            "${_dateTime.month.toString().length == 1? _dateTime.month : {'0${_dateTime.month}'}}-"
-            "${_dateTime.day.toString().length == 1? _dateTime.day : {'0${_dateTime.day}'}}",
+            "${_dateTime.month.toString().length == 2? _dateTime.month : {'0${_dateTime.month}'}}-"
+            "${_dateTime.day.toString().length == 2? _dateTime.day : {'0${_dateTime.day}'}}",
         interests: controller.interests.text,
         file: _image!,
         context: context);

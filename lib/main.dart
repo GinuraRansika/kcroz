@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const CreateProfile(),
+        home: const SplashScreen(),
         // routes: const {},
       ),
     );
