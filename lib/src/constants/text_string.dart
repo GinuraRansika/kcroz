@@ -62,3 +62,8 @@ const String kcrozForgetMailSubTitle = "Enter your registered E-Mail to receive 
 const String kcrozOTPTitle = "CO\nDE";
 const String kcrozOTPSubTitle = "Verification";
 const String kcrozOTPMessage = "Enter the verification code sent at ";
+
+// Create Profile - Name
+const String kcrozNamePageTitle = "";
+const String kcrozNamePageSubTitle = "";
+
