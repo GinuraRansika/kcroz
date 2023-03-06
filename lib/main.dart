@@ -10,6 +10,7 @@ import 'package:kcroz/src/features/authentication/screens/screens/create_profile
 import 'package:kcroz/src/features/authentication/screens/screens/create_profile/create_profile.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/providers/user_provider.dart';
+import 'package:kcroz/src/router.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const CreateProfile(),
+        onGenerateRoute: (settings) => generateRoute(settings),
+        home: const SplashScreen(),
         // routes: const {},
       ),
     );
