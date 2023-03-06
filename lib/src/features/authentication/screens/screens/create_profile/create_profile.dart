@@ -68,77 +68,89 @@ class _CreateProfileState extends State<CreateProfile> {
     }
   }
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
-        key: scaffoldKey,
         body:
         Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(primary: Colors.red)
+            canvasColor: Colors.purple[900],
+            colorScheme:  ColorScheme.light(primary: Colors.purple,)
           ),
-          child: Stepper(
-            type: StepperType.horizontal,
-            steps: getSteps(),
-            currentStep: currentStep,
-            onStepContinue: () {
-              final isLastStep = currentStep == getSteps().length -1;
-              if(validate(currentStep))
-              {
-                if(isLastStep) {
-                  setState(() {
-                    isCompleted = true;
-                  });
-                  signUpUser();
-                } else {
-                  setState(() {currentStep += 1;});
+          child: Container(
+            decoration: BoxDecoration(
+                image: isDarkMode ? const DecorationImage(
+                    image: AssetImage(kcrozDarkBackgroundImage1),
+                    fit: BoxFit.cover
+                ):const DecorationImage(
+                    image: AssetImage(kcrozLightBackgroundImage1),
+                    fit: BoxFit.cover
+                )
+            ),
+            child: Stepper(
+              type: StepperType.horizontal,
+              steps: getSteps(),
+              currentStep: currentStep,
+              onStepContinue: () {
+                final isLastStep = currentStep == getSteps().length -1;
+                if(validate(currentStep))
+                {
+                  if(isLastStep) {
+                    setState(() {
+                      isCompleted = true;
+                    });
+                    signUpUser();
+                  } else {
+                    setState(() {currentStep += 1;});
+                  }
+                }else{
+                  Get.snackbar("Error","Please add your Details",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.redAccent.withOpacity(0.1),
+                      colorText: Colors.red);
                 }
-              }else{
-                Get.snackbar("Error","Please add your Details",
-                    snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor: Colors.redAccent.withOpacity(0.1),
-                    colorText: Colors.red);
-              }
-            },
-            onStepTapped: (step){
-              setState(() {
-                currentStep = step;
-              });
-            },
-            onStepCancel: () {
-              if(currentStep == 0){
-                print("GO Back");
-              }
-              else{
-                setState(() {currentStep -= 1;});
-              }
-            },
-            controlsBuilder: (context, ControlsDetails controls) {
-              final isLastStep = currentStep == getSteps().length -1;
-              return Container(
-                margin:EdgeInsets.only(top: 50),
-                child: Row(
-                  children: [
-                    if(currentStep != 0)
+              },
+              onStepTapped: (step){
+                setState(() {
+                  currentStep = step;
+                });
+              },
+              onStepCancel: () {
+                if(currentStep == 0){
+                  print("GO Back");
+                }
+                else{
+                  setState(() {currentStep -= 1;});
+                }
+              },
+              controlsBuilder: (context, ControlsDetails controls) {
+                final isLastStep = currentStep == getSteps().length -1;
+                return Container(
+                  margin:EdgeInsets.only(top: 50),
+                  child: Row(
+                    children: [
+                      if(currentStep != 0)
+                        Expanded(
+                            child: ElevatedButton(
+                              onPressed: controls.onStepCancel,
+                              child: Text("Back"),
+                            )
+                        ),
+                      const SizedBox(width: 12,),
                       Expanded(
                           child: ElevatedButton(
-                            onPressed: controls.onStepCancel,
-                            child: Text("Back"),
+                            onPressed: controls.onStepContinue,
+                            child: Text(isLastStep ? "Confirm" : "Next"),
                           )
                       ),
-                    const SizedBox(width: 12,),
-                    Expanded(
-                        child: ElevatedButton(
-                          onPressed: controls.onStepContinue,
-                          child: Text(isLastStep ? "Confirm" : "Next"),
-                        )
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -184,20 +196,26 @@ class _CreateProfileState extends State<CreateProfile> {
     return false;
   }
 
+  bool checkDark(){
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    return isDarkMode;
+  }
+
   List<Step> getSteps() => [
     // Name
     Step(
       state: currentStep > 0 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 0,
-      title: Text(""),
+      title: const Text(""),
       content: Container(
         padding: const EdgeInsets.fromLTRB(kcrozDefaultSize,kcrozDefaultSize,kcrozDefaultSize,0),
         child: Column(
           children: [
-            const FormHeaderWidget(
-              image: kcrozWelcomeScreenImage,
+            FormHeaderWidget(
+              image: checkDark() ? kcrozNameDarkDoodle : kcrozNameLightDoodle,
               title: "What's your name?",
-              subTitle: "We protect our community by making sure everyone on Kcroz is real.",
+              subTitle: "This is how it will appear in Kcroz Profile",
               imageHeight: 0.3,
             ),
             Container(
