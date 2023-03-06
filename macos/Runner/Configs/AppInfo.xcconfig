@@ -8,7 +8,7 @@
 PRODUCT_NAME = kcroz
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.kcroz.kcroz
+PRODUCT_BUNDLE_IDENTIFIER = com.creed.kcroz
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.kcroz. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.creed. All rights reserved.
