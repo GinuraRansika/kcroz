@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:kcroz/src/features/core/screens/home_screen_items.dart';
 
 
-class MobileScreenLayout extends StatefulWidget {
-  const MobileScreenLayout({Key? key}) : super(key: key);
+class NavigationPage extends StatefulWidget {
+  const NavigationPage({Key? key}) : super(key: key);
 
   @override
-  State<MobileScreenLayout> createState() => _MobileScreenLayoutState();
+  State<NavigationPage> createState() => _NavigationPageState();
 }
 
-class _MobileScreenLayoutState extends State<MobileScreenLayout> {
+class _NavigationPageState extends State<NavigationPage> {
   int _currentIndex = 0;
   late PageController pageController;
 
@@ -32,13 +32,12 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
-    print(_currentIndex);
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: homeScreenItems
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: homeScreenItems
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.fromLTRB(displayWidth*.05,displayWidth*.05,displayWidth*.05,displayWidth*.08),

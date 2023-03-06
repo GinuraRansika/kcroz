@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kcroz/src/features/authentication/screens/models/feed_image_model.dart';
 import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/services/exceptions/login_email_password_failure.dart';
@@ -27,8 +28,32 @@ class FirebaseAuthMethods {
   }
 
 
-  // STATE PERSISTENCE STREAM
-  // stream of users which will tel if the user is present or not
+  Future<void> addFeedImages({
+    required Uint8List feedImage01,
+    required Uint8List feedImage02,
+    required Uint8List feedImage03,
+    required Uint8List feedImage04,
+}) async{
+    try{
+      String feedImage01URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage01", feedImage01, false);
+      String feedImage02URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage02", feedImage02, false);
+      String feedImage03URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage03", feedImage03, false);
+      String feedImage04URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage04", feedImage04, false);
+
+      FeedImageModel feedImageModel = FeedImageModel(
+        feedImage01URL: feedImage01URL,
+        feedImage02URL: feedImage02URL,
+        feedImage03URL: feedImage03URL,
+        feedImage04URL: feedImage04URL,
+      );
+
+      // add user to the firestore
+      await _firestore.collection("users").doc(_auth.currentUser!.uid).update(feedImageModel.toJson(),);
+    }
+    catch(e){
+      print(e);
+    }
+  }
 
 
   // EMAIL SIGN UP
