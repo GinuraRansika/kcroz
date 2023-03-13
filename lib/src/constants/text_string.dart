@@ -11,6 +11,7 @@ const String kcrozPassword = "Password";
 const String kcrozForgetPassword = "Forget Password?";
 const String kcrozSignInWithGoogle = "Sign-In with Google";
 const String kcrozProfile = "Profile";
+const String kcrozUserProfile = "My Profile";
 
 
 // Splash Screen Text
