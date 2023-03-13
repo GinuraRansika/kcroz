@@ -4,18 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kcroz/src/features/authentication/screens/models/feed_image_model.dart';
 import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:kcroz/src/services/exceptions/login_email_password_failure.dart';
 import 'package:kcroz/src/services/storage_methods.dart';
 
-
-import '../features/authentication/screens/models/user_model.dart';
 import '../utils/show_snack_bar.dart';
 import 'exceptions/signup_email_password_failure.dart';
+
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -119,6 +117,20 @@ class FirebaseAuthMethods {
     }
     return result;
   }
+
+  void signInWithPhone(BuildContext context, String phoneNumber) async {
+    try{
+      await _auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async{ print("done");},
+          verificationFailed: (e) {print(e);},
+          codeSent: ((String verificationId, int? resendToken) async {}),
+          codeAutoRetrievalTimeout: (String verificationId) {},);
+    } catch(e){
+      print(e);
+    }
+  }
+
 
   // EMAIL LOGIN
   Future<String> loginWithEmail({

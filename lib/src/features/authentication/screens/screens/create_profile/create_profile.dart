@@ -43,18 +43,18 @@ class _CreateProfileState extends State<CreateProfile> {
 
   void signUpUser() async {
     String result = await FirebaseAuthMethods().signUpWithEmail(
-        email: controller.email.text,
-        fullName: controller.fullName.text,
-        phoneNumber: controller.phoneNo.text,
-        password: controller.password.text,
-        religion: controller.religion.text,
-        gender: controller.gender.text,
-        sexualOrientation: controller.sexualOrientation.text,
+        email: controller.email.text.trim(),
+        fullName: controller.fullName.text.trim(),
+        phoneNumber: controller.phoneNo.text.trim(),
+        password: controller.password.text.trim(),
+        religion: controller.religion.text.trim(),
+        gender: controller.gender.text.trim(),
+        sexualOrientation: controller.sexualOrientation.text.trim(),
         birthday:
             "${_dateTime.year}-"
             "${_dateTime.month.toString().length == 2? _dateTime.month : {'0${_dateTime.month}'}}-"
             "${_dateTime.day.toString().length == 2? _dateTime.day : {'0${_dateTime.day}'}}",
-        interests: controller.interests.text,
+        interests: controller.interests.text.trim(),
         file: _image!,
         context: context);
 
