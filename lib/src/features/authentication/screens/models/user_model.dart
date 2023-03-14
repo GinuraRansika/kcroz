@@ -57,4 +57,6 @@ class UserModel {
       followers: snapshot["followers"],
     );
   }
+
+
 }
