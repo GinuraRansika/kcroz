@@ -5,6 +5,7 @@ import 'profile_feed.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
+import 'user_profile_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/text_string.dart';
@@ -27,7 +28,23 @@ class ProfileSettings extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(LineAwesomeIcons.angle_left),
+        ),
+        title: Text(kcrozProfileSettings, style: Theme.of(context).textTheme.headline4,),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(LineAwesomeIcons.tools))
+        ],
+
+      ),
+
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,98 +72,16 @@ class ProfileSettings extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     fontFamily: "Poppins"),
               ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    IntrinsicHeight(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            TextButton(
-                                key: null,
-                                onPressed: () {},
-                                child: const Text(
-                                  "15\nConnections",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Color(0xFF717171),
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Poppins"),
-                                )),
-                            const VerticalDivider(
-                              color: Color(0xFF949494),
-                              thickness: 1,
-                              indent: 12,
-                              endIndent: 10,
-                            ),
-                            TextButton(
-                                key: null,
-                                onPressed: () {},
-                                child: const Text(
-                                  "2\nRequests",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Color(0xFF717171),
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Poppins"),
-                                )),
-                          ],
-                        )),
-                  ]),
+
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                      key: null,
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
-                      },
-                      child: const Icon(LineAwesomeIcons.camera,
-                        size: 30,
-                        color: Color(0xFFCF9FFF),
+                  ),
+            ])
 
-                      ),
+    );
 
-                    ),
-
-                    GestureDetector(
-                      key: null,
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileBio()),);
-                      },
-                      child: const Icon(LineAwesomeIcons.user_circle,
-                        size: 30,
-                        color: Color(0xFFCF9FFF),),
-                    ),
-
-                    GestureDetector(
-                      key: null,
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileInterests()),);
-                      },
-                      child: const Icon(LineAwesomeIcons.heart,
-                        size: 30,
-                        color: Color(0xFFCF9FFF),),
-                    ),
-
-                    GestureDetector(
-                      key: null,
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
-                      },
-                      child: const Icon(LineAwesomeIcons.tools,
-                        size: 30,
-                        color: Color(0xFF966FD6),),
-                    ),
-
-                  ]),
-            ]));
   }
 }
 

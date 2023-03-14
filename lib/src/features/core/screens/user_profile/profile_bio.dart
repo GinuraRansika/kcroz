@@ -149,8 +149,26 @@ class ProfileBio extends StatelessWidget {
               DetailsRow(title: 'UserName', value: 'Senudi Dias', iconData: Icons.person_outline,),
               DetailsRow(title: 'PhoneNumber', value: '071 234 5678', iconData: Icons.phone_outlined,),
               DetailsRow(title: 'Email', value: 'senudi.20210388@iit.ac.lk', iconData: Icons.email_outlined,),
-            ]));
+            ]
+
+
+
+        ));
   }
+
+
+  // Widget build_build(BuildContext context){
+  //   return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //       crossAxisCount: 2),
+  //       itemBuilder: (_, index){
+  //         return Container(
+  //           color: const Color(0xFFCF9FFF),
+  //         );
+  //       }
+  //   );
+  // }
+
+
 }
 
 

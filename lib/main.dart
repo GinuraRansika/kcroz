@@ -9,6 +9,7 @@ import 'package:kcroz/firebase_options.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/features/core/screens/profile/profile_screen.dart';
+import 'package:kcroz/src/features/core/screens/user_profile/profile_settings.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:kcroz/src/providers/user_provider.dart';
 import 'package:kcroz/src/responsive/mobile_screen_layout.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: UserProfileScreen(),
+        home: ProfileSettings(),
         // routes: const {},
       ),
     );
