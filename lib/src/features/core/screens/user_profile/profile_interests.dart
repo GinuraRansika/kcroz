@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'profile_feed.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
+import 'additional_step.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/text_string.dart';
@@ -105,7 +105,7 @@ class ProfileInterests extends StatelessWidget {
                     GestureDetector(
                       key: null,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
                       },
                       child: const Icon(LineAwesomeIcons.camera,
                         size: 30,
