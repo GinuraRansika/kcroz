@@ -25,30 +25,38 @@ class AdditionalStep extends StatefulWidget {
   State<AdditionalStep> createState() => _AdditionalStepState();
 
 
-  final List<ImageProvider> _imageProviders = [
-    Image.network(
-        "https://i12.haber7.net//haber/haber7/og_image/2022/22/hande_ercelden_sert_cikis_kadinlara_yuklenmeyin_1654068467_3687.jpg")
-        .image,
-    Image.network(
-        "https://los40es00.epimg.net/los40/imagenes/2021/08/11/cinetv/1628672548_463726_1628675121_noticia_normal_amp.jpg")
-        .image,
-    Image.network(
-        "https://www.chafarderias.com/uploads/s1/17/08/69/hande-ercel.jpeg")
-        .image,
-    Image.network(
-        "https://nubiapage.com/wp-content/uploads/cbfd5a971ff66f9e0439eaf447227aff-1-531x744.jpg")
-        .image
-  ];
+  // final List<ImageProvider> _imageProviders = [
+  //   Image.network(
+  //       "https://i12.haber7.net//haber/haber7/og_image/2022/22/hande_ercelden_sert_cikis_kadinlara_yuklenmeyin_1654068467_3687.jpg")
+  //       .image,
+  //   Image.network(
+  //       "https://los40es00.epimg.net/los40/imagenes/2021/08/11/cinetv/1628672548_463726_1628675121_noticia_normal_amp.jpg")
+  //       .image,
+  //   Image.network(
+  //       "https://www.chafarderias.com/uploads/s1/17/08/69/hande-ercel.jpeg")
+  //       .image,
+  //   Image.network(
+  //       "https://nubiapage.com/wp-content/uploads/cbfd5a971ff66f9e0439eaf447227aff-1-531x744.jpg")
+  //       .image
+  // ];
 
 }
 
 
 class _AdditionalStepState extends State<AdditionalStep> {
   final List<Uint8List> _imageList = [];
+  Uint8List? _profilePic;
   Uint8List? _feedImage01;
   Uint8List? _feedImage02;
   Uint8List? _feedImage03;
   Uint8List? _feedImage04;
+
+  void selectProfilePic() async{
+    Uint8List image = await pickImage(ImageSource.gallery);
+    setState(() {
+      _profilePic = image;
+    });
+  }
 
   void selectFeedImage01() async {
     Uint8List image = await pickImage(ImageSource.gallery);
@@ -121,16 +129,35 @@ class _AdditionalStepState extends State<AdditionalStep> {
                 SizedBox.fromSize(size: Size(0, 50)),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20.0), //or 15.0
-                  child: Container(
-                    height: 150.0,
-                    width: 150.0,
-                    color: Color(0xFF966FD6),
-                    child: Image.network(
-                      'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
-                      fit: BoxFit.cover,
-                    ),
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 150.0,
+                        width: 150.0,
+                        color: Color(0xFF966FD6),
+                        child: Image.network(
+                          'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+
+                      Positioned(
+                        top: 100,
+                          left: 100,
+                          child: IconButton(
+                            onPressed: () {
+                              selectProfilePic();
+                            },
+                            icon: const Icon(
+                              Icons.add_circle_outlined,
+                              size: 30,
+                            ),
+                          )
+                      ),
+                    ],
                   ),
                 ),
+
                 SizedBox.fromSize(size: Size(10, 10)),
                 const Text(
                   "Anne Marie",
@@ -140,6 +167,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                       fontWeight: FontWeight.w400,
                       fontFamily: "Poppins"),
                 ),
+
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.max,
