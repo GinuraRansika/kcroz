@@ -59,16 +59,8 @@ android {
 
     }
 
-    flavorDimensions "version"
-    productFlavors {
-        debug {
-            // ...
-        }
-        flavorName {
-            dimension "version"
-            applicationId "com.app.kcroz"
-        }
-    }
+
+
 
 
 
