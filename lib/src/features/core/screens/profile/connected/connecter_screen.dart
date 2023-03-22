@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kcroz/src/features/core/screens/profile/profile_bio.dart';
-import 'package:kcroz/src/features/core/screens/profile/profile_interest.dart';
+import 'package:kcroz/src/features/core/screens/profile/connected/connected_bio.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'connected_interest.dart';
 
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class ConnectedScreen extends StatelessWidget {
+  ConnectedScreen({Key? key}) : super(key: key);
 
   final List<String> assetNames = [
     'https://burst.shopifycdn.com/photos/fog-on-dark-waters-edge.jpg?width=1200&format=pjpg&exif=1&iptc=1',
@@ -91,17 +91,6 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      IconButton(
-                        key: null,
-                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfileBio()));
-                          // FirebaseAuthMethods().deleteAccount(context);
-                        },
-                        icon: const Icon(
-                          LineAwesomeIcons.user_circle,
-                          size: 30,
-                        ),
-                        color: const Color(0xFF966FD6),
-                      ),
                       TextButton(
                           key: null,
                           onPressed: () {},
@@ -125,10 +114,65 @@ class ProfileScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Poppins"),
                           )),
+
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
                       IconButton(
                         key: null,
-                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>UserInterest()));
-                          // FirebaseAuthMethods().signOut(context);
+                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>ConnectedProfileBio()));
+                          // FirebaseAuthMethods().deleteAccount(context);
+                        },
+                        icon: const Icon(
+                          LineAwesomeIcons.user_circle,
+                          size: 30,
+                        ),
+                        color: const Color(0xFF966FD6),
+                      ),
+                      IconButton(
+                        key: null,
+                        onPressed: () {
+                          // Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfileBio()));
+                          // FirebaseAuthMethods().deleteAccount(context);
+                        },
+                        icon: const Icon(
+                          LineAwesomeIcons.phone,
+                          size: 30,
+                        ),
+                        color: const Color(0xFF966FD6),
+                      ),
+                      IconButton(
+                        key: null,
+                        onPressed: () {
+                          // Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfileBio()));
+                          // FirebaseAuthMethods().deleteAccount(context);
+                        },
+                        icon: const Icon(
+                          LineAwesomeIcons.retro_camera,
+                          size: 30,
+                        ),
+                        color: const Color(0xFF966FD6),
+                      ),
+                      IconButton(
+                        key: null,
+                        onPressed: () {
+                        //   Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfileBio())
+                        // );
+                          // FirebaseAuthMethods().deleteAccount(context);
+                        },
+                        icon: const Icon(
+                          LineAwesomeIcons.facebook_messenger,
+                          size: 30,
+                        ),
+                        color: const Color(0xFF966FD6),
+                      ),
+                      IconButton(
+                        key: null,
+                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>ConnectedUserInterest()));
+                          // FirebaseAuthMethods().deleteAccount(context);
                         },
                         icon: const Icon(
                           LineAwesomeIcons.heart,
@@ -137,8 +181,6 @@ class ProfileScreen extends StatelessWidget {
                         color: const Color(0xFF966FD6),
                       ),
                     ]),
-
-
                 Padding(
                     padding: const EdgeInsets.all(24),
                     child: GridA())  ]),
@@ -173,11 +215,11 @@ class GridA extends StatelessWidget {
         itemCount:8,
         itemBuilder: (context, index) {
           return Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0),
-              image: DecorationImage(
-                image: NetworkImage(imagessList[index]),
-                fit: BoxFit.cover,))
-              );
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0),
+                  image: DecorationImage(
+                    image: NetworkImage(imagessList[index]),
+                    fit: BoxFit.cover,))
+          );
         }
     );
   }

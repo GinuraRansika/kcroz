@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:kcroz/firebase_options.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/create_profile/additional_step.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/create_profile/create_profile.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
+import 'package:kcroz/src/features/core/screens/profile/connected/connecter_screen.dart';
 import 'package:kcroz/src/providers/user_provider.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:kcroz/src/utils/theme/theme.dart';
@@ -53,11 +50,10 @@ class MyApp extends StatelessWidget {
         darkTheme: KcrozAppTheme.darkTheme,
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
-        home: const CreateProfile(),
+        home: ConnectedScreen(),
         // routes: const {},
       ),
     );
   }
 }
-
-
+//
