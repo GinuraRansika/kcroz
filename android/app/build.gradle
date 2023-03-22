@@ -35,6 +35,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+//    flavorName {
+//        applicationId = "com.creed.kcroz"
+//    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -55,6 +58,19 @@ android {
         multiDexEnabled true
 
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        debug {
+            // ...
+        }
+        flavorName {
+            dimension "version"
+            applicationId "com.app.kcroz"
+        }
+    }
+
+
 
     buildTypes {
         release {

@@ -21,13 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      theme: KcrozAppTheme.lightTheme,
-      darkTheme: KcrozAppTheme.darkTheme,
-      defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: const Duration(milliseconds: 500),
-      home: const SplashScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        theme: KcrozAppTheme.lightTheme,
+        darkTheme: KcrozAppTheme.darkTheme,
+        defaultTransition: Transition.leftToRightWithFade,
+        transitionDuration: const Duration(milliseconds: 500),
+        home: const SplashScreen());
   }
 }
