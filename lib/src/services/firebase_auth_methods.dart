@@ -235,4 +235,6 @@ class FirebaseAuthMethods {
       // in user again and then delete account.
     }
   }
+
+  void addFeedImages({required Uint8List feedImage01, required Uint8List feedImage02, required Uint8List feedImage03, required Uint8List feedImage04}) {}
 }
