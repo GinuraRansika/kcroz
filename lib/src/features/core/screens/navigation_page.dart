@@ -118,14 +118,14 @@ class _NavigationPageState extends State<NavigationPage> {
                       ),
                       Row(
                         children: [
-                          AnimatedContainer(
+                          AnimatedContainer (
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
                             // icons width
                             width:
                             index == _currentIndex ? displayWidth * .07 : 20,
                           ),
-                          Icon(
+                          Icon (
                             listOfIcons[index],
                             size: displayWidth * .07,
                             color: index == _currentIndex ? Colors.black87 : Colors.black26,
