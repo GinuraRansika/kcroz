@@ -12,6 +12,7 @@ import '../forget_password/forget_password_options/forget_password_model_bottom_
 import 'widgets/ login_footer_widget.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login-screen';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

@@ -4,17 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kcroz/src/features/authentication/screens/models/feed_image_model.dart';
 import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:kcroz/src/services/exceptions/login_email_password_failure.dart';
 import 'package:kcroz/src/services/storage_methods.dart';
 
-
-import '../features/authentication/screens/models/user_model.dart';
 import '../utils/show_snack_bar.dart';
 import 'exceptions/signup_email_password_failure.dart';
+
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,8 +26,32 @@ class FirebaseAuthMethods {
   }
 
 
-  // STATE PERSISTENCE STREAM
-  // stream of users which will tel if the user is present or not
+  Future<void> addFeedImages({
+    required Uint8List feedImage01,
+    required Uint8List feedImage02,
+    required Uint8List feedImage03,
+    required Uint8List feedImage04,
+}) async{
+    try{
+      String feedImage01URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage01", feedImage01, false);
+      String feedImage02URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage02", feedImage02, false);
+      String feedImage03URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage03", feedImage03, false);
+      String feedImage04URL = await StorageMethods().uploadImageToStorage("feedImages/${_auth.currentUser!.uid}/feedImage04", feedImage04, false);
+
+      FeedImageModel feedImageModel = FeedImageModel(
+        feedImage01URL: feedImage01URL,
+        feedImage02URL: feedImage02URL,
+        feedImage03URL: feedImage03URL,
+        feedImage04URL: feedImage04URL,
+      );
+
+      // add user to the firestore
+      await _firestore.collection("users").doc(_auth.currentUser!.uid).update(feedImageModel.toJson(),);
+    }
+    catch(e){
+      print(e);
+    }
+  }
 
 
   // EMAIL SIGN UP
@@ -94,6 +117,20 @@ class FirebaseAuthMethods {
     }
     return result;
   }
+
+  void signInWithPhone(BuildContext context, String phoneNumber) async {
+    try{
+      await _auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async{ print("done");},
+          verificationFailed: (e) {print(e);},
+          codeSent: ((String verificationId, int? resendToken) async {}),
+          codeAutoRetrievalTimeout: (String verificationId) {},);
+    } catch(e){
+      print(e);
+    }
+  }
+
 
   // EMAIL LOGIN
   Future<String> loginWithEmail({

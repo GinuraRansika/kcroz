@@ -36,6 +36,8 @@ dependencies:
   firebase_auth: ^4.2.9
   cloud_firestore: ^4.4.3
   firebase_storage: ^11.0.14
+  country_picker: ^2.0.20
+  flutter_riverpod: ^2.3.0
 
 
 dev_dependencies:
@@ -59,3 +61,5 @@ flutter:
    - assets/images/profile_picture/default-profile-picture.png
    - assets/images/splash_screen/splash-screen-bottom1.png
    - assets/images/splash_screen/splash-screen-top.jpg
+   - assets/images/backgrounds/
+   - assets/images/doodles/
