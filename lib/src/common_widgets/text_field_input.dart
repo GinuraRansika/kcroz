@@ -23,19 +23,19 @@ class TextFieldInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final inputBorder  = OutlineInputBorder(
-        // borderSide: Divider.createBorderSide(context)
+      // borderSide: Divider.createBorderSide(context)
     );
     return TextField(
       controller: textEditingController,
       decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        hintText: hintText,
-        labelText: labelText,
-        border: inputBorder,
-        // focusedBorder: inputBorder,
-        enabledBorder: inputBorder,
-        // filled: true,
-        contentPadding: const EdgeInsets.all(20)
+          prefixIcon: prefixIcon,
+          hintText: hintText,
+          labelText: labelText,
+          border: inputBorder,
+          // focusedBorder: inputBorder,
+          enabledBorder: inputBorder,
+          // filled: true,
+          contentPadding: const EdgeInsets.all(20)
       ),
       keyboardType: textInputType,
       obscureText: isPassword,
