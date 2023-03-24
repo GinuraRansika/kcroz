@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kcroz/src/features/core/screens/profile/profile_bio.dart';
 import 'package:kcroz/src/features/core/screens/profile/profile_interest.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class ProfileBio extends StatelessWidget {
+  ProfileBio({Key? key}) : super(key: key);
 
   final List<String> assetNames = [
     'https://burst.shopifycdn.com/photos/fog-on-dark-waters-edge.jpg?width=1200&format=pjpg&exif=1&iptc=1',
@@ -93,11 +92,11 @@ class ProfileScreen extends StatelessWidget {
                     children: <Widget>[
                       IconButton(
                         key: null,
-                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>ProfileBio()));
+                        onPressed: () {
                           // FirebaseAuthMethods().deleteAccount(context);
                         },
                         icon: const Icon(
-                          LineAwesomeIcons.user_circle,
+                          LineAwesomeIcons.user_circle, //info-bio
                           size: 30,
                         ),
                         color: const Color(0xFF966FD6),
@@ -128,57 +127,61 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         key: null,
                         onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>UserInterest()));
-                          // FirebaseAuthMethods().signOut(context);
+    // FirebaseAuthMethods().signOut(context);
                         },
                         icon: const Icon(
-                          LineAwesomeIcons.heart,
+                          LineAwesomeIcons.heart, //interest
                           size: 30,
                         ),
                         color: const Color(0xFF966FD6),
                       ),
                     ]),
-
-
-                Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: GridA())  ]),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        '100% Italian, fun loving, affectionate young lady who knows what it takes to mako a rolationshio work.',
+                        style: TextStyle(fontSize: 17),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        'INFO',
+                        style: TextStyle(fontSize: 17),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        'Age 30 \n '
+                            'Birthday  Buddhist\n'
+                            'HomeTown  Maradhana\n'
+                            'Occupation  Software Engineer\n'
+                            'University  IIT\n'
+                            'College  Visaka College\n'
+                          'Diet  Vegan \n '
+                              'Smoke  No \n'
+                              'Drink  No\n',
+                        style: TextStyle(fontSize: 17),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
         )
     );
   }
 }
 
-// ignore: must_be_immutable
-class GridA extends StatelessWidget {
-  // const GridA({Key? key}) : super(key: key);
-  List<String> imagessList=[
-    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60',
-    'https://plus.unsplash.com/premium_photo-1664361480561-3bdcd6eb3b6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60',
-    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-    'https://images.unsplash.com/photo-1517999179346-a7078f1e40a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFzc2V0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
-    'https://images.unsplash.com/photo-1488229297570-58520851e868?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGFzc2V0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
-    'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFzc2V0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
-    'https://plus.unsplash.com/premium_photo-1669741908308-5ca216f3fcd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60',
-    'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
 
-  ];
-
-  GridA({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-        scrollDirection: Axis.vertical,
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 5,mainAxisSpacing: 5),
-        itemCount:8,
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0),
-              image: DecorationImage(
-                image: NetworkImage(imagessList[index]),
-                fit: BoxFit.cover,))
-              );
-        }
-    );
-  }
-}
