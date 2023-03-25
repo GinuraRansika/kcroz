@@ -11,6 +11,7 @@ import 'package:kcroz/src/features/authentication/screens/screens/create_profile
 import 'package:kcroz/src/features/authentication/screens/screens/splash_screen/splash_screen.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/features/core/screens/profile/profile_screen.dart';
+import 'package:kcroz/src/features/core/screens/user_profile/connections.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/profile_feed.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/editable_text_widget.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: EditProfile(),
+        home: Connections(),
         // routes: const {},
       ),
     );

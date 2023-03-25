@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'connections.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
@@ -66,7 +67,11 @@ class ProfileBio extends StatelessWidget {
                           children: <Widget>[
                             TextButton(
                                 key: null,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => Connections()),
+                                  );
+                                },
                                 child: const Text(
                                   "15\nConnections",
                                   textAlign: TextAlign.center,
@@ -185,15 +190,16 @@ class ProfileBio extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      'Age 30 \n '
+                      'Age 28 \n '
+                          'Birthday  27 May 2000\n'
                           'Religion  Buddhism\n'
-                          'HomeTown  Maradhana\n'
+                          'HomeTown  Ganemulla\n'
                           'Occupation  Software Engineer\n'
                           'University  IIT\n'
-                          'College  Visaka College\n'
+                          'College  Nalanda College\n'
                           'Diet  Vegan \n '
                           'Smoke  No \n'
-                          'Drink  No\n',
+                          'Drink  Yes\n',
                       style: TextStyle(fontSize: 17),
                       textAlign: TextAlign.center,
                     ),

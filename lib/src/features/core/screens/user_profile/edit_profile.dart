@@ -1,10 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../utils/utils.dart';
+import '../navigation_page.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
@@ -16,6 +20,10 @@ import '../../../../constants/text_string.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
+
+
+
+
   final List<ImageProvider> _imageProviders = [
     Image.network(
         "https://i12.haber7.net//haber/haber7/og_image/2022/22/hande_ercelden_sert_cikis_kadinlara_yuklenmeyin_1654068467_3687.jpg")
@@ -62,20 +70,16 @@ class EditProfile extends StatelessWidget {
       'her signature use of the whistle register, '
       'which have received critical acclaim by critics and media';
   String _userName = 'Hayat Uzun';
-  String _age = '30';
+  String _age = '28';
   String _religion = 'Buddhism';
-  String _birthday = 'Buddhism';
-  String _homeTown = 'Buddhism';
-  String _occupation = 'Buddhism';
-  String _university = 'Buddhism';
-  String _college = 'Buddhism';
-  String _diet = 'Buddhism';
-  String _smoke = 'Buddhism';
-  String _drink = 'Buddhism';
-
-
-
-
+  String _birthday = '27 May 2000';
+  String _homeTown = 'Ganemulla';
+  String _occupation = 'Software Engineer';
+  String _university = 'UoW';
+  String _college = 'Nalanda College';
+  String _diet = 'Vegan';
+  String _smoke = 'No';
+  String _drink = 'Yes';
 
 
   @override
@@ -92,7 +96,9 @@ class EditProfile extends StatelessWidget {
           ),
           title: Text('Edit Profile', style: Theme.of(context).textTheme.headline4,),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
+            IconButton(onPressed: () {
+              saveEdits();
+            }, icon: const Icon(Icons.done_sharp))
           ],
 
         ),
@@ -286,6 +292,49 @@ class EditProfile extends StatelessWidget {
 
                   Row(
                     children: const [
+                      Icon(Icons.celebration_rounded),
+                      SizedBox(width: 10),
+                      Text('Birthday:',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Sans-serif',),),
+                    ],
+                  ),
+
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        // When the text is tapped, set the editing controller's value to the current text value
+                        _birthdayController.text = _birthday;
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: EditableText(
+                          controller: _birthdayController,
+                          focusNode: FocusNode(),
+                          style: const TextStyle(fontSize: 16.0,
+                              color: Colors.black),
+                          cursorColor: Colors.blue,
+                          backgroundCursorColor: Colors.grey,
+                          onChanged: (value) {
+                            setState(() {
+                              _birthday = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                  Row(
+                    children: const [
                       Icon(Icons.temple_buddhist_rounded),
                       SizedBox(width: 10),
                       Text('Religion:',
@@ -326,48 +375,6 @@ class EditProfile extends StatelessWidget {
                     ),
                   ),
 
-
-                  Row(
-                    children: const [
-                      Icon(Icons.celebration_rounded),
-                      SizedBox(width: 10),
-                      Text('Birthday:',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Sans-serif',),),
-                    ],
-                  ),
-
-                  Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        // When the text is tapped, set the editing controller's value to the current text value
-                        _birthdayController.text = _birthday;
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: EditableText(
-                          controller: _birthdayController,
-                          focusNode: FocusNode(),
-                          style: const TextStyle(fontSize: 16.0,
-                              color: Colors.black),
-                          cursorColor: Colors.blue,
-                          backgroundCursorColor: Colors.grey,
-                          onChanged: (value) {
-                            setState(() {
-                              _birthday = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
 
 
                   Row(
@@ -671,28 +678,31 @@ class EditProfile extends StatelessWidget {
                   ),
 
 
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => const ProfileSettings());
+                              },
+                              child: Text("Back"),
+                            )
+                        ),
+                        const SizedBox(width: 10,),
+                        Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                saveEdits();
+                              },
+                              child: Text("Save"),
+                            )
+                        ),
+                      ],
 
-
-
-                  // Padding(
-                  //   padding: const EdgeInsets.all(16.0),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: <Widget>[
-                  //       // Text('Title:'),
-                  //       TextFormField(
-                  //         decoration: const InputDecoration(
-                  //           hintText: 'Edit Your Name',
-                  //           labelText: 'Anne Marie',
-                  //         ),
-                  //         onChanged: (value) {
-                  //           setState(() {
-                  //             _textValue = value;
-                  //           });
-                  //         },
-                  //       ),
-                  //     ],
-                  //   ),)
+                    ),
+                  )
 
 
                 ]),
@@ -702,6 +712,12 @@ class EditProfile extends StatelessWidget {
   }
 
   void setState(Null Function() param0) {}
+
+  void saveEdits() {}
 }
+
+
+
+
 
 

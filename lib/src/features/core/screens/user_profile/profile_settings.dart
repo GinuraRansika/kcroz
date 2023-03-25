@@ -32,6 +32,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   bool _isPrivateAccountEnabled = false;
 
 
+  List<String> _languages = ['English', 'French', 'Spanish', 'German'];
+  String _selectedLanguage = 'English';
+
+
   @override
   Widget build(BuildContext context) {
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
@@ -97,7 +101,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                     textStyle: MaterialStateProperty.all<TextStyle>(
                       const TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Sans-serif',
                       ),
@@ -140,39 +144,44 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   child: const Text('Add Account'),
                 ),
 
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()),
-                    );
-                  },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                    ),
-                    side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(color: Colors.transparent, width: 2.0),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-
-                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
-                    alignment: Alignment.centerLeft,
-
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 16.0),
+                      width: 292,
+                      height: 30,
+                      child: const Text('Language', style: TextStyle(
                         fontSize: 20,
+
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Sans-serif',
+                        fontFamily: 'Sans-serif',),),
+                    ),
+
+                    Container(
+                      width: 100,
+                      height: 30,
+                      child:
+                      DropdownButton(
+                        value: _selectedLanguage,
+                        items: _languages.map((language) {
+                          return DropdownMenuItem(
+                            value: language,
+                            child: Text(language,
+                              textAlign: TextAlign.left,),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedLanguage = newValue!;
+                          });
+                        },
                       ),
                     ),
-                  ),
-                  child: const Text('Language'),
+
+                  ],
                 ),
+
 
                 ElevatedButton(
                   onPressed: (){
@@ -239,7 +248,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       ),
                     ),
                   ),
-                  child: const Text('Switch Account'),
+                  child: const Text('Delete Account'),
                 ),
 
                 ElevatedButton(
@@ -273,7 +282,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       ),
                     ),
                   ),
-                  child: const Text('Delete Account'),
+                  child: const Text('Log Out'),
                 ),
 
                 Divider(thickness: 0,),

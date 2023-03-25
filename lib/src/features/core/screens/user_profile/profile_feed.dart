@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/features/core/screens/navigation_page.dart';
+import 'package:kcroz/src/features/core/screens/user_profile/connections.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -161,7 +162,11 @@ class _ProfileFeedState extends State<ProfileFeed> {
                             children: <Widget>[
                               TextButton(
                                   key: null,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => Connections()),
+                                    );
+                                  },
                                   child: const Text(
                                     "15\nConnections",
                                     textAlign: TextAlign.center,
