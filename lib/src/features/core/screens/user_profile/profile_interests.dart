@@ -168,7 +168,9 @@ class ProfileInterests extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      '100% Italian, fun loving, affectionate young lady who knows what it takes to mako a rolationshio work.',
+                      'singer, songwriter, and actress. She is noted for her four-octave vocal range '
+                          'and her signature use of the whistle register, which have received critical '
+                          'acclaim by critics and media',
                       style: TextStyle(fontSize: 17),
                       textAlign: TextAlign.center,
                     ),
