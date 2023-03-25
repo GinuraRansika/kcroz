@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1027941086185-s6bmh5knodevji7akvbi441439q51mo2.apps.googleusercontent.com</string>
+	<string>1019076583860-knptgam5ciskr0qepecnq6k4csd4d2i4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1027941086185-s6bmh5knodevji7akvbi441439q51mo2</string>
+	<string>com.googleusercontent.apps.1019076583860-knptgam5ciskr0qepecnq6k4csd4d2i4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCYxbNn65MWBMvzG8xZ2G3kqpVPEsdem6I</string>
+	<string>AIzaSyCSTLLmwZmI3wEWWdqwnjbDYDpDTvxvD_w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1027941086185</string>
+	<string>1019076583860</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.creed.kcroz</string>
+	<string>com.app.kcroz</string>
 	<key>PROJECT_ID</key>
-	<string>kcroz-dating-app</string>
+	<string>kcroz-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kcroz-dating-app.appspot.com</string>
+	<string>kcroz-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1027941086185:ios:e9053435ad3613a7f1d178</string>
+	<string>1:1019076583860:ios:480f041a9717880c26d2e1</string>
 </dict>
 </plist>
