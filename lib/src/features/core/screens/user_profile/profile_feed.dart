@@ -17,12 +17,12 @@ import 'profile_settings.dart';
 import '../../../../../constants/image_string.dart';
 import '../../../../../utils/utils.dart';
 
-class AdditionalStep extends StatefulWidget {
-  AdditionalStep({Key? key}) : super(key: key);
+class ProfileFeed extends StatefulWidget {
+  ProfileFeed({Key? key}) : super(key: key);
 
 
   @override
-  State<AdditionalStep> createState() => _AdditionalStepState();
+  State<ProfileFeed> createState() => _ProfileFeedState();
 
 
   // final List<ImageProvider> _imageProviders = [
@@ -43,7 +43,7 @@ class AdditionalStep extends StatefulWidget {
 }
 
 
-class _AdditionalStepState extends State<AdditionalStep> {
+class _ProfileFeedState extends State<ProfileFeed> {
   final List<Uint8List> _imageList = [];
   Uint8List? _profilePic;
   Uint8List? _feedImage01;
@@ -142,7 +142,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
 
                 SizedBox.fromSize(size: Size(10, 10)),
                 const Text(
-                  "Anne Marie",
+                  "Hayat Uzun",
                   style: TextStyle(
                       fontSize: 16.0,
                       color: Color(0xFF000000),
@@ -201,7 +201,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                       GestureDetector(
                         key: null,
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
                         },
                         child:
 

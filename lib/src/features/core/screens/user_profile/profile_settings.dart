@@ -13,7 +13,7 @@ import 'profile_interests.dart';
 import 'profile_settings.dart';
 import 'user_profile_screen.dart';
 import 'package:provider/provider.dart';
-import 'additional_step.dart';
+import 'profile_feed.dart';
 
 import '../../../../constants/text_string.dart';
 

@@ -5,7 +5,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
-import 'additional_step.dart';
+import 'profile_feed.dart';
 import 'package:provider/provider.dart';
 
 
@@ -50,7 +50,7 @@ class UserProfileScreen extends StatelessWidget {
               ),
               SizedBox.fromSize(size: Size(10, 10)),
               const Text(
-                "Anne Marie",
+                "Hayat Uzun",
                 style: TextStyle(
                     fontSize: 16.0,
                     color: Color(0xFF000000),
@@ -108,7 +108,7 @@ class UserProfileScreen extends StatelessWidget {
                     GestureDetector(
                       key: null,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
                       },
                       child:
 

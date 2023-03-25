@@ -4,7 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
-import 'additional_step.dart';
+import 'profile_feed.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/text_string.dart';
@@ -48,7 +48,7 @@ class ProfileInterests extends StatelessWidget {
               ),
               SizedBox.fromSize(size: Size(10, 10)),
               const Text(
-                "Anne Marie",
+                "Hayat Uzun",
                 style: TextStyle(
                     fontSize: 16.0,
                     color: Color(0xFF000000),
@@ -106,7 +106,7 @@ class ProfileInterests extends StatelessWidget {
                     GestureDetector(
                       key: null,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
                       },
                       child:
 
@@ -156,6 +156,187 @@ class ProfileInterests extends StatelessWidget {
                     ),
 
                   ]),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      '100% Italian, fun loving, affectionate young lady who knows what it takes to mako a rolationshio work.',
+                      style: TextStyle(fontSize: 17),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    child: const Text(
+                      'INTERESTS',
+                      style: TextStyle(
+                          fontSize: 17),
+                      textAlign: TextAlign.left,
+
+                    ),
+                  ),
+                  const SizedBox(width: 30),
+                  Column(
+                    children: [
+
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                        child: Row(
+
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.purpleAccent,
+                                  borderRadius: BorderRadius.circular(10),
+
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Horror Movies',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      // fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.cyan,
+
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Cricket',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      // fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(10),
+
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Dogs',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      // fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.deepPurpleAccent,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Planting',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black45,
+                                    borderRadius: BorderRadius.circular(10),
+
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Coding',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10),
+
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Badminton',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ],
+              ),
+
             ]));
   }
 }

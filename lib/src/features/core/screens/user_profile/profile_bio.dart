@@ -4,7 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
-import 'additional_step.dart';
+import 'profile_feed.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/text_string.dart';
@@ -48,7 +48,7 @@ class ProfileBio extends StatelessWidget {
               ),
               SizedBox.fromSize(size: Size(10, 10)),
               const Text(
-                "Anne Marie",
+                "Hayat Uzun",
                 style: TextStyle(
                     fontSize: 16.0,
                     color: Color(0xFF000000),
@@ -106,7 +106,7 @@ class ProfileBio extends StatelessWidget {
                     GestureDetector(
                       key: null,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileFeed()),);
                       },
                       child:
 
@@ -156,9 +156,50 @@ class ProfileBio extends StatelessWidget {
                     ),
 
                   ]),
-              DetailsRow(title: 'UserName', value: 'Senudi Dias', iconData: Icons.person_outline,),
-              DetailsRow(title: 'PhoneNumber', value: '071 234 5678', iconData: Icons.phone_outlined,),
-              DetailsRow(title: 'Email', value: 'senudi.20210388@iit.ac.lk', iconData: Icons.email_outlined,),
+
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      'singer, songwriter, and actress. She is noted for her four-octave vocal range and her signature use of the whistle register, which have received critical acclaim by critics and media',
+                      style: TextStyle(fontSize: 17),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      'INFO',
+                      style: TextStyle(fontSize: 17),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      'Age 30 \n '
+                          'Religion  Buddhism\n'
+                          'HomeTown  Maradhana\n'
+                          'Occupation  Software Engineer\n'
+                          'University  IIT\n'
+                          'College  Visaka College\n'
+                          'Diet  Vegan \n '
+                          'Smoke  No \n'
+                          'Drink  No\n',
+                      style: TextStyle(fontSize: 17),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              )
 
 
 
@@ -166,11 +207,17 @@ class ProfileBio extends StatelessWidget {
 
 
 
-            ]
 
 
 
-        ));
+
+
+
+              // DetailsRow(title: 'UserName', value: 'Senudi Dias', iconData: Icons.person_outline,),
+              // DetailsRow(title: 'PhoneNumber', value: '071 234 5678', iconData: Icons.phone_outlined,),
+              // DetailsRow(title: 'Email', value: 'senudi.20210388@iit.ac.lk', iconData: Icons.email_outlined,),
+
+            ]));
   }
 
 
@@ -192,21 +239,21 @@ class ProfileBio extends StatelessWidget {
 
 
 
-class DetailsRow extends StatelessWidget{
-  final String title, value;
-  final IconData iconData;
-  const DetailsRow ({Key? key, required this.title, required this.iconData, required this.value}): super(key: key);
-
-  Widget build (BuildContext context){
-    return Column(
-      children: [
-        ListTile(
-          title: Text (title),
-          leading: Icon(iconData),
-          trailing: Text(value),
-        )
-        // Divider(color: Colors.black.withOpacity(0.4),)
-      ],
-    );
-  }
-}
+// class DetailsRow extends StatelessWidget{
+//   final String title, value;
+//   final IconData iconData;
+//   const DetailsRow ({Key? key, required this.title, required this.iconData, required this.value}): super(key: key);
+//
+//   Widget build (BuildContext context){
+//     return Column(
+//       children: [
+//         ListTile(
+//           title: Text (title),
+//           leading: Icon(iconData),
+//           trailing: Text(value),
+//         )
+//         // Divider(color: Colors.black.withOpacity(0.4),)
+//       ],
+//     );
+//   }
+// }
