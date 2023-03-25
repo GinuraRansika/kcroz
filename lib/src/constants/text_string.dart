@@ -11,6 +11,7 @@ const String kcrozPassword = "Password";
 const String kcrozForgetPassword = "Forget Password?";
 const String kcrozSignInWithGoogle = "Sign-In with Google";
 const String kcrozProfile = "Profile";
+const String kcrozProfileSettings = "Settings";
 
 
 // Splash Screen Text
@@ -61,3 +62,8 @@ const String kcrozForgetMailSubTitle = "Enter your registered E-Mail to receive 
 const String kcrozOTPTitle = "CO\nDE";
 const String kcrozOTPSubTitle = "Verification";
 const String kcrozOTPMessage = "Enter the verification code sent at ";
+
+// Create Profile - Name
+const String kcrozNamePageTitle = "";
+const String kcrozNamePageSubTitle = "";
+
