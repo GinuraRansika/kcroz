@@ -1,3 +1,6 @@
+import 'dart:html';
+
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +22,8 @@ class Chat extends StatelessWidget {
 class ChatScreen extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 
+  bool isSelected = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +38,8 @@ class ChatScreen extends StatelessWidget {
         title: Text('Anne Marie', style: Theme.of(context).textTheme.headline4,),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.call_rounded)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.video_call_rounded))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.video_call_rounded)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert_rounded)),
         ],
 
       ),
@@ -111,9 +117,14 @@ class ChatScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
+
+
+
+          ]
         ),
       ),
     );
   }
+
+  void setState(Null Function() param0) {}
 }

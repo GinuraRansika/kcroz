@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: Connections(),
+        home: ChatScreen(),
         // routes: const {},
       ),
     );
