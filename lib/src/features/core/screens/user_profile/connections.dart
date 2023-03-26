@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/features/core/screens/chat_screen/chat_screen.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
@@ -95,7 +96,7 @@ class _ConnectionsState extends State<Connections> {
                     GestureDetector(
                       key: null,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()),);
                       },
                       child:
                       const Icon(Icons.message_rounded,
