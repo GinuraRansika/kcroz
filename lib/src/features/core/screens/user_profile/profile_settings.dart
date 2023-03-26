@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
+import 'package:kcroz/src/features/core/screens/user_profile/language_settings.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -27,13 +28,11 @@ class ProfileSettings extends StatefulWidget {
 
 class _ProfileSettingsState extends State<ProfileSettings> {
 
-  bool _isNotificationsEnabled = true;
-  bool _isAppNotificationsEnabled = true;
-  bool _isPrivateAccountEnabled = false;
+  bool _isRequestsNotificationsEnabled = true;
+  bool _isMessagesNotificationsEnabled = true;
+  bool _isCallsAccountEnabled = true;
+  bool _isDarkModeEnabled = false;
 
-
-  List<String> _languages = ['English', 'French', 'Spanish', 'German'];
-  String _selectedLanguage = 'English';
 
 
   @override
@@ -50,7 +49,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
         ),
         title: Text(kcrozProfileSettings, style: Theme.of(context).textTheme.headline4,),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.done_sharp))
         ],
 
       ),
@@ -144,44 +143,39 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   child: const Text('Add Account'),
                 ),
 
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 16.0),
-                      width: 292,
-                      height: 30,
-                      child: const Text('Language', style: TextStyle(
-                        fontSize: 20,
-
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Sans-serif',),),
-                    ),
-
-                    Container(
-                      width: 100,
-                      height: 30,
-                      child:
-                      DropdownButton(
-                        value: _selectedLanguage,
-                        items: _languages.map((language) {
-                          return DropdownMenuItem(
-                            value: language,
-                            child: Text(language,
-                              textAlign: TextAlign.left,),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedLanguage = newValue!;
-                          });
-                        },
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LanguageSettings()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
                       ),
                     ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
 
-                  ],
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Language'),
                 ),
-
 
                 ElevatedButton(
                   onPressed: (){
@@ -217,73 +211,6 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   child: const Text('Manage Interests'),
                 ),
 
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()),
-                    );
-                  },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                    ),
-                    side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(color: Colors.transparent, width: 2.0),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-
-                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
-                    alignment: Alignment.centerLeft,
-
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Sans-serif',
-                      ),
-                    ),
-                  ),
-                  child: const Text('Delete Account'),
-                ),
-
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()),
-                    );
-                  },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                    ),
-                    side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(color: Colors.transparent, width: 2.0),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-
-                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
-                    alignment: Alignment.centerLeft,
-
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Sans-serif',
-                      ),
-                    ),
-                  ),
-                  child: const Text('Log Out'),
-                ),
 
                 Divider(thickness: 0,),
 
@@ -303,7 +230,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 Divider(thickness: 4,),
 
                 SwitchListTile(
-                  title: const Text('Notifications',
+                  title: const Text('Requests',
                     style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
@@ -312,16 +239,16 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   activeColor: Colors.purple,
                   inactiveTrackColor: Colors.grey,
-                  value: _isNotificationsEnabled,
+                  value: _isRequestsNotificationsEnabled,
                   onChanged: (bool value) {
                     setState(() {
-                      _isNotificationsEnabled = value;
+                      _isRequestsNotificationsEnabled = value;
                     });
                   },
                 ),
 
                 SwitchListTile(
-                  title: const Text('App Notifications',
+                  title: const Text('Messages',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -330,10 +257,28 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   activeColor: Colors.purple,
                   inactiveTrackColor: Colors.grey,
-                  value: _isAppNotificationsEnabled,
+                  value: _isMessagesNotificationsEnabled,
                   onChanged: (bool value) {
                     setState(() {
-                      _isAppNotificationsEnabled = value;
+                      _isMessagesNotificationsEnabled = value;
+                    });
+                  },
+                ),
+
+                SwitchListTile(
+                  title: const Text('Calls',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Sans-serif',),
+                  ),
+                  activeColor: Colors.purple,
+                  inactiveTrackColor: Colors.grey,
+                  value: _isCallsAccountEnabled,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _isCallsAccountEnabled = value;
                     });
                   },
                 ),
@@ -343,9 +288,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
                 Row(
                   children: const [
-                    Icon(Icons.privacy_tip_rounded),
+                    Icon(Icons.dark_mode_rounded),
                     SizedBox(width: 10),
-                    Text('Privacy', style: TextStyle(
+                    Text('Display', style: TextStyle(
                       fontSize: 25,
                       color: Colors.purple,
                       fontWeight: FontWeight.bold,
@@ -356,7 +301,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 Divider(thickness: 4,),
 
                 SwitchListTile(
-                  title: const Text('Private Account',
+                  title: const Text('Dark',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -365,10 +310,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   activeColor: Colors.purple,
                   inactiveTrackColor: Colors.grey,
-                  value: _isPrivateAccountEnabled,
+                  value: _isDarkModeEnabled,
                   onChanged: (bool value) {
                     setState(() {
-                      _isPrivateAccountEnabled = value;
+                      _isDarkModeEnabled = value;
                     });
                   },
                 ),
@@ -490,6 +435,399 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                   child: const Text('Login Activity'),
                 ),
+
+
+                Divider(thickness: 0,),
+
+                Row(
+                  children: const [
+                    Icon(Icons.info_rounded),
+                    SizedBox(width: 10),
+                    Text('About', style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.purple,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Sans-serif',),),
+                  ],
+                ),
+
+                Divider(thickness: 4,),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Privacy Policy'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Terms of Use'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Open source libraries'),
+                ),
+
+
+                Divider(thickness: 0,),
+
+                Row(
+                  children: const [
+                    Icon(Icons.help_rounded),
+                    SizedBox(width: 10),
+                    Text('Help', style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.purple,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Sans-serif',),),
+                  ],
+                ),
+
+                Divider(thickness: 4,),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Report a Problem'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Account Status'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Help Center'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Privacy and Security Help'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Support Requests'),
+                ),
+
+
+                Divider(thickness: 0,),
+
+                Row(
+                  children: const [
+                    Icon(Icons.logout_rounded),
+                    SizedBox(width: 10),
+                    Text('Account Actions', style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.purple,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Sans-serif',),),
+                  ],
+                ),
+
+                Divider(thickness: 4,),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Delete Account'),
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()),
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.transparent, width: 2.0),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+
+                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 16)),
+                    alignment: Alignment.centerLeft,
+
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sans-serif',
+                      ),
+                    ),
+                  ),
+                  child: const Text('Log Out'),
+                ),
+
+
               ]),
         ),
     );

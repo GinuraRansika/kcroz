@@ -412,31 +412,6 @@ class _ProfileFeedState extends State<ProfileFeed> {
                           ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Get.to(() => const NavigationPage());
-                                  },
-                                  child: Text("Skip"),
-                                )
-                            ),
-                            const SizedBox(width: 10,),
-                            Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    saveImages();
-                                  },
-                                  child: Text("Finished"),
-                                )
-                            ),
-                          ],
-
-                        ),
-                      )
                     ]
                 ),
 
