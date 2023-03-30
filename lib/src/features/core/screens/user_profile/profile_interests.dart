@@ -102,45 +102,55 @@ class ProfileInterests extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(width: 0,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
                       },
-                      child: const Icon(LineAwesomeIcons.camera,
+                      child:
+
+                      const Icon(LineAwesomeIcons.camera,
                         size: 30,
                         color: Color(0xFFCF9FFF),
-
                       ),
-
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileBio()),);
                       },
-                      child: const Icon(LineAwesomeIcons.user_circle,
+                      child:
+                      const Icon(LineAwesomeIcons.user_circle,
+
                         size: 30,
-                        color: Color(0xFFCF9FFF),),
+                        color: Color(0xFFCF9FFF),
+                      ),
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileInterests()),);
                       },
-                      child: const Icon(LineAwesomeIcons.heart,
+                      child:
+
+                      const Icon(LineAwesomeIcons.heart,
                         size: 30,
                         color: Color(0xFF966FD6),),
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
                       },
-                      child: const Icon(LineAwesomeIcons.tools,
+                      child:
+                      const Icon(Icons.settings,
                         size: 30,
                         color: Color(0xFFCF9FFF),),
                     ),
