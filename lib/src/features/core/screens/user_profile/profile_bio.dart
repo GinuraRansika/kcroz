@@ -102,45 +102,55 @@ class ProfileBio extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(width: 0,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
                       },
-                      child: const Icon(LineAwesomeIcons.camera,
+                      child:
+
+                      const Icon(LineAwesomeIcons.camera,
                         size: 30,
                         color: Color(0xFFCF9FFF),
-
                       ),
-
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileBio()),);
                       },
-                      child: const Icon(LineAwesomeIcons.user_circle,
+                      child:
+                      const Icon(LineAwesomeIcons.user_circle,
+
                         size: 30,
-                        color: Color(0xFF966FD6),),
+                        color: Color(0xFF966FD6),
+                      ),
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileInterests()),);
                       },
-                      child: const Icon(LineAwesomeIcons.heart,
+                      child:
+
+                      const Icon(LineAwesomeIcons.heart,
                         size: 30,
                         color: Color(0xFFCF9FFF),),
                     ),
 
+                    SizedBox(width: 20,),
                     GestureDetector(
                       key: null,
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
                       },
-                      child: const Icon(LineAwesomeIcons.tools,
+                      child:
+                      const Icon(Icons.settings,
                         size: 30,
                         color: Color(0xFFCF9FFF),),
                     ),
@@ -149,6 +159,13 @@ class ProfileBio extends StatelessWidget {
               DetailsRow(title: 'UserName', value: 'Senudi Dias', iconData: Icons.person_outline,),
               DetailsRow(title: 'PhoneNumber', value: '071 234 5678', iconData: Icons.phone_outlined,),
               DetailsRow(title: 'Email', value: 'senudi.20210388@iit.ac.lk', iconData: Icons.email_outlined,),
+
+
+
+
+
+
+
             ]
 
 
@@ -170,6 +187,9 @@ class ProfileBio extends StatelessWidget {
 
 
 }
+
+
+
 
 
 class DetailsRow extends StatelessWidget{

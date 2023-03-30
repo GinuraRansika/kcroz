@@ -129,32 +129,14 @@ class _AdditionalStepState extends State<AdditionalStep> {
                 SizedBox.fromSize(size: Size(0, 50)),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20.0), //or 15.0
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 150.0,
-                        width: 150.0,
-                        color: Color(0xFF966FD6),
-                        child: Image.network(
-                          'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-
-                      Positioned(
-                        top: 100,
-                          left: 100,
-                          child: IconButton(
-                            onPressed: () {
-                              selectProfilePic();
-                            },
-                            icon: const Icon(
-                              Icons.add_circle_outlined,
-                              size: 30,
-                            ),
-                          )
-                      ),
-                    ],
+                  child: Container(
+                    height: 150.0,
+                    width: 150.0,
+                    color: Color(0xFF966FD6),
+                    child: Image.network(
+                      'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
 
@@ -215,56 +197,64 @@ class _AdditionalStepState extends State<AdditionalStep> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(width: 0,),
                       GestureDetector(
                         key: null,
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>AdditionalStep()),);
                         },
-                        child: const Icon(LineAwesomeIcons.camera,
+                        child:
+
+                        const Icon(LineAwesomeIcons.camera,
                           size: 30,
                           color: Color(0xFF966FD6),
-
                         ),
-
                       ),
 
+                      SizedBox(width: 20,),
                       GestureDetector(
                         key: null,
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileBio()),);
                         },
-                        child: const Icon(LineAwesomeIcons.user_circle,
+                        child:
+                        const Icon(LineAwesomeIcons.user_circle,
+
                           size: 30,
-                          color: Color(0xFFCF9FFF),),
+                          color: Color(0xFFCF9FFF),
+                        ),
                       ),
 
+                      SizedBox(width: 20,),
                       GestureDetector(
                         key: null,
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileInterests()),);
                         },
-                        child: const Icon(LineAwesomeIcons.heart,
+                        child:
+
+                        const Icon(LineAwesomeIcons.heart,
                           size: 30,
                           color: Color(0xFFCF9FFF),),
                       ),
 
+                      SizedBox(width: 20,),
                       GestureDetector(
                         key: null,
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
                         },
-                        child: const Icon(LineAwesomeIcons.tools,
+                        child:
+                        const Icon(Icons.settings,
                           size: 30,
                           color: Color(0xFFCF9FFF),),
                       ),
 
                     ]),
                 Column(
-
-
                     children: [
-                      SizedBox(height: 20,),
-                      Container(
+                      const SizedBox(height: 20,),
+                      SizedBox(
                         width: double.infinity,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
