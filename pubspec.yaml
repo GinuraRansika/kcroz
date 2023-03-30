@@ -61,6 +61,9 @@ flutter:
    - assets/logo/
    - assets/images/forget_password/
    - assets/images/profile_picture/default-profile-picture.png
+   - assets/images/profile_picture/pic2.jpg
+   - assets/images/profile_picture/pic3.jpg
+   - assets/images/profile_picture/profile_pic.jpg
    - assets/images/splash_screen/splash-screen-bottom1.png
    - assets/images/splash_screen/splash-screen-top.jpg
    - assets/images/backgrounds/
