@@ -88,11 +88,11 @@ class _check_n_scanState extends State<check_n_scan> {
 // // // Loop over the retrieved documents and add to the markers array by calling markers.add(radiusRange like below
 //     querySnapshot.docs.forEach((doc) {
 //       // Access the data for each user
-//       String name = doc.data()['name'];
+//       String name = doc.data()['username'];
 //       String email = doc.data()['email'];
 //       double olatitude = doc.data()['latitude'];
 //       double olongitude = doc.data()['longitude'];
-//        String profilePageUrl = doc.data()['profile_page_url'];
+//        String profilePageUrl = doc.data()['dpURL'];
 //       String profilePictureUrl = doc.data()['profile_picture_url'];
 //       markers.add(radiusRange(latitude, longtitude,
 //         olatitude,
