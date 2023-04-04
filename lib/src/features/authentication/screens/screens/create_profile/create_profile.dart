@@ -1,10 +1,13 @@
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gender_picker/gender_picker.dart';
+import 'package:gender_picker/source/enums.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/constants/creat_profile_text_string.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/create_profile/additional_step.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/create_profile/widget/gender_widget.dart';
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../common_widgets/text_field_input.dart';
 import '../../../../../constants/image_string.dart';
@@ -26,6 +29,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Uint8List? _image;
   int currentStep = 0;
   bool isCompleted = false;
+  String gender = "Male";
+  String sexualOrientation = "Female";
+
   DateTime _dateTime = DateTime.now();
 
   void selectImage() async {
@@ -48,8 +54,8 @@ class _CreateProfileState extends State<CreateProfile> {
         phoneNumber: controller.phoneNo.text.trim(),
         password: controller.password.text.trim(),
         religion: controller.religion.text.trim(),
-        gender: controller.gender.text.trim(),
-        sexualOrientation: controller.sexualOrientation.text.trim(),
+        gender: gender,
+        sexualOrientation: sexualOrientation,
         birthday:
             "${_dateTime.year}-"
             "${_dateTime.month.toString().length == 2? _dateTime.month : {'0${_dateTime.month}'}}-"
@@ -173,21 +179,11 @@ class _CreateProfileState extends State<CreateProfile> {
         return true;
       }
     }
-    else if(currentStep == 3){
-      if(controller.gender.text.isNotEmpty && controller.sexualOrientation.text.isNotEmpty) {
-        return true;
-      }
-    }
-    else if(currentStep == 4){
-      return true;
-    }
-    else if(currentStep == 5){
-        return true;
-    }
-    else if(currentStep == 6){
-        return true;
+    else if(currentStep == 3){return true;}
+    else if(currentStep == 4){return true;}
+    else if(currentStep == 5){return true;}
+    else if(currentStep == 6){return true;}
 
-    }
     else if(currentStep == 7){
       if(controller.interests.text.isNotEmpty) {
         return true;
@@ -296,7 +292,7 @@ class _CreateProfileState extends State<CreateProfile> {
                     style: Theme.of(context).textTheme.headline1,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 80,),
+                  const SizedBox(height: 30,),
                   // circular widget to add dp
                   Stack(
                     children: [
@@ -324,7 +320,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           )),
                     ],
                   ),
-                  const SizedBox(height: 80,),
+                  const SizedBox(height: 40,),
                 ],
               ),
             )
@@ -343,37 +339,23 @@ class _CreateProfileState extends State<CreateProfile> {
             kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
-            const FormHeaderWidget(
-              image: kcrozWelcomeScreenImage,
-              title: "I am",
-              subTitle: "",
-              imageHeight: 0.3,
-            ),
             Container(
-              padding: const EdgeInsets.only(top: kcrozDefaultSize - 20),
+              padding: const EdgeInsets.only(top: kcrozDefaultSize),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFieldInput(
-                    textEditingController: controller.gender,
-                    labelText: "Gender",
-                    prefixIcon: const Icon(Icons.hourglass_empty_rounded),
-                    hintText: "Gender",
-                    textInputType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 20,),
                   Text(
-                    "Interested In",
+                    "I'm a ",
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  genderWidget(false, true, gender, Gender.Male),
+                  const SizedBox(height: 40,),
+                  Text(
+                    "I'm Interested In",
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   const SizedBox(height: 20,),
-                  TextFieldInput(
-                    textEditingController: controller.sexualOrientation,
-                    labelText: "Sexual Orientation",
-                    prefixIcon: const Icon(Icons.heat_pump_rounded),
-                    hintText: "Sexual Orientation",
-                    textInputType: TextInputType.text,
-                  ),
+                  genderWidget(false, true, sexualOrientation, Gender.Female),
                 ],
               ),
             )
@@ -381,7 +363,6 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
-
 
     // Birthday
     Step(
@@ -561,3 +542,6 @@ class _CreateProfileState extends State<CreateProfile> {
 
   ];
 }
+
+
+
