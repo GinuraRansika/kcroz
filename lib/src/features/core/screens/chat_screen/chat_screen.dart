@@ -1,5 +1,3 @@
-import 'dart:html';
-
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -125,6 +123,4 @@ class ChatScreen extends StatelessWidget {
       ),
     );
   }
-
-  void setState(Null Function() param0) {}
 }
