@@ -30,8 +30,13 @@ class _CreateProfileState extends State<CreateProfile> {
   int currentStep = 0;
   bool isCompleted = false;
   String gender = "Male";
+  String drink = "No";
+  String smoke = "No";
+  String vegan = "No";
   String sexualOrientation = "Female";
-
+  List<bool> isDrinkSelected = [true, false];
+  List<bool> isSmokeSelected = [true, false];
+  List<bool> isDietSelected = [true, false];
   DateTime _dateTime = DateTime.now();
 
   void selectImage() async {
@@ -55,6 +60,12 @@ class _CreateProfileState extends State<CreateProfile> {
         password: controller.password.text.trim(),
         religion: controller.religion.text.trim(),
         gender: gender,
+        drink: drink,
+        smoke: smoke,
+        vegan: vegan,
+        occupation: controller.occupation.text.trim(),
+        university: controller.university.text.trim(),
+        college: controller.college.text.trim(),
         sexualOrientation: sexualOrientation,
         birthday:
             "${_dateTime.year}-"
@@ -181,8 +192,20 @@ class _CreateProfileState extends State<CreateProfile> {
     }
     else if(currentStep == 3){return true;}
     else if(currentStep == 4){return true;}
-    else if(currentStep == 5){return true;}
-    else if(currentStep == 6){return true;}
+    else if(currentStep == 5){
+      if(controller.university.text.isNotEmpty
+      && controller.college.text.isNotEmpty
+      && controller.occupation.text.isNotEmpty){
+        return true;
+      }
+    }
+
+    else if(currentStep == 6){
+      getSelectedItems(isDrinkSelected);
+      getSelectedItems(isSmokeSelected);
+      getSelectedItems(isDietSelected);
+      return true;
+    }
 
     else if(currentStep == 7){
       if(controller.interests.text.isNotEmpty) {
@@ -190,6 +213,18 @@ class _CreateProfileState extends State<CreateProfile> {
       }
     }
     return false;
+  }
+
+  getSelectedItems(array){
+    for(int index=0; index < array.length; index++){
+      if(array[index]){
+        if(index == 0){
+          print("No");
+        }else{
+          print("yes");
+        }
+      }
+    }
   }
 
   bool checkDark(){
@@ -345,13 +380,13 @@ class _CreateProfileState extends State<CreateProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "I'm a ",
+                    "${controller.fullName.text.trim()} is a ",
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   genderWidget(false, true, gender, Gender.Male),
                   const SizedBox(height: 40,),
                   Text(
-                    "I'm Interested In",
+                    "And Interested In",
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   const SizedBox(height: 20,),
@@ -418,33 +453,37 @@ class _CreateProfileState extends State<CreateProfile> {
           children: [
             const FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
-              title: "Occupation,University,College?",
+              title: "Additionally, My",
               subTitle: "",
-              imageHeight: 0.3,
+              imageHeight: 0.25,
             ),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("Occupation"),
-                      prefixIcon: Icon(Icons.cast_for_education),
-                    ),
+                  const SizedBox(height: 20,),
+                  TextFieldInput(
+                    textEditingController: controller.occupation,
+                    labelText: "Occupation",
+                    prefixIcon: const Icon(Icons.cast_for_education),
+                    hintText: "Occupation",
+                    textInputType: TextInputType.text,
                   ),
                   const SizedBox(height: 20,),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("University"),
-                      prefixIcon: Icon(Icons.book),
-                    ),
+                  TextFieldInput(
+                    textEditingController: controller.university,
+                    labelText: "University",
+                    prefixIcon: const Icon(Icons.book),
+                    hintText: "University",
+                    textInputType: TextInputType.text,
                   ),
                   const SizedBox(height: 20,),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("College"),
-                      prefixIcon: Icon(Icons.book_online_rounded),
-                    ),
+                  TextFieldInput(
+                    textEditingController: controller.college,
+                    labelText: "College",
+                    prefixIcon: const Icon(Icons.book_online_rounded),
+                    hintText: "College",
+                    textInputType: TextInputType.text,
                   ),
                 ],
               ),
@@ -464,37 +503,23 @@ class _CreateProfileState extends State<CreateProfile> {
             kcrozDefaultSize, 0, kcrozDefaultSize, 0),
         child: Column(
           children: [
-            const FormHeaderWidget(
+            FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
-              title: "Drink,Smoke, Diet?",
+              title: controller.fullName.text.trim(),
               subTitle: "",
-              imageHeight: 0.3,
+              imageHeight: 0.25,
             ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("Drink"),
-                      prefixIcon: Icon(Icons.local_drink),
-                    ),
-                  ),
+                  drinkWidget(),
                   const SizedBox(height: 20,),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("Smoke"),
-                      prefixIcon: Icon(Icons.smoke_free_rounded),
-                    ),
-                  ),
+                  smokeWidget(),
                   const SizedBox(height: 20,),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("Diet"),
-                      prefixIcon: Icon(Icons.food_bank_rounded),
-                    ),
-                  ),
+                  dietWidget(),
+                  const SizedBox(height: 20,),
                 ],
               ),
             )
@@ -539,9 +564,126 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
-
   ];
+
+
+
+  Widget drinkWidget(){
+    return Container(
+      child: ToggleButtons(
+        isSelected: isDrinkSelected,
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(Icons.no_drinks),
+                Text("Don't Drink",),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              children: [
+                Icon(Icons.local_drink),
+                Text(" Drink",),
+              ],
+            ),
+          ),
+        ],
+        onPressed: (int newIndex) {
+          setState(() {
+            for(int index=0; index < isDrinkSelected.length; index++){
+              if(index == newIndex){
+                isDrinkSelected[index] = true;
+              }else{
+                isDrinkSelected[index] = false;
+              }
+            }
+          });
+        },
+      ),
+    );
+  }
+
+
+  Widget smokeWidget(){
+    return Container(
+      child: ToggleButtons(
+        isSelected: isSmokeSelected,
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                Icon(Icons.smoke_free),
+                Text("Don't Smoke",),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 23),
+            child: Row(
+              children: [
+                Icon(Icons.smoking_rooms),
+                Text("Smoke",),
+              ],
+            ),
+          ),
+        ],
+        onPressed: (int newIndex) {
+          setState(() {
+            for(int index=0; index < isSmokeSelected.length; index++){
+              if(index == newIndex){
+                isSmokeSelected[index] = true;
+              }else{
+                isSmokeSelected[index] = false;
+              }
+            }
+          });
+        },
+      ),
+    );
+  }
+
+  Widget dietWidget(){
+    return Container(
+      child: ToggleButtons(
+        isSelected: isDietSelected,
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(Icons.egg_alt_outlined),
+                Text("Not Vegan",),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              children: [
+                Icon(Icons.energy_savings_leaf),
+                Text("Vegan",),
+              ],
+            ),
+          ),
+        ],
+        onPressed: (int newIndex) {
+          setState(() {
+            for(int index=0; index < isDietSelected.length; index++){
+              if(index == newIndex){
+                isDietSelected[index] = true;
+              }else{
+                isDietSelected[index] = false;
+              }
+            }
+          });
+        },
+      ),
+    );
+  }
 }
-
-
 
