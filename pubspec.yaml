@@ -42,6 +42,8 @@ dependencies:
   # Gender Picker
   gender_picker: ^1.1.0
 
+  group_button: ^5.2.2
+
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:get/get.dart';
+import 'package:group_button/group_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/constants/creat_profile_text_string.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/create_profile/additional_step.dart';
@@ -566,6 +567,21 @@ class _CreateProfileState extends State<CreateProfile> {
     ),
   ];
 
+  // Widget interest(){
+  //   return Container(
+  //     child: SingleChildScrollView(
+  //       child: Column(
+  //         children: [
+  //           GroupButton(
+  //             isRadio: false,
+  //             onSelected: (index, isSelected) => print('$index button is selected'),
+  //             buttons: ["12:00", "13:00", "14:30", "18:00", "19:00", "21:40", "22:00", "23:30"],
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   )
+  // }
 
 
   Widget drinkWidget(){
