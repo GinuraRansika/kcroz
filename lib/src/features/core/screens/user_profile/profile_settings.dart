@@ -9,6 +9,7 @@ import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart'
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../utils/utils.dart';
+import '../profile/update_profile_screen.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
@@ -33,12 +34,24 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   bool _isCallsAccountEnabled = true;
   bool _isDarkModeEnabled = false;
 
+  final ThemeData _lightTheme = ThemeData(
+    primarySwatch: Colors.purple,
+    brightness: Brightness.light,
+  );
 
+  final ThemeData _darkTheme = ThemeData(
+    primarySwatch: Colors.deepPurple,
+    brightness: Brightness.dark,
+  );
 
   @override
   Widget build(BuildContext context) {
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    return Scaffold(
+    return
+      MaterialApp(
+      theme: _isDarkModeEnabled ? _darkTheme : _lightTheme,
+      home:
+      Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
         leading: IconButton(
@@ -78,7 +91,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ElevatedButton(
                   onPressed: (){
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()),
+                      MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
                     );
                   },
                   style: ButtonStyle(
@@ -313,7 +326,8 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   value: _isDarkModeEnabled,
                   onChanged: (bool value) {
                     setState(() {
-                      _isDarkModeEnabled = value;
+                      _isDarkModeEnabled = !_isDarkModeEnabled;
+                      // _isDarkModeEnabled = value;
                     });
                   },
                 ),
@@ -830,6 +844,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
               ]),
         ),
+    ),
     );
   }
 }
