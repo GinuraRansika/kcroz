@@ -4,9 +4,9 @@ import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
-void main() => runApp(Quizzler());
+void main() => runApp(Quiz1());
 
-class Quizzler extends StatelessWidget {
+class Quiz1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
