@@ -87,6 +87,16 @@ class UpdateProfileScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done){
                 if(snapshot.hasData){
                   UserModel userData = snapshot.data as UserModel;
+
+                  final userName = TextEditingController(text: userData.username);
+                  final email = TextEditingController(text: userData.email);
+                  final phoneNumber = TextEditingController(text: userData.phoneNumber);
+                  final religion = TextEditingController(text: userData.religion);
+                  final gender = TextEditingController(text: userData.gender);
+                  final birthday = TextEditingController(text: userData.birthday);
+                  final interests = TextEditingController(text: userData.interests);
+                  final sexualOrientation = TextEditingController(text: userData.sexualOrientation);
+
                   return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,8 +156,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         Form(child: Column(
                             children: [
                               TextFormField(
-                                controller: controller.userName,
-                                initialValue: userData.username,
+                                controller: userName,
                                 decoration: const InputDecoration(
                                     label: Text("User Name"), prefixIcon: Icon(LineAwesomeIcons.user)
                                 ),
@@ -156,8 +165,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.email,
-                                initialValue: userData.email,
+                                controller: email,
                                 decoration: const InputDecoration(
                                     label: Text("Email"), prefixIcon: Icon(LineAwesomeIcons.envelope_1)
                                 ),
@@ -166,8 +174,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.phoneNumber,
-                                initialValue: userData.phoneNumber,
+                                controller: phoneNumber,
                                 decoration: const InputDecoration(
                                     label: Text("Phone Number"), prefixIcon: Icon(LineAwesomeIcons.phone)
                                 ),
@@ -176,8 +183,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.religion,
-                                initialValue: userData.religion,
+                                controller: religion,
                                 decoration: const InputDecoration(
                                     label: Text("Religion"), prefixIcon: Icon(LineAwesomeIcons.church)
                                 ),
@@ -186,8 +192,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.gender,
-                                initialValue: userData.gender,
+                                controller: gender,
                                 decoration: const InputDecoration(
                                     label: Text("Gender"), prefixIcon: Icon(LineAwesomeIcons.genderless)
                                 ),
@@ -196,8 +201,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.birthday,
-                                initialValue: userData.birthday,
+                                controller: birthday,
                                 decoration: const InputDecoration(
                                     label: Text("Birthday"), prefixIcon: Icon(LineAwesomeIcons.calendar)
                                 ),
@@ -206,8 +210,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.interests,
-                                initialValue: userData.interests,
+                                controller: interests,
                                 decoration: const InputDecoration(
                                     label: Text("Interests"), prefixIcon: Icon(LineAwesomeIcons.heart)
                                 ),
@@ -216,8 +219,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               const SizedBox(height: 30),
 
                               TextFormField(
-                                controller: controller.sexualOrientation,
-                                initialValue: userData.sexualOrientation,
+                                controller: sexualOrientation,
                                 decoration: const InputDecoration(
                                     label: Text("Sexual Orientation"), prefixIcon: Icon(LineAwesomeIcons.heart_1)
                                 ),
@@ -228,19 +230,21 @@ class UpdateProfileScreen extends StatelessWidget {
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     final userData = UserModel(
-                                        uid: controller.email.text.trim(),
-                                        username: controller.userName.text.trim(),
-                                        email: controller.email.text.trim(),
-                                        phoneNumber: controller.phoneNumber.text.trim(),
-                                        dpURL: controller.email.text.trim(),
-                                        religion: controller.religion.text.trim(),
-                                        gender: controller.gender.text.trim(),
-                                        sexualOrientation: controller.sexualOrientation.text.trim(),
-                                        birthday: controller.birthday.text.trim(),
-                                        interests: controller.interests.text.trim(),
+                                        uid: email.text.trim(),
+                                        username: userName.text.trim(),
+                                        email: email.text.trim(),
+                                        phoneNumber: phoneNumber.text.trim(),
+                                        dpURL: email.text.trim(),
+                                        religion: religion.text.trim(),
+                                        gender: gender.text.trim(),
+                                        sexualOrientation: sexualOrientation.text.trim(),
+                                        birthday: birthday.text.trim(),
+                                        interests: interests.text.trim(),
                                         followers: []);
+
+                                    await controller.updateUserRecord(userData);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.purpleAccent,

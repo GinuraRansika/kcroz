@@ -8,14 +8,7 @@ import '../../../services/user_repository.dart';
 class ProfileController extends GetxController{
   static ProfileController get instance => Get.find();
 
-  final userName = TextEditingController();
-  final email = TextEditingController();
-  final phoneNumber = TextEditingController();
-  final religion = TextEditingController();
-  final gender = TextEditingController();
-  final birthday = TextEditingController();
-  final interests = TextEditingController();
-  final sexualOrientation = TextEditingController();
+
 
 
 
