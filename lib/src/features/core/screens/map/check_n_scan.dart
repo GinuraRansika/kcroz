@@ -235,7 +235,7 @@ class _check_n_scanState extends State<check_n_scan> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => const Home_page()),  //add profile page,profile picture from parameter here So can navigate to that Profile
+                builder: (BuildContext context) => const HomePage()),  //add profile page,profile picture from parameter here So can navigate to that Profile
           );
         },
         child: Container(

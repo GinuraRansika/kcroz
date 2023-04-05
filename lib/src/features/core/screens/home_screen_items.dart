@@ -5,7 +5,7 @@ import 'package:kcroz/src/features/core/screens/profile/profile_screen.dart';
 
 List<Widget> homeScreenItems = [
   Home_page(),
-  Center(child: Text("Game")),
-  Center(child: Text("Message")),
+  HomePageMap(),
+  const Center(child: Text("Message")),
   ProfileScreen(),
 ];
