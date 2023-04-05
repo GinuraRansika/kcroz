@@ -74,8 +74,8 @@ class _check_n_scanState extends State<check_n_scan> {
   void initState() {
 
     super.initState();
-    print(latitude);
-    getUsersByLocation(latitude, longtitude).then((querySnapshot) {
+    print('latitude');
+    getUsersByLocation(6.8627014, 79.8769743).then((querySnapshot) {
       // Handle the query results here
       usersSnapshot = querySnapshot;
     }).catchError((error) {
@@ -101,6 +101,9 @@ class _check_n_scanState extends State<check_n_scan> {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('uid', isNotEqualTo: uid)
+          // .where('location', isGreaterThanOrEqualTo: GeoPoint(latitude-0.00018, longitude-0.00018), isLessThanOrEqualTo: GeoPoint(latitude+0.00018, longitude+0.00018))
+          // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018, isLessThanOrEqualTo: latitude+0.00018)
+          // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018, isLessThanOrEqualTo: longitude+0.00018)
           // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018)
           // .where('latitude', isLessThanOrEqualTo: latitude+0.00018)
           // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018)
@@ -158,7 +161,7 @@ class _check_n_scanState extends State<check_n_scan> {
       double userLati, double userLongi, double lat, double long,String profilePageUrl,String profilePictureUrl) {  //Add profile page as a parameter
     double markerPosX = 0;
     double markerPosY = 0;
-    if (userLati != null && userLongi != null && lat != null && long != null && profilePictureUrl != null){
+    if (userLati != null && userLongi != null && lat != null && long != null && profilePictureUrl != null && lat >= userLati-0.00018 && lat <= userLati+0.00018 && long >= userLongi-0.00018 && long <= userLongi+0.00018){
       print('radiusRange');
       //In a for loop , loop over every user in firestore
       // double rangeLatiPlus = userLati + 0.00018;
@@ -192,38 +195,9 @@ class _check_n_scanState extends State<check_n_scan> {
       double markerDistanceY =
           boxY * oneBoxLenght; //distance in cm from center in y axis
 
-      markerPosX = centerX + markerDistanceX * 10;
-      markerPosY = centerY + markerDistanceY * 10;
+      markerPosX = centerX + markerDistanceX * 3;
+      markerPosY = centerY + markerDistanceY * 3;
 
-      // if ((rangeLatiMinus < lat && lat < rangeLatiPlus) &&
-      //     (long > rangeLongiMinus && long < rangeLongiPlus)) {
-      //   //Access User's datas
-      //   //Get the user's phone display details
-      //   ui.Size screenSize = MediaQuery.of(context).size;
-      //   double screenWidthPx = screenSize.width;
-      //   double screenHeightPx = screenSize.height;
-      //   double screenDensity = MediaQuery.of(context).devicePixelRatio;
-      //   double screenWidthCm = screenWidthPx / (screenDensity * 2.54);
-      //   double screenHeightCm = screenHeightPx / (screenDensity * 2.54);
-      //   double centerX = screenWidthPx / 2;
-      //   double centerY = screenHeightPx / 2;
-      //   double oneBoxLenght = screenWidthCm / 40;
-      //   //Check the user's distance from the center
-      //   //Check how boxes need to move
-      //   //Calculate 1 box lenght by phone lenght
-      //   //display he marker according to chatGPT
-      //   //attach the user profie link to the marker
-      //
-      //   boxX = ((lat - userLati) / 0.000009).round();
-      //   boxY = ((long - userLongi) / 0.000009).round();
-      //   double markerDistanceX =
-      //       boxX * oneBoxLenght; //distance in cm from center in x axis
-      //   double markerDistanceY =
-      //       boxY * oneBoxLenght; //distance in cm from center in y axis
-      //
-      //   markerPosX = centerX + markerDistanceX * 6;
-      //   markerPosY = centerY + markerDistanceY * 6;
-      // }
     }
 
     return Positioned(
@@ -239,8 +213,8 @@ class _check_n_scanState extends State<check_n_scan> {
           );
         },
         child: Container(
-          width: 30,
-          height: 30,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
