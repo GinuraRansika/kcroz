@@ -57,6 +57,7 @@ class _Home_pageState extends State<Home_page>{
         FirebaseFirestore.instance.collection('users').doc(userId).update({
           'latitude': _currentPosition!.latitude,
           'longitude': _currentPosition!.longitude,
+          'altitude':_currentPosition!.altitude,
           'timestamp': FieldValue.serverTimestamp(),
         });
       }
