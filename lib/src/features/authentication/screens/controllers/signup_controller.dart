@@ -13,7 +13,6 @@ class SignUpController extends GetxController{
   final password = TextEditingController();
   final fullName = TextEditingController();
   final religion = TextEditingController();
-  final interests = TextEditingController();
   final occupation = TextEditingController();
   final university = TextEditingController();
   final college = TextEditingController();

@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: const CreateProfile(),
+        home: const SplashScreen(),
         // routes: const {},
       ),
     );

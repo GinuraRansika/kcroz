@@ -70,7 +70,7 @@ class FirebaseAuthMethods {
     required String college,
     required String sexualOrientation,
     required String birthday,
-    required String interests,
+    required List interests,
     required Uint8List file,
     required BuildContext context,
   }) async {
@@ -86,7 +86,6 @@ class FirebaseAuthMethods {
           && smoke.isNotEmpty
           && vegan.isNotEmpty
           && birthday.isNotEmpty
-          && interests.isNotEmpty
           && file != null
           && sexualOrientation.isNotEmpty ) {
         // Register the user

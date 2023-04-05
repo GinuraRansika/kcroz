@@ -13,7 +13,7 @@ class UserModel {
   final String vegan;
   final String sexualOrientation;
   final String birthday;
-  final String interests;
+  final List interests;
   final String occupation;
   final String university;
   final String college;

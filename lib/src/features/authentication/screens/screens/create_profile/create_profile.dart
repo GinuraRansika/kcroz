@@ -40,6 +40,10 @@ class _CreateProfileState extends State<CreateProfile> {
   List<bool> isDietSelected = [true, false];
   DateTime _dateTime = DateTime.now();
 
+  List<String> interestList =  ["Sports", "Movies", "Pets", "Traveling", "Food & Drinks", "Music", "Reading", "Creativity", "Tech",];
+  List<String> selectedInterestList =  [];
+  int maxInterest = 5;
+
   void selectImage() async {
     Uint8List image = await pickImage(ImageSource.gallery);
     setState(() {
@@ -72,7 +76,7 @@ class _CreateProfileState extends State<CreateProfile> {
             "${_dateTime.year}-"
             "${_dateTime.month.toString().length == 2? _dateTime.month : {'0${_dateTime.month}'}}-"
             "${_dateTime.day.toString().length == 2? _dateTime.day : {'0${_dateTime.day}'}}",
-        interests: controller.interests.text.trim(),
+        interests: selectedInterestList,
         file: _image!,
         context: context);
 
@@ -202,29 +206,25 @@ class _CreateProfileState extends State<CreateProfile> {
     }
 
     else if(currentStep == 6){
-      getSelectedItems(isDrinkSelected);
-      getSelectedItems(isSmokeSelected);
-      getSelectedItems(isDietSelected);
+      getSelectedItems(isDrinkSelected,drink);
+      getSelectedItems(isSmokeSelected, smoke);
+      getSelectedItems(isDietSelected, vegan);
       return true;
     }
 
     else if(currentStep == 7){
-      if(controller.interests.text.isNotEmpty) {
+      if(selectedInterestList.isNotEmpty) {
         return true;
       }
     }
     return false;
   }
 
-  getSelectedItems(array){
-    for(int index=0; index < array.length; index++){
-      if(array[index]){
-        if(index == 0){
-          print("No");
-        }else{
-          print("yes");
-        }
-      }
+  getSelectedItems(array, option){
+    if(array[0] == true){
+      option = "No";
+    }else{
+      option = "Yes";
     }
   }
 
@@ -538,26 +538,59 @@ class _CreateProfileState extends State<CreateProfile> {
         padding: const EdgeInsets.fromLTRB(
             kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormHeaderWidget(
-              image: kcrozWelcomeScreenImage,
-              title: "My Interests are",
-              subTitle:
-              "We protect our community by making sure everyone on Kcroz is real.",
-              imageHeight: 0.3,
+            Text(
+              "Interests?",
+              style: Theme.of(context).textTheme.headline1,
+              textAlign: TextAlign.left,
             ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFieldInput(
-                    textEditingController: controller.interests,
-                    labelText: "Interests",
-                    prefixIcon: const Icon(Icons.sports_cricket),
-                    hintText: "Interests",
-                    textInputType: TextInputType.text,
-                  ),
+                  Container(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20,),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: GroupButton(
+                              options: GroupButtonOptions(
+                                buttonHeight: 50,
+                                spacing: 10,
+                                runSpacing: 10,
+                                  textPadding: const EdgeInsets.symmetric(horizontal: 20),
+                                groupingType: GroupingType.wrap,
+                                direction: Axis.horizontal,
+                                borderRadius: BorderRadius.circular(25),
+                                selectedTextStyle: const TextStyle(color: Colors.white),
+                                unselectedTextStyle: const TextStyle(color: Colors.white)
+                              ),
+                              buttons: interestList,
+                              isRadio: false,
+                              onSelected: (index, isSelected, booleanValue){
+                                if(booleanValue){
+                                  selectedInterestList.add(index);
+                                }else{
+                                  selectedInterestList.remove(index);
+                                }
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                  // TextFieldInput(
+                  //   textEditingController: controller.interests,
+                  //   labelText: "Interests",
+                  //   prefixIcon: const Icon(Icons.sports_cricket),
+                  //   hintText: "Interests",
+                  //   textInputType: TextInputType.text,
+                  // ),
                 ],
               ),
             )
@@ -568,19 +601,6 @@ class _CreateProfileState extends State<CreateProfile> {
   ];
 
   // Widget interest(){
-  //   return Container(
-  //     child: SingleChildScrollView(
-  //       child: Column(
-  //         children: [
-  //           GroupButton(
-  //             isRadio: false,
-  //             onSelected: (index, isSelected) => print('$index button is selected'),
-  //             buttons: ["12:00", "13:00", "14:30", "18:00", "19:00", "21:40", "22:00", "23:30"],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   )
   // }
 
 
