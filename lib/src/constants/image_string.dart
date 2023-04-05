@@ -30,6 +30,7 @@ const String kcrozNameLightDoodle = "assets/images/doodles/name light.png";
 const String kcrozNameDarkDoodle = "assets/images/doodles/name dark.png";
 
 
-// Create Profile Image
+// Feed Images
+const String kcrozDefaultFeedImage = "assets/images/feed_images/feed_background.png";
 
 

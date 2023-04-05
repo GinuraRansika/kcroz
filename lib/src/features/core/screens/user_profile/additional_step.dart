@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,9 +12,6 @@ import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
 
-import '../../../../../constants/image_string.dart';
-import '../../../../../utils/utils.dart';
-
 class AdditionalStep extends StatefulWidget {
   AdditionalStep({Key? key}) : super(key: key);
 
@@ -24,39 +19,16 @@ class AdditionalStep extends StatefulWidget {
   @override
   State<AdditionalStep> createState() => _AdditionalStepState();
 
-
-  // final List<ImageProvider> _imageProviders = [
-  //   Image.network(
-  //       "https://i12.haber7.net//haber/haber7/og_image/2022/22/hande_ercelden_sert_cikis_kadinlara_yuklenmeyin_1654068467_3687.jpg")
-  //       .image,
-  //   Image.network(
-  //       "https://los40es00.epimg.net/los40/imagenes/2021/08/11/cinetv/1628672548_463726_1628675121_noticia_normal_amp.jpg")
-  //       .image,
-  //   Image.network(
-  //       "https://www.chafarderias.com/uploads/s1/17/08/69/hande-ercel.jpeg")
-  //       .image,
-  //   Image.network(
-  //       "https://nubiapage.com/wp-content/uploads/cbfd5a971ff66f9e0439eaf447227aff-1-531x744.jpg")
-  //       .image
-  // ];
-
 }
 
 
 class _AdditionalStepState extends State<AdditionalStep> {
   final List<Uint8List> _imageList = [];
-  Uint8List? _profilePic;
   Uint8List? _feedImage01;
   Uint8List? _feedImage02;
   Uint8List? _feedImage03;
   Uint8List? _feedImage04;
 
-  void selectProfilePic() async{
-    Uint8List image = await pickImage(ImageSource.gallery);
-    setState(() {
-      _profilePic = image;
-    });
-  }
 
   void selectFeedImage01() async {
     Uint8List image = await pickImage(ImageSource.gallery);

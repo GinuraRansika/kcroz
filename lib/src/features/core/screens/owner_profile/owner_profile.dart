@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -214,7 +212,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                               width: width * 0.43,
                               height: 200,
                               fit: BoxFit.cover,
-                              image: const AssetImage(kcrozOnBoardingImage1)
+                              image: const AssetImage(kcrozDefaultFeedImage)
                           ):
                           Image(
                               width: width * 0.43,
@@ -236,7 +234,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                                 width: width * 0.43,
                                 height: 150,
                                 fit: BoxFit.cover,
-                                image: const AssetImage(kcrozOnBoardingImage1)
+                                image: const AssetImage(kcrozDefaultFeedImage)
                             ):
                             Image(
                                 width: width * 0.43,
@@ -262,7 +260,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                                 width: width * 0.43,
                                 height: 150,
                                 fit: BoxFit.cover,
-                                image: const AssetImage(kcrozOnBoardingImage1)
+                                image: const AssetImage(kcrozDefaultFeedImage)
                             ):
                             Image(
                                 width: width * 0.43,
@@ -284,7 +282,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                                 width: width * 0.43,
                                 height: 200,
                                 fit: BoxFit.cover,
-                                image: const AssetImage(kcrozOnBoardingImage1)
+                                image: const AssetImage(kcrozDefaultFeedImage)
                             ):
                             Image(
                                 width: width * 0.43,
