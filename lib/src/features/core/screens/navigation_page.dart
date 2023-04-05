@@ -59,7 +59,7 @@ class _NavigationPageState extends State<NavigationPage> {
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
           children: homeScreenItems = [
-            HomePage(),
+            Home_page(),
             HomePageMap(),
             const Center(child: Text("Message")),
             OwnerProfileScreen(user: _user,),
