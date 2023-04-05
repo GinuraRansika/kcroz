@@ -31,7 +31,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  
   int questionNumber = 0;
 
 
@@ -65,7 +64,9 @@ class _QuizPageState extends State<QuizPage> {
       children: <Widget>[
         Container(color: Colors.deepPurple.shade900 ,
           width: double.infinity,
-          child: Image.network('https://static.vecteezy.com/system/resources/thumbnails/001/991/202/small/realistic-isolated-neon-sign-of-question-template-decoration-and-covering-on-the-wall-background-vector.jpg'),),
+          child: Image.asset('assets/images/Quiz/bgimg1.jpg',
+          fit: BoxFit.fill,),
+        ),
         Expanded(
           flex: 5,
           child: Padding(
@@ -138,9 +139,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
