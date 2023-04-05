@@ -39,5 +39,9 @@ class UserRepository extends GetxController{
     return userData;
   }
 
+  Future<void> updateUserRecord (UserModel user) async{
+    await _database.collection("user").doc(user.uid).update(user.toJson());
+  }
+
 
 }

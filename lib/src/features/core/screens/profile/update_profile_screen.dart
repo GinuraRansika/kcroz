@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
+import 'package:kcroz/src/features/core/controllers/profile_controller.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -54,7 +56,9 @@ class UpdateProfileScreen extends StatelessWidget {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProfileController());
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
@@ -77,114 +81,222 @@ class UpdateProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child:
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox.fromSize(size: Size(0, 50)),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0), //or 15.0
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 150.0,
-                        width: 150.0,
-                        color: Color(0xFF966FD6),
-                        child: Image.network(
-                          'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+          FutureBuilder(
+            future: controller.getAllUser(),
+            builder: (context,snapshot){
+              if (snapshot.connectionState == ConnectionState.done){
+                if(snapshot.hasData){
+                  UserModel userData = snapshot.data as UserModel;
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox.fromSize(size: Size(0, 50)),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0), //or 15.0
+                          child: Stack(
+                            children: [
+                              Container(
+                                height: 150.0,
+                                width: 150.0,
+                                color: Color(0xFF966FD6),
+                                child: Image.network(
+                                  'https://blogger.googleusercontent.com/img/a/AVvXsEjA3yU3DQvoZfKBHzkcIumfUyxaUYDVVWSQcu5ikh8PW_UQx_wxTNivemQn1MY1TsjvFVDesueMPmTk-FWnYErepqHjvi9Ni4hSTvhlNfFIBsOLYjCnfq4sxeTkVNPjm7GApYXQSRd3Bwe7I06FqWu8Ja2W7VM7nsJf-ZwO59ckAJvjD2_cI0TjEwVE=s895',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
 
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            // border: Border.all(
-                            //   width: 4,
-                            //   color: Colors.white
-                            // ),
-                            color: Color(0xFFCF9FFF),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    // border: Border.all(
+                                    //   width: 4,
+                                    //   color: Colors.white
+                                    // ),
+                                    color: Color(0xFFCF9FFF),
+                                  ),
+                                  child: IconButton(
+                                    onPressed: (){
+                                      selectProfilePic();
+                                    },
+                                    icon: const Icon(Icons.edit,color: Colors.white,),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          child: IconButton(
-                            onPressed: (){
-                              selectProfilePic();
-                            },
-                            icon: const Icon(Icons.edit,color: Colors.white,),
-                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
 
-                // SizedBox.fromSize(size: Size(10, 10)),
+                        // SizedBox.fromSize(size: Size(10, 10)),
 
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   mainAxisSize: MainAxisSize.max,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   mainAxisSize: MainAxisSize.max,
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        // ),
 
-                const SizedBox(height: 50,),
+                        const SizedBox(height: 30,),
 
-                Form(child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        label: Text("tFullName"), prefixIcon: Icon(LineAwesomeIcons.user)
-                      ),
-                    ),
+                        Form(child: Column(
+                            children: [
+                              TextFormField(
+                                controller: controller.userName,
+                                initialValue: userData.username,
+                                decoration: const InputDecoration(
+                                    label: Text("User Name"), prefixIcon: Icon(LineAwesomeIcons.user)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.email,
+                                initialValue: userData.email,
+                                decoration: const InputDecoration(
+                                    label: Text("Email"), prefixIcon: Icon(LineAwesomeIcons.envelope_1)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.phoneNumber,
+                                initialValue: userData.phoneNumber,
+                                decoration: const InputDecoration(
+                                    label: Text("Phone Number"), prefixIcon: Icon(LineAwesomeIcons.phone)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.religion,
+                                initialValue: userData.religion,
+                                decoration: const InputDecoration(
+                                    label: Text("Religion"), prefixIcon: Icon(LineAwesomeIcons.church)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.gender,
+                                initialValue: userData.gender,
+                                decoration: const InputDecoration(
+                                    label: Text("Gender"), prefixIcon: Icon(LineAwesomeIcons.genderless)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.birthday,
+                                initialValue: userData.birthday,
+                                decoration: const InputDecoration(
+                                    label: Text("Birthday"), prefixIcon: Icon(LineAwesomeIcons.calendar)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.interests,
+                                initialValue: userData.interests,
+                                decoration: const InputDecoration(
+                                    label: Text("Interests"), prefixIcon: Icon(LineAwesomeIcons.heart)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              TextFormField(
+                                controller: controller.sexualOrientation,
+                                initialValue: userData.sexualOrientation,
+                                decoration: const InputDecoration(
+                                    label: Text("Sexual Orientation"), prefixIcon: Icon(LineAwesomeIcons.heart_1)
+                                ),
+                              ),
+
+                              const SizedBox(height: 30),
+
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    final userData = UserModel(
+                                        uid: controller.email.text.trim(),
+                                        username: controller.userName.text.trim(),
+                                        email: controller.email.text.trim(),
+                                        phoneNumber: controller.phoneNumber.text.trim(),
+                                        dpURL: controller.email.text.trim(),
+                                        religion: controller.religion.text.trim(),
+                                        gender: controller.gender.text.trim(),
+                                        sexualOrientation: controller.sexualOrientation.text.trim(),
+                                        birthday: controller.birthday.text.trim(),
+                                        interests: controller.interests.text.trim(),
+                                        followers: []);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.purpleAccent,
+                                    side: BorderSide.none,
+                                    shape: const StadiumBorder()
+                                  ),
+
+                                  child: const Text('Save', style: TextStyle(color: Colors.black),),
+                                ),
+                              )
 
 
-                    const SizedBox(height: 50),
-
-
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          label: Text("tFullName"), prefixIcon: Icon(LineAwesomeIcons.user)
-                      ),
-                    ),
-
-
-                  ]
-                ))
+                            ]
+                        ))
 
 
 
-                // Container(
-                //   padding: const EdgeInsets.all(15),
-                //   child: Row(
-                //     children: [
-                //       Expanded(
-                //           child: ElevatedButton(
-                //             onPressed: () {
-                //               Get.to(() => const ProfileSettings());
-                //             },
-                //             child: Text("Back"),
-                //           )
-                //       ),
-                //       const SizedBox(width: 10,),
-                //       Expanded(
-                //           child: ElevatedButton(
-                //             onPressed: () {
-                //               saveEdits();
-                //             },
-                //             child: Text("Save"),
-                //           )
-                //       ),
-                //     ],
-                //
-                //   ),
-                // )
+                        // Container(
+                        //   padding: const EdgeInsets.all(15),
+                        //   child: Row(
+                        //     children: [
+                        //       Expanded(
+                        //           child: ElevatedButton(
+                        //             onPressed: () {
+                        //               Get.to(() => const ProfileSettings());
+                        //             },
+                        //             child: Text("Back"),
+                        //           )
+                        //       ),
+                        //       const SizedBox(width: 10,),
+                        //       Expanded(
+                        //           child: ElevatedButton(
+                        //             onPressed: () {
+                        //               saveEdits();
+                        //             },
+                        //             child: Text("Save"),
+                        //           )
+                        //       ),
+                        //     ],
+                        //
+                        //   ),
+                        // )
 
 
-              ]),
+                      ]);
+                } else if(snapshot.hasError){
+                  return Center(child: Text(snapshot.error.toString()),);
+                } else {
+                  return const Center(child: Text('Something went wrong'),);
+                }
+              }else{
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+
+          ),
         ),
       ),
     );
