@@ -48,9 +48,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return
-      MaterialApp(
-      theme: _isDarkModeEnabled ? _darkTheme : _lightTheme,
-      home:
+      // MaterialApp(
+      // theme: _isDarkModeEnabled ? _darkTheme : _lightTheme,
+      // home:
       Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
@@ -844,7 +844,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
               ]),
         ),
-    ),
+    // ),
     );
   }
 }

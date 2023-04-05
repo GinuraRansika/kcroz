@@ -14,6 +14,7 @@ import 'package:kcroz/src/features/core/screens/chat_screen/chat_screen.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
 import 'package:kcroz/src/features/core/screens/profile/profile_screen.dart';
 import 'package:kcroz/src/features/core/screens/profile/update_profile_screen.dart';
+import 'package:kcroz/src/features/core/screens/settings/side_settings.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/connections.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/language_settings.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: ProfileFeed(),
+        home: SideSettings(),
         // routes: const {},
       ),
     );

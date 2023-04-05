@@ -11,6 +11,7 @@ import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../constants/image_string.dart';
 import '../../../../utils/utils.dart';
+import '../settings/side_settings.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
@@ -247,7 +248,7 @@ class _ProfileFeedState extends State<ProfileFeed> {
                       GestureDetector(
                         key: null,
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileSettings()),);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SideSettings()),);
                         },
                         child:
                         const Icon(Icons.settings,
