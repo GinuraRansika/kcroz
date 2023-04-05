@@ -251,11 +251,13 @@ class _AdditionalStepState extends State<AdditionalStep> {
                   child: Row(
                     children: [
                       Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.to(() => const NavigationPage());
-                            },
-                            child: Text("Skip"),
+                          child: Center(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => const NavigationPage());
+                              },
+                              child: Text("Skip"),
+                            ),
                           )
                       ),
                       const SizedBox(width: 10,),
