@@ -1,5 +1,4 @@
 import 'questions1.dart';
-import 'questions1.dart';
 
 class QuizBrain{
   int _questionNumber = 0;
@@ -19,6 +18,12 @@ class QuizBrain{
     Question(q: 'Infants have more bones than adults.',a:true),
     Question(q: 'Cheesecake comes from Italy.',a:false),
     Question(q: 'The U.S. and Canada celebrate Thanksgiving on the same day.',a:false),
+    Question(q: 'Vanilla is the world’s most expensive spice.',a:false),
+    Question(q: 'Pineapples grow on trees.',a:false),
+    Question(q: 'The U.S. and Canada celebrate Thanksgiving on the same day.',a:false),
+    Question(q: 'The Harry Potter film, Chamber of Secrets, is the longest film of the Harry Potter movies.',a:true),
+
+
 
 
   ];
@@ -26,6 +31,8 @@ class QuizBrain{
   void nextQuestion(){
     if (_questionNumber < (questionBank.length - 1)){
       _questionNumber++;
+
+
     }
 
 

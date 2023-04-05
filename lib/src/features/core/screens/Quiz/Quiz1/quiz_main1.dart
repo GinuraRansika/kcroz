@@ -63,22 +63,26 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        Container(color: Colors.deepPurple.shade900 ,
+          width: double.infinity,
+          child: Image.network('https://static.vecteezy.com/system/resources/thumbnails/001/991/202/small/realistic-isolated-neon-sign-of-question-template-decoration-and-covering-on-the-wall-background-vector.jpg'),),
         Expanded(
           flex: 5,
           child: Padding(
             padding: EdgeInsets.all(10.0),
-            child: Center(
+            child:  Center(
               child: Text(
                 quizBrain.getQuestionText(questionNumber),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
+                  fontSize: 30.0,
+                  color: Colors.purple.shade400,
                 ),
               ),
             ),
           ),
         ),
+
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(15.0),
@@ -89,7 +93,7 @@ class _QuizPageState extends State<QuizPage> {
                 'True',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: 28.0,
                 ),
               ),
               onPressed: () {
@@ -112,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
               child: Text(
                 'False',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 28.0,
                   color: Colors.white,
                 ),
               ),
