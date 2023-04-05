@@ -608,7 +608,7 @@ class _CreateProfileState extends State<CreateProfile> {
     return Container(
       child: ToggleButtons(
         isSelected: isDrinkSelected,
-        children: const <Widget>[
+        children:  <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -648,7 +648,7 @@ class _CreateProfileState extends State<CreateProfile> {
     return Container(
       child: ToggleButtons(
         isSelected: isSmokeSelected,
-        children: const <Widget>[
+        children:  <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Row(
@@ -687,7 +687,7 @@ class _CreateProfileState extends State<CreateProfile> {
     return Container(
       child: ToggleButtons(
         isSelected: isDietSelected,
-        children: const <Widget>[
+        children:  <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
