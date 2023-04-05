@@ -53,83 +53,85 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // Section - 2 [ Form ]
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: kcrozDefaultSize - 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      const SizedBox(height: kcrozDefaultSize - 20,),
-                      TextButton(
-
-                        onPressed: () => pickCountry(),
-                        child: const Text("Pick Your Country")
-                      ),
-                      Row(
-                        children: [
-                          if(country != null)
-                            Container(
-                              alignment: Alignment.center,
-                              width: 40,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                  color: Colors.black87,
-                                  width: 2,
-                                )
+                  child: SizedBox(
+                    width: size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: kcrozDefaultSize - 20,),
+                        TextButton(
+                          onPressed: () => pickCountry(),
+                          child: const Text("Pick Your Country")
+                        ),
+                        Row(
+                          children: [
+                            if(country != null)
+                              Container(
+                                alignment: Alignment.center,
+                                width: size.width * 0.2,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                                  border: Border.all(
+                                    color: Colors.black87,
+                                    width: 2,
+                                  )
+                                ),
+                                margin: const EdgeInsets.only(right: 10),
+                                child: Text("+${country!.phoneCode}",)
                               ),
-                              margin: const EdgeInsets.only(right: 10),
-                              child: Text("+${country!.phoneCode}",)
-                            ),
-                          SizedBox(
-                            width: country == null ? size.width * 0.855 : size.width*0.74,
-                            child: TextFieldInput(
-                              textEditingController: controller.phoneNo,
-                              labelText: kcrozPhoneNo,
-                              prefixIcon: const Icon(Icons.numbers),
-                              hintText: kcrozPhoneNo,
-                              textInputType: TextInputType.phone,
-                            ),
-                          )
-                        ],
-                      ),
+                            SizedBox(
+                              width: country == null ? size.width * 0.70 : size.width*0.60,
+                              child: TextFieldInput(
+                                textEditingController: controller.phoneNo,
+                                labelText: kcrozPhoneNo,
+                                prefixIcon: const Icon(Icons.numbers),
+                                hintText: kcrozPhoneNo,
+                                textInputType: TextInputType.phone,
+                              ),
+                            )
+                          ],
+                        ),
 
-                      const SizedBox(height: kcrozDefaultSize - 20,),
-                      TextFieldInput(
-                        textEditingController: controller.email,
-                        labelText: kcrozEmail,
-                        prefixIcon: const Icon(Icons.email_outlined),
-                        hintText: kcrozEmail,
-                        textInputType: TextInputType.emailAddress,
-                      ),
-                      const SizedBox(height: kcrozDefaultSize - 20,),
-                      TextFieldInput(
-                        textEditingController: controller.password,
-                        labelText: kcrozPassword,
-                        prefixIcon: const Icon(Icons.fingerprint),
-                        hintText: kcrozPassword,
-                        textInputType: TextInputType.text,
-                      ),
-                      const SizedBox(height: kcrozDefaultSize - 10,),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed:  ()  {
-                              if(controller.email.text.isNotEmpty
-                                  && controller.phoneNo.text.isNotEmpty
-                                  && controller.password.text.isNotEmpty
-                                  && country != null){
-                                FirebaseAuthMethods().signInWithPhone(context, "+${country!.phoneCode}${controller.phoneNo.text}");
-                                Get.to(() => const CreateProfile());
-                              }else {
-                                Get.snackbar("Error", "Please Fill empty Fields",
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    backgroundColor: Colors.redAccent.withOpacity(0.2),
-                                    colorText: Colors.red);
-                              }
-                            },
-                            child: Text(kcrozSignup.toUpperCase())),
-                      )
-                    ],
+                        const SizedBox(height: kcrozDefaultSize - 20,),
+                        TextFieldInput(
+                          textEditingController: controller.email,
+                          labelText: kcrozEmail,
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          hintText: kcrozEmail,
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(height: kcrozDefaultSize - 20,),
+                        TextFieldInput(
+                          textEditingController: controller.password,
+                          labelText: kcrozPassword,
+                          prefixIcon: const Icon(Icons.fingerprint),
+                          hintText: kcrozPassword,
+                          isPassword: true,
+                          textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(height: kcrozDefaultSize - 10,),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              onPressed:  ()  {
+                                if(controller.email.text.isNotEmpty
+                                    && controller.phoneNo.text.isNotEmpty
+                                    && controller.password.text.isNotEmpty
+                                    && country != null){
+                                  FirebaseAuthMethods().signInWithPhone(context, "+${country!.phoneCode}${controller.phoneNo.text}");
+                                  Get.to(() => const CreateProfile());
+                                }else {
+                                  Get.snackbar("Error", "Please Fill empty Fields",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      backgroundColor: Colors.redAccent.withOpacity(0.2),
+                                      colorText: Colors.red);
+                                }
+                              },
+                              child: Text(kcrozSignup.toUpperCase())),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 // Section - 3 [ Footer ]

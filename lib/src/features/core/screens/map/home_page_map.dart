@@ -15,7 +15,7 @@ class HomePageMap extends StatefulWidget {
 }
 
 class _HomePageMapState extends State<HomePageMap> {
-  String  username = "";
+  String username = "";
 
   @override
   void initState() {
