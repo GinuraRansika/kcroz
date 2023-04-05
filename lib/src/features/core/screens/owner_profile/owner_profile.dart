@@ -1,15 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
-import '../../../../constants/image_string.dart';
-import '../../../../services/firebase_auth_methods.dart';
 import '../../../authentication/screens/models/user_model.dart';
-import '../profile/profile_bio.dart';
-import '../profile/profile_interest.dart';
 
 class OwnerProfileScreen extends StatefulWidget {
   final UserModel user;
+
+
   const OwnerProfileScreen({
         required this.user,
         Key? key}
@@ -23,10 +22,30 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
   bool isFeed = true;
   bool isInterests = false;
   bool isDetails = false;
+  String feedImage01URL = "";
+  String feedImage02URL = "";
+  String feedImage03URL = "";
+  String feedImage04URL = "";
+
 
   @override
   void initState() {
     super.initState();
+    getFeedImages();
+  }
+
+  void getFeedImages() async {
+    // snapshot of the current user's data from the firebase firestore database
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    setState(() {
+      feedImage01URL = (snapshot.data() as Map<String, dynamic>)['feedImage01URL'];
+      feedImage02URL = (snapshot.data() as Map<String, dynamic>)['feedImage02URL'];
+      feedImage03URL = (snapshot.data() as Map<String, dynamic>)['feedImage03URL'];
+      feedImage04URL = (snapshot.data() as Map<String, dynamic>)['feedImage04URL'];
+    });
   }
 
   @override
@@ -208,18 +227,23 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                         padding: const EdgeInsets.all(5),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(32),
-                          child: widget.user.feedImage01URL == "" ? Image(
+                          child: SizedBox(
                               width: width * 0.43,
                               height: 200,
-                              fit: BoxFit.cover,
-                              image: const AssetImage(kcrozDefaultFeedImage)
-                          ):
-                          Image(
-                              width: width * 0.43,
-                              height: 200,
-                              fit: BoxFit.cover,
-                              image: NetworkImage(widget.user.feedImage01URL)
-                          )                                                  ,
+                              child: Image.network(
+                                fit: BoxFit.cover,
+                                feedImage01URL,
+                                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                                    ),
+                                  );
+                                },
+                              )
+                          )                                                 ,
                         ),
                       ),
                     ],
@@ -230,17 +254,22 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                         padding: const EdgeInsets.all(5),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(32),
-                            child: widget.user.feedImage03URL  == "" ? Image(
+                            child:  SizedBox(
                                 width: width * 0.43,
                                 height: 150,
-                                fit: BoxFit.cover,
-                                image: const AssetImage(kcrozDefaultFeedImage)
-                            ):
-                            Image(
-                                width: width * 0.43,
-                                height: 150,
-                                fit: BoxFit.cover,
-                                image: NetworkImage(widget.user.feedImage03URL)
+                                child: Image.network(
+                                  fit: BoxFit.cover,
+                                  feedImage03URL,
+                                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                                      ),
+                                    );
+                                  },
+                                )
                             )
                         ),
                       ),
@@ -256,17 +285,22 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                         padding: const EdgeInsets.all(5),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(32),
-                            child: widget.user.feedImage02URL  == "" ? Image(
+                            child:  SizedBox(
                                 width: width * 0.43,
                                 height: 150,
-                                fit: BoxFit.cover,
-                                image: const AssetImage(kcrozDefaultFeedImage)
-                            ):
-                            Image(
-                                width: width * 0.43,
-                                height: 150,
-                                fit: BoxFit.cover,
-                                image: NetworkImage(widget.user.feedImage02URL)
+                                child: Image.network(
+                                  fit: BoxFit.cover,
+                                  feedImage02URL,
+                                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                                      ),
+                                    );
+                                  },
+                                )
                             )
                         ),
                       ),
@@ -278,17 +312,22 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                         padding: const EdgeInsets.all(5),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(32),
-                            child: widget.user.feedImage04URL  == "" ? Image(
-                                width: width * 0.43,
-                                height: 200,
+                            child: SizedBox(
+                              width: width * 0.43,
+                              height: 200,
+                              child: Image.network(
                                 fit: BoxFit.cover,
-                                image: const AssetImage(kcrozDefaultFeedImage)
-                            ):
-                            Image(
-                                width: width * 0.43,
-                                height: 200,
-                                fit: BoxFit.cover,
-                                image: NetworkImage(widget.user.feedImage04URL)
+                                feedImage04URL,
+                                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                                    ),
+                                  );
+                                },
+                              )
                             )
                         ),
                       ),
