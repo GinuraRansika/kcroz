@@ -38,6 +38,7 @@ dependencies:
   firebase_storage: ^11.0.14
   country_picker: ^2.0.20
   flutter_riverpod: ^2.3.0
+  rflutter_alert: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -62,3 +63,4 @@ flutter:
    - assets/images/splash_screen/splash-screen-top.jpg
    - assets/images/backgrounds/
    - assets/images/doodles/
+   - assets/images/Quiz/bgimg1.jpg
