@@ -19,10 +19,7 @@ import 'package:kcroz/src/features/core/screens/user_profile/connections.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/language_settings.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/profile_feed.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/editable_text_widget.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/profile_settings.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:kcroz/src/providers/user_provider.dart';
 import 'package:kcroz/src/router.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
@@ -69,7 +66,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.leftToRightWithFade,
         transitionDuration: const Duration(milliseconds: 500),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: SideSettings(),
+        home: ProfileSettings(),
         // routes: const {},
       ),
     );
