@@ -45,6 +45,7 @@ dependencies:
   gender_picker: ^1.1.0
 
   group_button: ^5.2.2
+  http: ^0.13.5
 
 
 dev_dependencies:
@@ -73,3 +74,4 @@ flutter:
    - assets/images/splash_screen/splash-screen-top.jpg
    - assets/images/backgrounds/
    - assets/images/doodles/
+   - assets/images/feed_images/feed-background.png

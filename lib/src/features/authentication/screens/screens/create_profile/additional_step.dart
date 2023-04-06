@@ -159,24 +159,6 @@ class _AdditionalStepState extends State<AdditionalStep> {
   }
 
 
-  Widget getImage(double width) {
-    if(_imageList.length == 0){
-      return Image(
-          width: width * 0.45,
-          height: 220,
-          fit: BoxFit.cover,
-          image: AssetImage(kcrozDefaultProfileImage)
-      );
-    } else{
-      return Image(
-          width: width * 0.45,
-          height: 220,
-          fit: BoxFit.cover,
-          image: AssetImage(kcrozOnBoardingImage1)
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -207,14 +189,14 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                     width: width * 0.45,
                                     height: 320,
                                     fit: BoxFit.cover,
-                                    image: const AssetImage(kcrozOnBoardingImage1)
+                                    image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                     width: width * 0.45,
                                     height: 320,
                                     fit: BoxFit.cover,
                                     image: MemoryImage(_feedImage01!)
-                                  )                                                  ,
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -242,7 +224,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 220,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -280,7 +262,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 220,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -314,7 +296,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 320,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -346,15 +328,6 @@ class _AdditionalStepState extends State<AdditionalStep> {
                   padding: const EdgeInsets.all(15),
                   child: Row(
                     children: [
-                      Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.to(() => const NavigationPage());
-                            },
-                            child: Text("Skip"),
-                          )
-                      ),
-                      const SizedBox(width: 10,),
                       Expanded(
                           child: ElevatedButton(
                             onPressed: () {
