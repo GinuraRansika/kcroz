@@ -19,18 +19,6 @@ class LoginFooterWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text("OR"),
-        const SizedBox(height: kcrozFormHeight - 20,),
-        SizedBox( // make it cover the complete screen
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            icon: const Image(image: AssetImage(kcrozGoogleLogoImage), width: 20.0,),
-            onPressed: () {
-              FirebaseAuthMethods().signInWithGoogle(context);
-            },
-            label: Text(kcrozSignInWithGoogle.toUpperCase()),
-          ),
-        ),
         const SizedBox(height: kcrozFormHeight - 20,),
         TextButton(
             onPressed: () {Get.to(() => const SignUpScreen());},

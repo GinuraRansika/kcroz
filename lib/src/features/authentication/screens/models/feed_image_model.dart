@@ -18,7 +18,7 @@ class FeedImageModel {
     "feedImage01URL" : feedImage01URL,
     "feedImage02URL" : feedImage02URL,
     "feedImage03URL" : feedImage03URL,
-    "feedImage04URL" : feedImage03URL,
+    "feedImage04URL" : feedImage04URL,
   };
 
   static FeedImageModel fromSnap(DocumentSnapshot snap) {

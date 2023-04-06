@@ -1,7 +1,11 @@
+import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/features/core/screens/navigation_page.dart';
@@ -19,6 +23,98 @@ class AdditionalStep extends StatefulWidget {
 }
 
 class _AdditionalStepState extends State<AdditionalStep> {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  late Position _currentPosition;
+  final Geolocator _geolocator = Geolocator();
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+    // Update the user's location every minute
+    Timer.periodic(Duration(minutes: 1), (Timer t) => _updateUserLocation());
+  }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _positionStreamSubscription?.cancel();
+  // }
+
+  void _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+    setState(() {
+      _currentPosition = position;
+    });
+  }
+
+  // void _startLocationUpdates() {
+  //   _positionStreamSubscription =
+  //       Geolocator.getPositionStream(intervalDuration: const Duration(minutes: 1)).listen((position) {
+  //         setState(() {
+  //           _position = position;
+  //         });
+  //         _updateUserLocation();
+  //       });
+  // }
+
+  void _updateUserLocation() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId != null && _currentPosition != null) {
+      FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'latitude': _currentPosition!.latitude,
+        'longitude': _currentPosition!.longitude,
+        'altitude':_currentPosition!.altitude,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    }
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   // TODO: implement build
+  //   throw UnimplementedError();
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: Center(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           if (_position != null)
+  //             Text('Current location: ${_position!.latitude}, ${_position!.longitude}'),
+  //           const SizedBox(height: 16),
+  //           ElevatedButton(
+  //             onPressed: _getCurrentLocation,
+  //             child: const Text('Get Current Location'),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   final List<Uint8List> _imageList = [];
   Uint8List? _feedImage01;
   Uint8List? _feedImage02;
@@ -63,24 +159,6 @@ class _AdditionalStepState extends State<AdditionalStep> {
   }
 
 
-  Widget getImage(double width) {
-    if(_imageList.length == 0){
-      return Image(
-          width: width * 0.45,
-          height: 220,
-          fit: BoxFit.cover,
-          image: AssetImage(kcrozDefaultProfileImage)
-      );
-    } else{
-      return Image(
-          width: width * 0.45,
-          height: 220,
-          fit: BoxFit.cover,
-          image: AssetImage(kcrozOnBoardingImage1)
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -111,14 +189,14 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                     width: width * 0.45,
                                     height: 320,
                                     fit: BoxFit.cover,
-                                    image: const AssetImage(kcrozOnBoardingImage1)
+                                    image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                     width: width * 0.45,
                                     height: 320,
                                     fit: BoxFit.cover,
                                     image: MemoryImage(_feedImage01!)
-                                  )                                                  ,
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -146,7 +224,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 220,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -184,7 +262,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 220,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -218,7 +296,7 @@ class _AdditionalStepState extends State<AdditionalStep> {
                                       width: width * 0.45,
                                       height: 320,
                                       fit: BoxFit.cover,
-                                      image: const AssetImage(kcrozOnBoardingImage1)
+                                      image: const AssetImage(kcrozDefaultFeedImage)
                                   ):
                                   Image(
                                       width: width * 0.45,
@@ -251,17 +329,8 @@ class _AdditionalStepState extends State<AdditionalStep> {
                   child: Row(
                     children: [
                       Expanded(
-                          child: Center(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.to(() => const NavigationPage());
-                              },
-                              child: Text("Skip"),
-                            ),
-                          )
-                      ),
-                      const SizedBox(width: 10,),
-                      Expanded(
+
+
                           child: ElevatedButton(
                             onPressed: () {
                               saveImages();
