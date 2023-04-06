@@ -6,7 +6,6 @@ import 'package:kcroz/src/constants/text_string.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../../common_widgets/button/custom_button.dart';
 
 class HomePageMap extends StatefulWidget {
