@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kcroz/src/features/core/screens/Quiz/Quiz1/quiz_main1.dart';
 import 'package:kcroz/src/features/core/screens/home_screen_items.dart';
 
 import '../../../services/firebase_auth_methods.dart';
@@ -58,8 +59,8 @@ class _NavigationPageState extends State<NavigationPage> {
           physics: const NeverScrollableScrollPhysics(),
           children: homeScreenItems = [
             Home_page(),
+            QuizPage(),
             HomePageMap(),
-            const Center(child: Text("Message")),
             OwnerProfileScreen(user: _user,),
           ]
       ),
