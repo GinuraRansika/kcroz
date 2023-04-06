@@ -26,8 +26,6 @@ class WelcomeScreen extends StatelessWidget {
     final isDarkMode = brightness == Brightness.dark; // boolean
 
 
-
-
     return Scaffold(
       backgroundColor: isDarkMode ? kcrozSecondaryColor : kcrozPrimaryColor,
       body: Stack(

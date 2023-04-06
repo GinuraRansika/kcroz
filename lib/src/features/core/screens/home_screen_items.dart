@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kcroz/src/features/core/screens/map/home_page_map.dart';
-import 'package:kcroz/src/features/core/screens/map/home_page.dart';
 
-List<Widget> homeScreenItems = [
-  Home_page(),
+const homeScreenItems = [
   HomePageMap(),
-  const Center(child: Text("Message")),
+  Center(child: Text("Game")),
+  Center(child: Text("Message")),
+  Center(child: Text("Account")),
 ];
-
