@@ -1,9 +1,11 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kcroz/src/constants/text_string.dart';
 import 'package:kcroz/src/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../../common_widgets/button/custom_button.dart';
 
@@ -16,6 +18,8 @@ class HomePageMap extends StatefulWidget {
 
 class _HomePageMapState extends State<HomePageMap> {
   String username = "";
+  String myresponse = "";
+
 
   @override
   void initState() {
@@ -32,6 +36,17 @@ class _HomePageMapState extends State<HomePageMap> {
     setState(() {
       username = (snapshot.data() as Map<String, dynamic>)['username'];
     });
+  }
+
+  postData() async{
+    final url = Uri.parse('http://10.0.2.2:8080/summerize/music');
+    var response = await http.get(url);
+    setState(() {
+      String result = response.body;
+      myresponse = result.replaceAll("<n>", " ");
+      myresponse = result.replaceAll("\\", "");
+    });
+
   }
 
   @override
@@ -65,6 +80,8 @@ class _HomePageMapState extends State<HomePageMap> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(username),
+              Text(myresponse),
+              Text("Name"),
               CustomButton(
                 onTap: () {
                   context.read<FirebaseAuthMethods>().signOut(context);
@@ -73,7 +90,7 @@ class _HomePageMapState extends State<HomePageMap> {
               ),
               CustomButton(
                 onTap: () {
-                  context.read<FirebaseAuthMethods>().deleteAccount(context);
+                  postData();
                 },
                 text: 'Delete Account',
               ),
