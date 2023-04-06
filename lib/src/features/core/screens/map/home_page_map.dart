@@ -26,7 +26,7 @@ class _HomePageMapState extends State<HomePageMap> {
   }
 
   void getUsername() async {
-    // snapshot of the current user's data from the firebase firestore database
+    // snapshot of the current user's data from the firebase firestore  database
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
