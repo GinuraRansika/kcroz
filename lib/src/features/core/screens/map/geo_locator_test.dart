@@ -10,7 +10,7 @@ class geo_locator_test extends StatefulWidget {
   State<geo_locator_test> createState() => _geo_locator_testState();
 }
 
-// ignore: camel_case_types
+// ignore: camel_case_types 
 class _geo_locator_testState extends State<geo_locator_test> {
   var latitude = "";
   var longtitude = "";
