@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kcroz/src/features/core/screens/map/check_n_scan.dart';
 
-// ignore: camel_case_types
+// ignore: camel_case_typess
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
 
