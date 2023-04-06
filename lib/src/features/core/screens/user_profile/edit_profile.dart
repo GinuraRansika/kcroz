@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
+
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../utils/utils.dart';
 import '../navigation_page.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
-import 'user_profile_screen.dart';
+
 import 'package:provider/provider.dart';
 import 'profile_feed.dart';
 

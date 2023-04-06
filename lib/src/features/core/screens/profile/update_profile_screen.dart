@@ -6,8 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/features/authentication/screens/models/user_model.dart';
 import 'package:kcroz/src/features/core/controllers/profile_controller.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
+
+
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../utils/utils.dart';
 import '../navigation_page.dart';

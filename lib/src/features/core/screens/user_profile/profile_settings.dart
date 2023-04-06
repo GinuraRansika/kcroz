@@ -3,17 +3,16 @@ import 'dart:typed_data';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kcroz/src/features/authentication/screens/screens/signup/signup_screen.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/edit_profile.dart';
 import 'package:kcroz/src/features/core/screens/user_profile/language_settings.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/settings_page.dart';
-import 'package:kcroz/src/features/core/screens/user_profile/user_profile_screen.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../../utils/utils.dart';
 import '../profile/update_profile_screen.dart';
 import 'profile_bio.dart';
 import 'profile_interests.dart';
 import 'profile_settings.dart';
-import 'user_profile_screen.dart';
+
 import 'package:provider/provider.dart';
 import 'profile_feed.dart';
 
@@ -125,7 +124,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ElevatedButton(
                   onPressed: (){
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()),
+                      MaterialPageRoute(builder: (context) => SignUpScreen()),
                     );
                   },
                   style: ButtonStyle(
