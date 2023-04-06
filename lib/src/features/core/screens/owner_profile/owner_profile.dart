@@ -8,7 +8,6 @@ import '../../../authentication/screens/models/user_model.dart';
 class OwnerProfileScreen extends StatefulWidget {
   final UserModel user;
 
-
   const OwnerProfileScreen({
         required this.user,
         Key? key}
