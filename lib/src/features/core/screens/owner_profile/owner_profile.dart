@@ -415,7 +415,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
               buttons: widget.user.interests,
               isRadio: false,
               onSelected: (index, isSelected, booleanValue){
-                print("selected");
+                print("selected index");
               },
             ),
           ],
