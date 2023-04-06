@@ -87,9 +87,9 @@ class _check_n_scanState extends State<check_n_scan> {
 
 
 
-     //store user informations in an array or any loopable type
-     //store current phone user informations to use in radius range function
-     //Perform the query to retrieve the user documents within the search range
+  //store user informations in an array or any loopable type
+  //store current phone user informations to use in radius range function
+  //Perform the query to retrieve the user documents within the search range
   Future<QuerySnapshot<Map<String, dynamic>>> getUsersByLocation(double latitude, double longitude) async {
     try {
       String uid = '';
@@ -101,13 +101,13 @@ class _check_n_scanState extends State<check_n_scan> {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('uid', isNotEqualTo: uid)
-          // .where('location', isGreaterThanOrEqualTo: GeoPoint(latitude-0.00018, longitude-0.00018), isLessThanOrEqualTo: GeoPoint(latitude+0.00018, longitude+0.00018))
-          // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018, isLessThanOrEqualTo: latitude+0.00018)
-          // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018, isLessThanOrEqualTo: longitude+0.00018)
-          // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018)
-          // .where('latitude', isLessThanOrEqualTo: latitude+0.00018)
-          // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018)
-          // .where('longitude', isLessThanOrEqualTo: longitude+0.00018)
+      // .where('location', isGreaterThanOrEqualTo: GeoPoint(latitude-0.00018, longitude-0.00018), isLessThanOrEqualTo: GeoPoint(latitude+0.00018, longitude+0.00018))
+      // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018, isLessThanOrEqualTo: latitude+0.00018)
+      // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018, isLessThanOrEqualTo: longitude+0.00018)
+      // .where('latitude', isGreaterThanOrEqualTo: latitude-0.00018)
+      // .where('latitude', isLessThanOrEqualTo: latitude+0.00018)
+      // .where('longitude', isGreaterThanOrEqualTo: longitude-0.00018)
+      // .where('longitude', isLessThanOrEqualTo: longitude+0.00018)
           .get();
       print('ABD');
       return querySnapshot;
@@ -135,9 +135,11 @@ class _check_n_scanState extends State<check_n_scan> {
       String profilePictureUrl = doc.data()['dpURL'];
       // String profilePageUrl = doc.data()['profile_picture_url'];
       String profilePageUrl = 'nothing yet';
-      markers.add(radiusRange(latitude, longtitude,
-        olatitude,
-        olongitude,profilePageUrl,profilePictureUrl));
+      if(olatitude >= latitude-0.00018 && olatitude <= latitude+0.00018 && olongitude >= longtitude-0.00018 && olongitude <= longtitude+0.00018) {
+        markers.add(radiusRange(latitude, longtitude,
+            olatitude,
+            olongitude, profilePageUrl, profilePictureUrl));
+      }
       // ...
       print(email);
     });
@@ -161,7 +163,7 @@ class _check_n_scanState extends State<check_n_scan> {
       double userLati, double userLongi, double lat, double long,String profilePageUrl,String profilePictureUrl) {  //Add profile page as a parameter
     double markerPosX = 0;
     double markerPosY = 0;
-    if (userLati != null && userLongi != null && lat != null && long != null && profilePictureUrl != null && lat >= userLati-0.00018 && lat <= userLati+0.00018 && long >= userLongi-0.00018 && long <= userLongi+0.00018){
+    if (userLati != null && userLongi != null && lat != null && long != null && profilePictureUrl != null){
       print('radiusRange');
       //In a for loop , loop over every user in firestore
       // double rangeLatiPlus = userLati + 0.00018;
@@ -195,8 +197,8 @@ class _check_n_scanState extends State<check_n_scan> {
       double markerDistanceY =
           boxY * oneBoxLenght; //distance in cm from center in y axis
 
-      markerPosX = centerX + markerDistanceX * 3;
-      markerPosY = centerY + markerDistanceY * 3;
+      markerPosX = centerX + markerDistanceX * 6;
+      markerPosY = centerY + markerDistanceY * 6;
 
     }
 
