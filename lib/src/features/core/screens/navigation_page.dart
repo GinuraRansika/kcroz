@@ -20,10 +20,8 @@ class _NavigationPageState extends State<NavigationPage> {
   int _currentIndex = 0;
   late PageController pageController;
 
-
   final FirebaseAuthMethods _authMethods = FirebaseAuthMethods();
   late UserModel _user;
-
 
 
   void getUserDetails() async {
