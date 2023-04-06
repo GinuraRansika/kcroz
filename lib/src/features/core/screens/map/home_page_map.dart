@@ -19,8 +19,6 @@ class HomePageMap extends StatefulWidget {
 class _HomePageMapState extends State<HomePageMap> {
   String username = "";
   String myresponse = "";
-
-
   @override
   void initState() {
     super.initState();
@@ -33,6 +31,7 @@ class _HomePageMapState extends State<HomePageMap> {
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
+    print(snapshot.data());
     setState(() {
       username = (snapshot.data() as Map<String, dynamic>)['username'];
     });

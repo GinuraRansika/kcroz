@@ -62,15 +62,9 @@ class FirebaseAuthMethods {
     required String password,
     required String religion,
     required String gender,
-    required String drink,
-    required String smoke,
-    required String vegan,
-    required String occupation,
-    required String university,
-    required String college,
     required String sexualOrientation,
     required String birthday,
-    required List interests,
+    required String interests,
     required Uint8List file,
     required BuildContext context,
   }) async {
@@ -82,10 +76,8 @@ class FirebaseAuthMethods {
           && password.isNotEmpty
           && religion.isNotEmpty
           && gender.isNotEmpty
-          && drink.isNotEmpty
-          && smoke.isNotEmpty
-          && vegan.isNotEmpty
           && birthday.isNotEmpty
+          && interests.isNotEmpty
           && file != null
           && sexualOrientation.isNotEmpty ) {
         // Register the user
@@ -104,19 +96,9 @@ class FirebaseAuthMethods {
           dpURL: dpURL,
           religion: religion,
           gender: gender,
-          drink: drink,
-          smoke: smoke,
-          vegan: vegan,
-          occupation: occupation,
-          university: university,
-          college: college,
           sexualOrientation: sexualOrientation,
           birthday: birthday,
           interests: interests,
-          feedImage01URL: "",
-          feedImage02URL: "",
-          feedImage03URL: "",
-          feedImage04URL: "",
           followers: []
         );
 
@@ -253,6 +235,4 @@ class FirebaseAuthMethods {
       // in user again and then delete account.
     }
   }
-
-  // void addFeedImages({required Uint8List feedImage01, required Uint8List feedImage02, required Uint8List feedImage03, required Uint8List feedImage04}) {}
 }
