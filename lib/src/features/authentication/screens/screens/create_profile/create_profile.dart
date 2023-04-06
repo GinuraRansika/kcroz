@@ -1,14 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gender_picker/gender_picker.dart';
-import 'package:gender_picker/source/enums.dart';
 import 'package:get/get.dart';
-import 'package:group_button/group_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kcroz/src/constants/creat_profile_text_string.dart';
 import 'package:kcroz/src/features/authentication/screens/screens/create_profile/additional_step.dart';
-import 'package:kcroz/src/features/authentication/screens/screens/create_profile/widget/gender_widget.dart';
 import '../../../../../common_widgets/form/form_header_widget.dart';
 import '../../../../../common_widgets/text_field_input.dart';
 import '../../../../../constants/image_string.dart';
@@ -30,19 +26,7 @@ class _CreateProfileState extends State<CreateProfile> {
   Uint8List? _image;
   int currentStep = 0;
   bool isCompleted = false;
-  String gender = "Male";
-  String drink = "No";
-  String smoke = "No";
-  String vegan = "No";
-  String sexualOrientation = "Female";
-  List<bool> isDrinkSelected = [true, false];
-  List<bool> isSmokeSelected = [true, false];
-  List<bool> isDietSelected = [true, false];
   DateTime _dateTime = DateTime.now();
-
-  List<String> interestList =  ["Sports", "Movies", "Pets", "Traveling", "Food & Drinks", "Music", "Reading", "Creativity", "Tech",];
-  List<String> selectedInterestList =  [];
-  int maxInterest = 5;
 
   void selectImage() async {
     Uint8List image = await pickImage(ImageSource.gallery);
@@ -64,19 +48,13 @@ class _CreateProfileState extends State<CreateProfile> {
         phoneNumber: controller.phoneNo.text.trim(),
         password: controller.password.text.trim(),
         religion: controller.religion.text.trim(),
-        gender: gender,
-        drink: drink,
-        smoke: smoke,
-        vegan: vegan,
-        occupation: controller.occupation.text.trim(),
-        university: controller.university.text.trim(),
-        college: controller.college.text.trim(),
-        sexualOrientation: sexualOrientation,
+        gender: controller.gender.text.trim(),
+        sexualOrientation: controller.sexualOrientation.text.trim(),
         birthday:
             "${_dateTime.year}-"
             "${_dateTime.month.toString().length == 2? _dateTime.month : {'0${_dateTime.month}'}}-"
             "${_dateTime.day.toString().length == 2? _dateTime.day : {'0${_dateTime.day}'}}",
-        interests: selectedInterestList,
+        interests: controller.interests.text.trim(),
         file: _image!,
         context: context);
 
@@ -195,37 +173,27 @@ class _CreateProfileState extends State<CreateProfile> {
         return true;
       }
     }
-    else if(currentStep == 3){return true;}
-    else if(currentStep == 4){return true;}
-    else if(currentStep == 5){
-      if(controller.university.text.isNotEmpty
-      && controller.college.text.isNotEmpty
-      && controller.occupation.text.isNotEmpty){
+    else if(currentStep == 3){
+      if(controller.gender.text.isNotEmpty && controller.sexualOrientation.text.isNotEmpty) {
         return true;
       }
     }
-
-    else if(currentStep == 6){
-      getSelectedItems(isDrinkSelected,drink);
-      getSelectedItems(isSmokeSelected, smoke);
-      getSelectedItems(isDietSelected, vegan);
+    else if(currentStep == 4){
       return true;
     }
+    else if(currentStep == 5){
+        return true;
+    }
+    else if(currentStep == 6){
+        return true;
 
+    }
     else if(currentStep == 7){
-      if(selectedInterestList.isNotEmpty) {
+      if(controller.interests.text.isNotEmpty) {
         return true;
       }
     }
     return false;
-  }
-
-  getSelectedItems(array, option){
-    if(array[0] == true){
-      option = "No";
-    }else{
-      option = "Yes";
-    }
   }
 
   bool checkDark(){
@@ -328,7 +296,7 @@ class _CreateProfileState extends State<CreateProfile> {
                     style: Theme.of(context).textTheme.headline1,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 80,),
                   // circular widget to add dp
                   Stack(
                     children: [
@@ -356,7 +324,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           )),
                     ],
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 80,),
                 ],
               ),
             )
@@ -375,23 +343,37 @@ class _CreateProfileState extends State<CreateProfile> {
             kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
           children: [
+            const FormHeaderWidget(
+              image: kcrozWelcomeScreenImage,
+              title: "I am",
+              subTitle: "",
+              imageHeight: 0.3,
+            ),
             Container(
-              padding: const EdgeInsets.only(top: kcrozDefaultSize),
+              padding: const EdgeInsets.only(top: kcrozDefaultSize - 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "${controller.fullName.text.trim()} is a ",
-                    style: Theme.of(context).textTheme.headline1,
+                  TextFieldInput(
+                    textEditingController: controller.gender,
+                    labelText: "Gender",
+                    prefixIcon: const Icon(Icons.hourglass_empty_rounded),
+                    hintText: "Gender",
+                    textInputType: TextInputType.text,
                   ),
-                  genderWidget(false, true, gender, Gender.Male),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 20,),
                   Text(
-                    "And Interested In",
+                    "Interested In",
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   const SizedBox(height: 20,),
-                  genderWidget(false, true, sexualOrientation, Gender.Female),
+                  TextFieldInput(
+                    textEditingController: controller.sexualOrientation,
+                    labelText: "Sexual Orientation",
+                    prefixIcon: const Icon(Icons.heat_pump_rounded),
+                    hintText: "Sexual Orientation",
+                    textInputType: TextInputType.text,
+                  ),
                 ],
               ),
             )
@@ -399,6 +381,7 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
+
 
     // Birthday
     Step(
@@ -454,37 +437,33 @@ class _CreateProfileState extends State<CreateProfile> {
           children: [
             const FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
-              title: "Additionally, My",
+              title: "Occupation,University,College?",
               subTitle: "",
-              imageHeight: 0.25,
+              imageHeight: 0.3,
             ),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20,),
-                  TextFieldInput(
-                    textEditingController: controller.occupation,
-                    labelText: "Occupation",
-                    prefixIcon: const Icon(Icons.cast_for_education),
-                    hintText: "Occupation",
-                    textInputType: TextInputType.text,
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("Occupation"),
+                      prefixIcon: Icon(Icons.cast_for_education),
+                    ),
                   ),
                   const SizedBox(height: 20,),
-                  TextFieldInput(
-                    textEditingController: controller.university,
-                    labelText: "University",
-                    prefixIcon: const Icon(Icons.book),
-                    hintText: "University",
-                    textInputType: TextInputType.text,
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("University"),
+                      prefixIcon: Icon(Icons.book),
+                    ),
                   ),
                   const SizedBox(height: 20,),
-                  TextFieldInput(
-                    textEditingController: controller.college,
-                    labelText: "College",
-                    prefixIcon: const Icon(Icons.book_online_rounded),
-                    hintText: "College",
-                    textInputType: TextInputType.text,
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("College"),
+                      prefixIcon: Icon(Icons.book_online_rounded),
+                    ),
                   ),
                 ],
               ),
@@ -504,23 +483,37 @@ class _CreateProfileState extends State<CreateProfile> {
             kcrozDefaultSize, 0, kcrozDefaultSize, 0),
         child: Column(
           children: [
-            FormHeaderWidget(
+            const FormHeaderWidget(
               image: kcrozWelcomeScreenImage,
-              title: controller.fullName.text.trim(),
+              title: "Drink,Smoke, Diet?",
               subTitle: "",
-              imageHeight: 0.25,
+              imageHeight: 0.3,
             ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  drinkWidget(),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("Drink"),
+                      prefixIcon: Icon(Icons.local_drink),
+                    ),
+                  ),
                   const SizedBox(height: 20,),
-                  smokeWidget(),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("Smoke"),
+                      prefixIcon: Icon(Icons.smoke_free_rounded),
+                    ),
+                  ),
                   const SizedBox(height: 20,),
-                  dietWidget(),
-                  const SizedBox(height: 20,),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text("Diet"),
+                      prefixIcon: Icon(Icons.food_bank_rounded),
+                    ),
+                  ),
                 ],
               ),
             )
@@ -538,59 +531,26 @@ class _CreateProfileState extends State<CreateProfile> {
         padding: const EdgeInsets.fromLTRB(
             kcrozDefaultSize, kcrozDefaultSize, kcrozDefaultSize, 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Interests?",
-              style: Theme.of(context).textTheme.headline1,
-              textAlign: TextAlign.left,
+            const FormHeaderWidget(
+              image: kcrozWelcomeScreenImage,
+              title: "My Interests are",
+              subTitle:
+              "We protect our community by making sure everyone on Kcroz is real.",
+              imageHeight: 0.3,
             ),
             Container(
               padding: const EdgeInsets.only(top: kcrozDefaultSize + 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 20,),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: GroupButton(
-                              options: GroupButtonOptions(
-                                buttonHeight: 50,
-                                spacing: 10,
-                                runSpacing: 10,
-                                  textPadding: const EdgeInsets.symmetric(horizontal: 20),
-                                groupingType: GroupingType.wrap,
-                                direction: Axis.horizontal,
-                                borderRadius: BorderRadius.circular(25),
-                                selectedTextStyle: const TextStyle(color: Colors.white),
-                                unselectedTextStyle: const TextStyle(color: Colors.white)
-                              ),
-                              buttons: interestList,
-                              isRadio: false,
-                              onSelected: (index, isSelected, booleanValue){
-                                if(booleanValue){
-                                  selectedInterestList.add(index);
-                                }else{
-                                  selectedInterestList.remove(index);
-                                }
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                  // TextFieldInput(
-                  //   textEditingController: controller.interests,
-                  //   labelText: "Interests",
-                  //   prefixIcon: const Icon(Icons.sports_cricket),
-                  //   hintText: "Interests",
-                  //   textInputType: TextInputType.text,
-                  // ),
+                  TextFieldInput(
+                    textEditingController: controller.interests,
+                    labelText: "Interests",
+                    prefixIcon: const Icon(Icons.sports_cricket),
+                    hintText: "Interests",
+                    textInputType: TextInputType.text,
+                  ),
                 ],
               ),
             )
@@ -598,128 +558,6 @@ class _CreateProfileState extends State<CreateProfile> {
         ),
       ),
     ),
+
   ];
-
-  // Widget interest(){
-  // }
-
-
-  Widget drinkWidget(){
-    return Container(
-      child: ToggleButtons(
-        isSelected: isDrinkSelected,
-        children:  <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Icon(Icons.no_drinks),
-                Text("Don't Drink",),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              children: [
-                Icon(Icons.local_drink),
-                Text(" Drink",),
-              ],
-            ),
-          ),
-        ],
-        onPressed: (int newIndex) {
-          setState(() {
-            for(int index=0; index < isDrinkSelected.length; index++){
-              if(index == newIndex){
-                isDrinkSelected[index] = true;
-              }else{
-                isDrinkSelected[index] = false;
-              }
-            }
-          });
-        },
-      ),
-    );
-  }
-
-
-  Widget smokeWidget(){
-    return Container(
-      child: ToggleButtons(
-        isSelected: isSmokeSelected,
-        children:  <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [
-                Icon(Icons.smoke_free),
-                Text("Don't Smoke",),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23),
-            child: Row(
-              children: [
-                Icon(Icons.smoking_rooms),
-                Text("Smoke",),
-              ],
-            ),
-          ),
-        ],
-        onPressed: (int newIndex) {
-          setState(() {
-            for(int index=0; index < isSmokeSelected.length; index++){
-              if(index == newIndex){
-                isSmokeSelected[index] = true;
-              }else{
-                isSmokeSelected[index] = false;
-              }
-            }
-          });
-        },
-      ),
-    );
-  }
-
-  Widget dietWidget(){
-    return Container(
-      child: ToggleButtons(
-        isSelected: isDietSelected,
-        children:  <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Icon(Icons.egg_alt_outlined),
-                Text("Not Vegan",),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-              children: [
-                Icon(Icons.energy_savings_leaf),
-                Text("Vegan",),
-              ],
-            ),
-          ),
-        ],
-        onPressed: (int newIndex) {
-          setState(() {
-            for(int index=0; index < isDietSelected.length; index++){
-              if(index == newIndex){
-                isDietSelected[index] = true;
-              }else{
-                isDietSelected[index] = false;
-              }
-            }
-          });
-        },
-      ),
-    );
-  }
 }
-
